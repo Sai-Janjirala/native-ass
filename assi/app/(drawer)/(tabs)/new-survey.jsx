@@ -237,7 +237,7 @@ export default function NewSurveyScreen() {
             text: 'Awesome',
             onPress: () => {
               setIsPreview(false);
-              router.navigate('/(drawer)/(tabs)/history');
+              router.navigate('/?tab=2');
             }
           }
         ]

@@ -53,7 +53,7 @@ export default function ClipboardScreen() {
       Alert.alert(
         'Text Pasted', 
         `Pasted text from clipboard into active survey draft notes:\n\n"${text}"`,
-        [{ text: 'View Form', onPress: () => router.navigate('/(drawer)/(tabs)/new-survey') }, { text: 'Dismiss' }]
+        [{ text: 'View Form', onPress: () => router.navigate('/?tab=1') }, { text: 'Dismiss' }]
       );
     } else {
       Alert.alert('Empty Clipboard', 'There is no text on the clipboard to paste.');

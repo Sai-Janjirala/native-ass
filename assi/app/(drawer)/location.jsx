@@ -100,7 +100,7 @@ export default function LocationScreen() {
       Alert.alert(
         'GPS Linked',
         'Coordinates successfully attached to your active survey draft.',
-        [{ text: 'OK', onPress: () => router.navigate('/(drawer)/(tabs)/new-survey') }]
+        [{ text: 'OK', onPress: () => router.navigate('/?tab=1') }]
       );
     }
   };

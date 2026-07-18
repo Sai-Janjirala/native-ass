@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, Text, useColorScheme, Pressable } from 'react-native';
 import { Drawer } from 'expo-router/drawer';
 import { DrawerContentScrollView } from '@react-navigation/drawer';
-import { router, usePathname } from 'expo-router';
+import { router, usePathname, useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/constants/theme';
 import { useSurvey } from '@/context/SurveyContext';
@@ -11,15 +11,17 @@ function CustomDrawerContent(props) {
   const colorScheme = useColorScheme();
   const colors = Colors[colorScheme ?? 'light'];
   const pathname = usePathname();
+  const { tab } = useLocalSearchParams();
   const { todayCount } = useSurvey();
 
   // Helper to determine if drawer item is active
   const isActive = (route) => {
-    if (route === 'dashboard') {
-      return pathname === '/' || pathname === '/(tabs)' || pathname === '/(drawer)/(tabs)';
-    }
-    if (route === 'survey') {
-      return pathname.includes('new-survey');
+    const isTabsPage = pathname === '/' || pathname === '/(tabs)' || pathname === '/(drawer)/(tabs)';
+    if (isTabsPage) {
+      const activeIndex = tab ? parseInt(tab, 10) : 0;
+      if (route === 'dashboard') return activeIndex === 0;
+      if (route === 'survey') return activeIndex === 1;
+      return false;
     }
     return pathname.includes(route);
   };
@@ -49,7 +51,7 @@ function CustomDrawerContent(props) {
         {/* Dashboard */}
         <Pressable
           style={[styles.itemPressable, isActive('dashboard') && { backgroundColor: activeBg }]}
-          onPress={() => router.navigate('/(drawer)/(tabs)')}
+          onPress={() => router.navigate('/?tab=0')}
         >
           <Ionicons 
             name="home-outline" 
@@ -64,7 +66,7 @@ function CustomDrawerContent(props) {
         {/* Survey */}
         <Pressable
           style={[styles.itemPressable, isActive('survey') && { backgroundColor: activeBg }]}
-          onPress={() => router.navigate('/(drawer)/(tabs)/new-survey')}
+          onPress={() => router.navigate('/?tab=1')}
         >
           <Ionicons 
             name="document-text-outline" 

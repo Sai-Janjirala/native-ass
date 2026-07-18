@@ -97,7 +97,7 @@ export default function CameraScreen() {
       Alert.alert(
         'Photo Attached', 
         'This photo has been attached to your active survey draft.',
-        [{ text: 'OK', onPress: () => router.navigate('/(drawer)/(tabs)/new-survey') }]
+        [{ text: 'OK', onPress: () => router.navigate('/?tab=1') }]
       );
     }
   };

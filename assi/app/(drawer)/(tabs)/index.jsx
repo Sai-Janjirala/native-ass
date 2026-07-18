@@ -1,19 +1,27 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { 
   View, 
   StyleSheet, 
   Text, 
   ScrollView, 
   Pressable, 
-  useColorScheme 
+  useColorScheme,
+  Dimensions,
+  SafeAreaView
 } from 'react-native';
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/constants/theme';
 import { useSurvey } from '@/context/SurveyContext';
 import { CustomHeader } from '@/components/CustomHeader';
 
-export default function DashboardScreen() {
+import NewSurveyScreen from './new-survey';
+import HistoryScreen from './history';
+import ProfileScreen from './profile';
+
+const { width } = Dimensions.get('window');
+
+function DashboardContent({ onNavigate }) {
   const colorScheme = useColorScheme();
   const colors = Colors[colorScheme ?? 'light'];
   const { todayCount, surveys } = useSurvey();
@@ -31,121 +39,208 @@ export default function DashboardScreen() {
   };
 
   return (
-    <View style={[styles.container, { backgroundColor: colors.background }]}>
-      <CustomHeader title="My Field Surveys 🚀" />
+    <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
+      {/* Grayscale User Welcome Banner */}
+      <View style={[
+        styles.welcomeBanner, 
+        { 
+          backgroundColor: colorScheme === 'dark' ? '#18181B' : '#F4F4F5',
+          borderColor: colorScheme === 'dark' ? '#27272A' : '#E4E4E7'
+        }
+      ]}>
+        <View style={styles.welcomeTextContainer}>
+          <Text style={[styles.welcomeSub, { color: colors.icon }]}>Hey there! 👋</Text>
+          <Text style={[styles.welcomeTitle, { color: colors.text }]}>Sai Janjirala</Text>
+          <Text style={[styles.studentRoll, { color: colors.icon }]}>ID: 2026-NATIVE-ASS</Text>
+        </View>
+        <View style={[styles.countBadge, { backgroundColor: colors.text }]}>
+          <Text style={[styles.countNumber, { color: colors.background }]}>{todayCount}</Text>
+          <Text style={[styles.countLabel, { color: colors.background }]}>Done</Text>
+        </View>
+      </View>
+
+      {/* Primary Action Buttons (Extremely Simple UX) */}
+      <Text style={[styles.sectionTitle, { color: colors.text }]}>What do you want to do?</Text>
       
-      <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
-        {/* Grayscale User Welcome Banner */}
-        <View style={[
-          styles.welcomeBanner, 
-          { 
-            backgroundColor: colorScheme === 'dark' ? '#18181B' : '#F4F4F5',
-            borderColor: colorScheme === 'dark' ? '#27272A' : '#E4E4E7'
-          }
-        ]}>
-          <View style={styles.welcomeTextContainer}>
-            <Text style={[styles.welcomeSub, { color: colors.icon }]}>Hey there! 👋</Text>
-            <Text style={[styles.welcomeTitle, { color: colors.text }]}>Sai Janjirala</Text>
-            <Text style={[styles.studentRoll, { color: colors.icon }]}>ID: 2026-NATIVE-ASS</Text>
+      <View style={styles.mainActionsContainer}>
+        {/* Colorful Emerald Green Button */}
+        <Pressable 
+          style={[styles.primaryActionBtn, { backgroundColor: '#10B981' }]}
+          onPress={() => onNavigate(1)}
+        >
+          <Ionicons name="add-circle" size={24} color="#FFF" />
+          <View style={styles.primaryActionText}>
+            <Text style={styles.primaryActionTitle}>Start a New Survey 📝</Text>
+            <Text style={styles.primaryActionSub}>Log a site check inline with camera & GPS</Text>
           </View>
-          <View style={[styles.countBadge, { backgroundColor: colors.text }]}>
-            <Text style={[styles.countNumber, { color: colors.background }]}>{todayCount}</Text>
-            <Text style={[styles.countLabel, { color: colors.background }]}>Done</Text>
-          </View>
-        </View>
+        </Pressable>
 
-        {/* Primary Action Buttons (Extremely Simple UX) */}
-        <Text style={[styles.sectionTitle, { color: colors.text }]}>What do you want to do?</Text>
-        
-        <View style={styles.mainActionsContainer}>
-          {/* Colorful Emerald Green Button */}
-          <Pressable 
-            style={[styles.primaryActionBtn, { backgroundColor: '#10B981' }]}
-            onPress={() => router.navigate('/(drawer)/(tabs)/new-survey')}
-          >
-            <Ionicons name="add-circle" size={24} color="#FFF" />
-            <View style={styles.primaryActionText}>
-              <Text style={styles.primaryActionTitle}>Start a New Survey 📝</Text>
-              <Text style={styles.primaryActionSub}>Log a site check inline with camera & GPS</Text>
-            </View>
+        {/* Colorful Royal Blue Button */}
+        <Pressable 
+          style={[styles.secondaryActionBtn, { backgroundColor: '#3B82F6', borderColor: '#3B82F6' }]}
+          onPress={() => onNavigate(2)}
+        >
+          <Ionicons name="time" size={24} color="#FFF" />
+          <View style={styles.primaryActionText}>
+            <Text style={[styles.secondaryActionTitle, { color: '#FFF' }]}>View Survey History 📂</Text>
+            <Text style={[styles.secondaryActionSub, { color: '#E0E7FF' }]}>
+              Browse, search and filter {surveys.length} survey logs
+            </Text>
+          </View>
+        </Pressable>
+      </View>
+
+      {/* Recent Surveys Summary */}
+      <View style={styles.recentHeader}>
+        <Text style={[styles.sectionTitle, { color: colors.text, marginBottom: 0 }]}>Latest Surveys 👀</Text>
+        {surveys.length > 0 && (
+          <Pressable onPress={() => onNavigate(2)}>
+            <Text style={[styles.viewAllText, { color: '#3B82F6' }]}>View All</Text>
           </Pressable>
+        )}
+      </View>
 
-          {/* Colorful Royal Blue Button */}
-          <Pressable 
-            style={[styles.secondaryActionBtn, { backgroundColor: '#3B82F6', borderColor: '#3B82F6' }]}
-            onPress={() => router.navigate('/(drawer)/(tabs)/history')}
+      {recentSurveys.length === 0 ? (
+        <View style={[styles.emptyRecent, { borderColor: colorScheme === 'dark' ? '#27272A' : '#E4E4E7' }]}>
+          <Ionicons name="document-text-outline" size={32} color={colors.icon} />
+          <Text style={[styles.emptyRecentText, { color: colors.icon }]}>Empty! Go start a survey ⚡</Text>
+        </View>
+      ) : (
+        recentSurveys.map((survey) => (
+          <Pressable
+            key={survey.id}
+            style={[
+              styles.recentCard,
+              { 
+                backgroundColor: colorScheme === 'dark' ? '#18181B' : '#FFFFFF',
+                borderColor: colorScheme === 'dark' ? '#27272A' : '#E4E4E7' 
+              }
+            ]}
+            onPress={() => router.navigate({ pathname: '/modal', params: { id: survey.id } })}
           >
-            <Ionicons name="time" size={24} color="#FFF" />
-            <View style={styles.primaryActionText}>
-              <Text style={[styles.secondaryActionTitle, { color: '#FFF' }]}>View Survey History 📂</Text>
-              <Text style={[styles.secondaryActionSub, { color: '#E0E7FF' }]}>
-                Browse, search and filter {surveys.length} survey logs
-              </Text>
+            <View style={styles.recentMeta}>
+              <View style={styles.siteInfo}>
+                <Text style={[styles.recentSiteName, { color: colors.text }]}>{survey.siteName}</Text>
+                <Text style={[styles.recentClient, { color: colors.icon }]}>{survey.clientName}</Text>
+              </View>
+              <View style={[styles.priorityBadge, { backgroundColor: getPriorityColor(survey.priority) + '15' }]}>
+                <Text style={[styles.priorityText, { color: getPriorityColor(survey.priority) }]}>
+                  {survey.priority}
+                </Text>
+              </View>
             </View>
-          </Pressable>
-        </View>
-
-        {/* Recent Surveys Summary */}
-        <View style={styles.recentHeader}>
-          <Text style={[styles.sectionTitle, { color: colors.text, marginBottom: 0 }]}>Latest Surveys 👀</Text>
-          {surveys.length > 0 && (
-            <Pressable onPress={() => router.navigate('/(drawer)/(tabs)/history')}>
-              <Text style={[styles.viewAllText, { color: '#3B82F6' }]}>View All</Text>
-            </Pressable>
-          )}
-        </View>
-
-        {recentSurveys.length === 0 ? (
-          <View style={[styles.emptyRecent, { borderColor: colorScheme === 'dark' ? '#27272A' : '#E4E4E7' }]}>
-            <Ionicons name="document-text-outline" size={32} color={colors.icon} />
-            <Text style={[styles.emptyRecentText, { color: colors.icon }]}>Empty! Go start a survey ⚡</Text>
-          </View>
-        ) : (
-          recentSurveys.map((survey) => (
-            <Pressable
-              key={survey.id}
-              style={[
-                styles.recentCard,
-                { 
-                  backgroundColor: colorScheme === 'dark' ? '#18181B' : '#FFFFFF',
-                  borderColor: colorScheme === 'dark' ? '#27272A' : '#E4E4E7' 
-                }
-              ]}
-              onPress={() => router.navigate({ pathname: '/modal', params: { id: survey.id } })}
-            >
-              <View style={styles.recentMeta}>
-                <View style={styles.siteInfo}>
-                  <Text style={[styles.recentSiteName, { color: colors.text }]}>{survey.siteName}</Text>
-                  <Text style={[styles.recentClient, { color: colors.icon }]}>{survey.clientName}</Text>
-                </View>
-                <View style={[styles.priorityBadge, { backgroundColor: getPriorityColor(survey.priority) + '15' }]}>
-                  <Text style={[styles.priorityText, { color: getPriorityColor(survey.priority) }]}>
-                    {survey.priority}
+            
+            <View style={[styles.recentDivider, { backgroundColor: colorScheme === 'dark' ? '#27272A' : '#E4E4E7' }]} />
+            
+            <View style={styles.recentFooter}>
+              <View style={styles.recentFooterItem}>
+                <Ionicons name="calendar-outline" size={14} color={colors.icon} />
+                <Text style={[styles.recentFooterText, { color: colors.icon }]}>{survey.date}</Text>
+              </View>
+              {survey.location && (
+                <View style={styles.recentFooterItem}>
+                  <Ionicons name="location-outline" size={14} color={colors.icon} />
+                  <Text style={[styles.recentFooterText, { color: colors.icon }]} numberOfLines={1}>
+                    {survey.location.latitude.toFixed(4)}, {survey.location.longitude.toFixed(4)}
                   </Text>
                 </View>
-              </View>
-              
-              <View style={[styles.recentDivider, { backgroundColor: colorScheme === 'dark' ? '#27272A' : '#E4E4E7' }]} />
-              
-              <View style={styles.recentFooter}>
-                <View style={styles.recentFooterItem}>
-                  <Ionicons name="calendar-outline" size={14} color={colors.icon} />
-                  <Text style={[styles.recentFooterText, { color: colors.icon }]}>{survey.date}</Text>
-                </View>
-                {survey.location && (
-                  <View style={styles.recentFooterItem}>
-                    <Ionicons name="location-outline" size={14} color={colors.icon} />
-                    <Text style={[styles.recentFooterText, { color: colors.icon }]} numberOfLines={1}>
-                      {survey.location.latitude.toFixed(4)}, {survey.location.longitude.toFixed(4)}
-                    </Text>
-                  </View>
-                )}
-              </View>
-            </Pressable>
-          ))
-        )}
-      </ScrollView>
-    </View>
+              )}
+            </View>
+          </Pressable>
+        ))
+      )}
+    </ScrollView>
+  );
+}
+
+export default function TabLayoutWrapper() {
+  const colorScheme = useColorScheme();
+  const colors = Colors[colorScheme ?? 'light'];
+  const { tab } = useLocalSearchParams();
+  const [activeTab, setActiveTab] = useState(0);
+  const scrollViewRef = useRef(null);
+
+  // Synchronize with URL search parameter reactively
+  useEffect(() => {
+    if (tab !== undefined && tab !== null) {
+      const idx = parseInt(tab, 10);
+      if (!isNaN(idx) && idx >= 0 && idx <= 3 && idx !== activeTab) {
+        navigateToTab(idx);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tab]);
+
+  const navigateToTab = (index) => {
+    setActiveTab(index);
+    scrollViewRef.current?.scrollTo({ x: index * width, animated: true });
+  };
+
+  const handleScrollEnd = (e) => {
+    const xOffset = e.nativeEvent.contentOffset.x;
+    const index = Math.round(xOffset / width);
+    if (index >= 0 && index <= 3) {
+      setActiveTab(index);
+    }
+  };
+
+  return (
+    <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
+      <View style={{ flex: 1 }}>
+        <ScrollView
+          ref={scrollViewRef}
+          horizontal
+          pagingEnabled
+          showsHorizontalScrollIndicator={false}
+          onMomentumScrollEnd={handleScrollEnd}
+          style={{ flex: 1 }}
+          bounces={false}
+          scrollEventThrottle={16}
+        >
+          <View style={{ width }}>
+            <View style={{ flex: 1 }}>
+              <CustomHeader title="My Field Surveys 🚀" />
+              <DashboardContent onNavigate={navigateToTab} />
+            </View>
+          </View>
+          <View style={{ width }}>
+            <NewSurveyScreen />
+          </View>
+          <View style={{ width }}>
+            <HistoryScreen />
+          </View>
+          <View style={{ width }}>
+            <ProfileScreen />
+          </View>
+        </ScrollView>
+
+        {/* Custom Premium Grayscale Bottom Navigation Bar */}
+        <View style={[
+          styles.tabBar, 
+          { 
+            backgroundColor: colors.background, 
+            borderTopColor: colorScheme === 'dark' ? '#27272A' : '#E4E4E7' 
+          }
+        ]}>
+          <Pressable style={styles.tabItem} onPress={() => navigateToTab(0)}>
+            <Ionicons name={activeTab === 0 ? 'grid' : 'grid-outline'} size={22} color={activeTab === 0 ? colors.tint : colors.icon} />
+            <Text style={[styles.tabLabel, { color: activeTab === 0 ? colors.tint : colors.icon }]}>Home</Text>
+          </Pressable>
+          <Pressable style={styles.tabItem} onPress={() => navigateToTab(1)}>
+            <Ionicons name={activeTab === 1 ? 'add-circle' : 'add-circle-outline'} size={22} color={activeTab === 1 ? colors.tint : colors.icon} />
+            <Text style={[styles.tabLabel, { color: activeTab === 1 ? colors.tint : colors.icon }]}>New</Text>
+          </Pressable>
+          <Pressable style={styles.tabItem} onPress={() => navigateToTab(2)}>
+            <Ionicons name={activeTab === 2 ? 'time' : 'time-outline'} size={22} color={activeTab === 2 ? colors.tint : colors.icon} />
+            <Text style={[styles.tabLabel, { color: activeTab === 2 ? colors.tint : colors.icon }]}>History</Text>
+          </Pressable>
+          <Pressable style={styles.tabItem} onPress={() => navigateToTab(3)}>
+            <Ionicons name={activeTab === 3 ? 'person' : 'person-outline'} size={22} color={activeTab === 3 ? colors.tint : colors.icon} />
+            <Text style={[styles.tabLabel, { color: activeTab === 3 ? colors.tint : colors.icon }]}>Me</Text>
+          </Pressable>
+        </View>
+      </View>
+    </SafeAreaView>
   );
 }
 
@@ -330,5 +425,24 @@ const styles = StyleSheet.create({
   recentFooterText: {
     fontSize: 12,
     fontWeight: '500',
+  },
+  tabBar: {
+    flexDirection: 'row',
+    height: 60,
+    borderTopWidth: 1,
+    paddingBottom: 8,
+    paddingTop: 8,
+    justifyContent: 'space-around',
+    alignItems: 'center',
+  },
+  tabItem: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1,
+  },
+  tabLabel: {
+    fontSize: 10,
+    marginTop: 4,
+    fontWeight: '600',
   },
 });

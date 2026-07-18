@@ -111,7 +111,7 @@ export default function ContactsScreen() {
     Alert.alert(
       'Contact Linked',
       `Success! Linked ${contact.name} to the active survey draft.`,
-      [{ text: 'OK', onPress: () => router.navigate('/(drawer)/(tabs)/new-survey') }]
+      [{ text: 'OK', onPress: () => router.navigate('/?tab=1') }]
     );
   };
 

@@ -52,7 +52,7 @@ export const CustomHeader = ({ title, showBack = false }) => {
 
         <Pressable 
           style={[styles.profileBadge, { borderColor: colors.tint }]}
-          onPress={() => router.navigate('/(drawer)/(tabs)/profile')}
+          onPress={() => router.navigate('/?tab=3')}
         >
           <Text style={[styles.profileBadgeText, { color: colors.tint }]}>SJ</Text>
         </Pressable>
