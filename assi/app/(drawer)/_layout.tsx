@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, StyleSheet, Text, Image, useColorScheme, Pressable } from 'react-native';
+import { View, StyleSheet, Text, useColorScheme, Pressable } from 'react-native';
 import { Drawer } from 'expo-router/drawer';
-import { DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
+import { DrawerContentScrollView } from '@react-navigation/drawer';
 import { router, usePathname } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/constants/theme';
@@ -160,7 +160,7 @@ function CustomDrawerContent(props: any) {
       {/* Drawer Footer info */}
       <View style={styles.footer}>
         <Text style={[styles.footerText, { color: colors.icon }]}>
-          Today's Surveys: {todayCount}
+          {"Today's Surveys: "}{todayCount}
         </Text>
         <Text style={[styles.footerVersion, { color: colors.icon }]}>v1.0.0 (Native Assignment)</Text>
       </View>

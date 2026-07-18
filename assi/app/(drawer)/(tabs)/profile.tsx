@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text, ScrollView, useColorScheme, Pressable } from 'react-native';
+import { View, StyleSheet, Text, ScrollView, useColorScheme } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/constants/theme';
 import { useSurvey } from '@/context/SurveyContext';

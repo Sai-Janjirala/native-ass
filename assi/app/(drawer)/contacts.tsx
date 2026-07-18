@@ -60,7 +60,7 @@ export default function ContactsScreen() {
       
       if (status === 'granted') {
         const { data } = await Contacts.getContactsAsync({
-          fields: [Contacts.Fields.PhoneNumbers, Contacts.Fields.Names],
+          fields: [Contacts.Fields.PhoneNumbers, Contacts.Fields.Name],
         });
         
         if (data.length > 0) {

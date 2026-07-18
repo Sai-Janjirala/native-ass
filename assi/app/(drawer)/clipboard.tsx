@@ -4,7 +4,6 @@ import {
   Text, 
   View, 
   Pressable, 
-  TextInput, 
   Alert, 
   useColorScheme, 
   ScrollView 

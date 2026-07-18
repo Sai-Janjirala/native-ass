@@ -193,7 +193,7 @@ export default function LocationScreen() {
             </View>
           ) : (
             <Text style={[styles.warningText, { color: colors.text }]}>
-              GPS Coordinates not yet retrieved. Tap 'Refresh GPS' below.
+              {"GPS Coordinates not yet retrieved. Tap 'Refresh GPS' below."}
             </Text>
           )}
         </View>

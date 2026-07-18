@@ -15,7 +15,7 @@ import { useSurvey } from '@/context/SurveyContext';
 export default function SettingsScreen() {
   const colorScheme = useColorScheme();
   const colors = Colors[colorScheme ?? 'light'];
-  const { surveys, setSurveys, clearDraft } = useSurvey();
+  const { surveys, deleteSurvey } = useSurvey();
 
   const handleClearAllData = () => {
     Alert.alert(
