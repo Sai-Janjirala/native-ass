@@ -8,23 +8,199 @@ import {
   Pressable, 
   useColorScheme, 
   Alert, 
-  Image
+  Image,
+  ActivityIndicator,
+  Modal,
+  FlatList,
+  SafeAreaView
 } from 'react-native';
 import { router } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import { CameraView, useCameraPermissions } from 'expo-camera';
+import * as Location from 'expo-location';
+import * as Contacts from 'expo-contacts';
+import * as Clipboard from 'expo-clipboard';
 import { Colors } from '@/constants/theme';
 import { useSurvey } from '@/context/SurveyContext';
 import { CustomHeader } from '@/components/CustomHeader';
+
+interface SimplifiedContact {
+  id: string;
+  name: string;
+  phoneNumber?: string;
+  initials: string;
+}
+
+// Fallback seed contacts for picker modal
+const mockContacts: SimplifiedContact[] = [
+  { id: '1', name: 'Rohan Sharma', phoneNumber: '+91 98765 43210', initials: 'RS' },
+  { id: '2', name: 'Anjali Verma', phoneNumber: '+91 91234 56789', initials: 'AV' },
+  { id: '3', name: 'Suresh Kumar', phoneNumber: '+91 88888 77777', initials: 'SK' },
+  { id: '4', name: 'Amit Patel', phoneNumber: '+91 99999 88888', initials: 'AP' },
+  { id: '5', name: 'Pooja Hegde', phoneNumber: undefined, initials: 'PH' },
+  { id: '6', name: 'Vikram Singh', phoneNumber: '+91 77777 66666', initials: 'VS' },
+];
 
 export default function NewSurveyScreen() {
   const colorScheme = useColorScheme();
   const colors = Colors[colorScheme ?? 'light'];
   
   const { draft, updateDraftField, submitSurvey, clearDraft } = useSurvey();
-  
-  // Local UI States
+  const [cameraPermission, requestCameraPermission] = useCameraPermissions();
+
+  // Navigation & Form States
   const [isPreview, setIsPreview] = useState(false);
   const [errors, setErrors] = useState<{ siteName?: string; clientName?: string }>({});
+
+  // Inline Modal Overlay States
+  const [isCameraOpen, setIsCameraOpen] = useState(false);
+  const [isCapturing, setIsCapturing] = useState(false);
+  const [isGPSLocating, setIsGPSLocating] = useState(false);
+  
+  const [isContactsPickerOpen, setIsContactsPickerOpen] = useState(false);
+  const [contactsList, setContactsList] = useState<SimplifiedContact[]>([]);
+  const [contactsSearchQuery, setContactsSearchQuery] = useState('');
+  const [contactsLoading, setContactsLoading] = useState(false);
+
+  const cameraRef = React.useRef<CameraView>(null);
+
+  // ==================== INLINE GPS RETRIEVAL ====================
+  const handleGetGPS = async () => {
+    try {
+      setIsGPSLocating(true);
+      const { status } = await Location.requestForegroundPermissionsAsync();
+      
+      if (status !== Location.PermissionStatus.GRANTED) {
+        Alert.alert('Location Blocked', 'Please grant GPS permission in settings to fetch coordinates.');
+        return;
+      }
+
+      const loc = await Location.getCurrentPositionAsync({
+        accuracy: Location.Accuracy.Balanced,
+      });
+
+      updateDraftField('location', {
+        latitude: loc.coords.latitude,
+        longitude: loc.coords.longitude,
+        accuracy: loc.coords.accuracy || 0,
+        timestamp: loc.timestamp,
+      });
+
+      Alert.alert('GPS Captured! 📍', 'GPS location has been linked to your survey.');
+    } catch (e) {
+      Alert.alert('GPS Error', 'Unable to retrieve location coordinates. Make sure location is turned on.');
+    } finally {
+      setIsGPSLocating(false);
+    }
+  };
+
+  // ==================== INLINE CAMERA CAPTURE ====================
+  const handleOpenCameraModal = async () => {
+    if (!cameraPermission || !cameraPermission.granted) {
+      const { granted } = await requestCameraPermission();
+      if (!granted) {
+        Alert.alert('Camera Blocked', 'Please enable camera permissions to capture site photographs.');
+        return;
+      }
+    }
+    setIsCameraOpen(true);
+  };
+
+  const handleCapturePhoto = async () => {
+    if (cameraRef.current && !isCapturing) {
+      try {
+        setIsCapturing(true);
+        const options = { quality: 0.8, skipProcessing: false };
+        const photo = await cameraRef.current.takePictureAsync(options);
+        
+        if (photo?.uri) {
+          const timestamp = new Date().toLocaleString();
+          updateDraftField('photoUri', photo.uri);
+          updateDraftField('photoTime', timestamp);
+          setIsCameraOpen(false);
+        }
+      } catch (error) {
+        Alert.alert('Camera Error', 'Could not capture picture.');
+      } finally {
+        setIsCapturing(false);
+      }
+    }
+  };
+
+  const handleDeletePhoto = () => {
+    Alert.alert(
+      'Trash Pic? 🗑️',
+      'Are you sure you want to delete this captured photograph?',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        { 
+          text: 'Delete', 
+          style: 'destructive',
+          onPress: () => {
+            updateDraftField('photoUri', undefined);
+            updateDraftField('photoTime', undefined);
+          }
+        }
+      ]
+    );
+  };
+
+  // ==================== INLINE CONTACTS PICKER ====================
+  const handleOpenContactsModal = async () => {
+    setIsContactsPickerOpen(true);
+    setContactsLoading(true);
+    try {
+      const { status } = await Contacts.requestPermissionsAsync();
+      if (status === 'granted') {
+        const { data } = await Contacts.getContactsAsync({
+          fields: [Contacts.Fields.PhoneNumbers, Contacts.Fields.Name],
+        });
+        if (data.length > 0) {
+          const formatted = data.map((c) => {
+            const phone = c.phoneNumbers?.[0]?.number;
+            const initials = c.name
+              ? c.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase()
+              : '?';
+            return {
+              id: c.id || Math.random().toString(),
+              name: c.name || 'Unknown Buddy',
+              phoneNumber: phone,
+              initials,
+            };
+          });
+          setContactsList(formatted);
+        } else {
+          setContactsList(mockContacts);
+        }
+      } else {
+        setContactsList(mockContacts);
+      }
+    } catch (e) {
+      setContactsList(mockContacts);
+    } finally {
+      setContactsLoading(false);
+    }
+  };
+
+  const handleSelectContact = (contact: SimplifiedContact) => {
+    updateDraftField('contact', {
+      name: contact.name,
+      phoneNumber: contact.phoneNumber,
+    });
+    setIsContactsPickerOpen(false);
+    setContactsSearchQuery('');
+  };
+
+  // ==================== INLINE CLIPBOARD NOTES ====================
+  const handlePasteClipboardNotes = async () => {
+    const text = await Clipboard.getStringAsync();
+    if (text) {
+      updateDraftField('notes', text);
+      Alert.alert('Notes Pasted! 📝', 'Successfully pasted text from clipboard.');
+    } else {
+      Alert.alert('Empty Clipboard', 'There is no text on the system clipboard to paste.');
+    }
+  };
 
   const handlePrioritySelect = (priority: 'High' | 'Medium' | 'Low') => {
     updateDraftField('priority', priority);
@@ -51,7 +227,7 @@ export default function NewSurveyScreen() {
     if (validateForm()) {
       setIsPreview(true);
     } else {
-      Alert.alert('Validation Failed', 'Please fill in all required fields (Site Name and Client Name).');
+      Alert.alert('Incomplete Form', 'Please fill in the required fields (Site Name and Client Name).');
     }
   };
 
@@ -59,11 +235,11 @@ export default function NewSurveyScreen() {
     const result = submitSurvey();
     if (result.success) {
       Alert.alert(
-        'Survey Submitted',
+        'Survey Logged! 🎉',
         `Survey ID: ${result.survey?.id} was successfully saved.`,
         [
           {
-            text: 'OK',
+            text: 'Awesome',
             onPress: () => {
               setIsPreview(false);
               router.navigate('/(drawer)/(tabs)/history');
@@ -72,13 +248,13 @@ export default function NewSurveyScreen() {
         ]
       );
     } else {
-      Alert.alert('Error', result.error || 'Failed to submit survey.');
+      Alert.alert('Error', result.error || 'Failed to submit.');
     }
   };
 
   const handleReset = () => {
     Alert.alert(
-      'Reset Draft',
+      'Wipe Draft? 🧹',
       'Are you sure you want to clear all inputs and attachments?',
       [
         { text: 'Cancel', style: 'cancel' },
@@ -103,6 +279,12 @@ export default function NewSurveyScreen() {
       default: return colors.icon;
     }
   };
+
+  // Filter contacts based on search query in Contacts Modal
+  const filteredContacts = contactsList.filter((c) =>
+    c.name.toLowerCase().includes(contactsSearchQuery.toLowerCase()) ||
+    (c.phoneNumber && c.phoneNumber.includes(contactsSearchQuery))
+  );
 
   // ==================== RENDER PREVIEW MODE ====================
   if (isPreview) {
@@ -249,7 +431,7 @@ export default function NewSurveyScreen() {
                   borderColor: errors.siteName ? '#FF3B30' : (colorScheme === 'dark' ? '#2F3336' : '#EAF0F6')
                 }
               ]}
-              placeholder="Enter site / installation name"
+              placeholder="Enter site name"
               placeholderTextColor={colors.icon}
               value={draft.siteName}
               onChangeText={(text) => {
@@ -272,7 +454,7 @@ export default function NewSurveyScreen() {
                   borderColor: errors.clientName ? '#FF3B30' : (colorScheme === 'dark' ? '#2F3336' : '#EAF0F6')
                 }
               ]}
-              placeholder="Enter client company/organization"
+              placeholder="Enter client organization"
               placeholderTextColor={colors.icon}
               value={draft.clientName}
               onChangeText={(text) => {
@@ -368,8 +550,12 @@ export default function NewSurveyScreen() {
           <View style={styles.inputGroup}>
             <View style={styles.labelRow}>
               <Text style={[styles.label, { color: colors.text }]}>My personal notes 📝</Text>
-              <Pressable onPress={() => router.navigate('/(drawer)/clipboard')}>
-                <Text style={[styles.notesPasteLink, { color: colors.tint }]}>Go to Clipboard</Text>
+              <Pressable 
+                style={styles.inlinePasteBtn} 
+                onPress={handlePasteClipboardNotes}
+              >
+                <Ionicons name="clipboard" size={14} color={colors.tint} style={{ marginRight: 4 }} />
+                <Text style={[styles.notesPasteLink, { color: colors.tint }]}>Quick Paste 📋</Text>
               </Pressable>
             </View>
             <TextInput
@@ -382,7 +568,7 @@ export default function NewSurveyScreen() {
                   borderColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6'
                 }
               ]}
-              placeholder="Enter notes manually or paste them from the Clipboard API tool..."
+              placeholder="Enter notes manually or tap Quick Paste..."
               placeholderTextColor={colors.icon}
               value={draft.notes}
               onChangeText={(text) => updateDraftField('notes', text)}
@@ -407,14 +593,21 @@ export default function NewSurveyScreen() {
               />
               <View style={styles.attachmentText}>
                 <Text style={[styles.attachmentName, { color: colors.text }]}>Photo 📸</Text>
-                <Text style={[styles.attachmentDesc, { color: colors.icon }]}>
-                  {draft.photoUri ? `Attached (${draft.photoTime})` : 'No photograph linked'}
-                </Text>
+                {draft.photoUri ? (
+                  <View style={styles.attachedImageWrapper}>
+                    <Image source={{ uri: draft.photoUri }} style={styles.inlineAttachedThumbnail} />
+                    <Pressable style={styles.removeImageBtn} onPress={handleDeletePhoto}>
+                      <Ionicons name="close-circle" size={18} color="#FF3B30" />
+                    </Pressable>
+                  </View>
+                ) : (
+                  <Text style={[styles.attachmentDesc, { color: colors.icon }]}>No picture snapped yet</Text>
+                )}
               </View>
             </View>
             <Pressable 
               style={[styles.attachBtn, { borderColor: colors.tint }]}
-              onPress={() => router.navigate('/(drawer)/camera')}
+              onPress={handleOpenCameraModal}
             >
               <Text style={[styles.attachBtnText, { color: colors.tint }]}>
                 {draft.photoUri ? 'Retake' : 'Open Camera'}
@@ -427,21 +620,26 @@ export default function NewSurveyScreen() {
           {/* Location Attachment Status */}
           <View style={styles.attachmentItem}>
             <View style={styles.attachmentMeta}>
-              <Ionicons 
-                name={draft.location ? "checkmark-circle" : "location-outline"} 
-                size={22} 
-                color={draft.location ? "#34C759" : colors.icon} 
-              />
+              {isGPSLocating ? (
+                <ActivityIndicator size="small" color={colors.tint} />
+              ) : (
+                <Ionicons 
+                  name={draft.location ? "checkmark-circle" : "location-outline"} 
+                  size={22} 
+                  color={draft.location ? "#34C759" : colors.icon} 
+                />
+              )}
               <View style={styles.attachmentText}>
                 <Text style={[styles.attachmentName, { color: colors.text }]}>GPS Location 📍</Text>
                 <Text style={[styles.attachmentDesc, { color: colors.icon }]}>
-                  {draft.location ? `${draft.location.latitude.toFixed(4)}, ${draft.location.longitude.toFixed(4)}` : 'No coordinates linked'}
+                  {draft.location ? `${draft.location.latitude.toFixed(5)}, ${draft.location.longitude.toFixed(5)}` : 'No coordinates linked'}
                 </Text>
               </View>
             </View>
             <Pressable 
-              style={[styles.attachBtn, { borderColor: colors.tint }]}
-              onPress={() => router.navigate('/(drawer)/location')}
+              style={[styles.attachBtn, { borderColor: colors.tint, opacity: isGPSLocating ? 0.6 : 1 }]}
+              onPress={handleGetGPS}
+              disabled={isGPSLocating}
             >
               <Text style={[styles.attachBtnText, { color: colors.tint }]}>
                 {draft.location ? 'Update' : 'Get GPS'}
@@ -462,13 +660,13 @@ export default function NewSurveyScreen() {
               <View style={styles.attachmentText}>
                 <Text style={[styles.attachmentName, { color: colors.text }]}>Linked Buddy 👥</Text>
                 <Text style={[styles.attachmentDesc, { color: colors.icon }]}>
-                  {draft.contact ? `${draft.contact.name}` : 'No contact linked'}
+                  {draft.contact ? `${draft.contact.name}` : 'No buddy linked'}
                 </Text>
               </View>
             </View>
             <Pressable 
               style={[styles.attachBtn, { borderColor: colors.tint }]}
-              onPress={() => router.navigate('/(drawer)/contacts')}
+              onPress={handleOpenContactsModal}
             >
               <Text style={[styles.attachBtnText, { color: colors.tint }]}>
                 {draft.contact ? 'Change' : 'Select'}
@@ -494,6 +692,113 @@ export default function NewSurveyScreen() {
           </Pressable>
         </View>
       </ScrollView>
+
+      {/* ==================== INLINE CAMERA OVERLAY MODAL ==================== */}
+      <Modal visible={isCameraOpen} animationType="slide" transparent={false}>
+        <SafeAreaView style={[styles.modalScreenContainer, { backgroundColor: '#000' }]}>
+          <CameraView style={StyleSheet.absoluteFillObject} ref={cameraRef}>
+            <View style={styles.cameraOverlayContainer}>
+              <View style={styles.cameraHeader}>
+                <Pressable 
+                  style={styles.camCloseBtn}
+                  onPress={() => setIsCameraOpen(false)}
+                >
+                  <Ionicons name="close" size={26} color="#FFF" />
+                </Pressable>
+              </View>
+
+              <View style={styles.cameraControls}>
+                {isCapturing ? (
+                  <ActivityIndicator size="large" color="#FFF" />
+                ) : (
+                  <Pressable style={styles.captureBtn} onPress={handleCapturePhoto}>
+                    <View style={styles.captureBtnInner} />
+                  </Pressable>
+                )}
+              </View>
+            </View>
+          </CameraView>
+        </SafeAreaView>
+      </Modal>
+
+      {/* ==================== INLINE CONTACTS PICKER MODAL ==================== */}
+      <Modal visible={isContactsPickerOpen} animationType="slide">
+        <SafeAreaView style={[styles.modalScreenContainer, { backgroundColor: colors.background }]}>
+          <View style={styles.modalHeader}>
+            <Text style={[styles.modalHeaderTitle, { color: colors.text }]}>Choose a Buddy 👥</Text>
+            <Pressable 
+              style={[styles.iconButtonSmall, { backgroundColor: colorScheme === 'dark' ? '#2F3336' : '#F5F5F5' }]}
+              onPress={() => {
+                setIsContactsPickerOpen(false);
+                setContactsSearchQuery('');
+              }}
+            >
+              <Ionicons name="close" size={20} color={colors.text} />
+            </Pressable>
+          </View>
+
+          <View style={styles.modalContent}>
+            {/* Search Input */}
+            <View style={[
+              styles.contactsSearchBox, 
+              { 
+                backgroundColor: colorScheme === 'dark' ? '#1E2123' : '#F5F5F5',
+                borderColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6'
+              }
+            ]}>
+              <Ionicons name="search" size={18} color={colors.icon} style={{ marginRight: 8 }} />
+              <TextInput
+                style={[styles.contactsSearchInput, { color: colors.text }]}
+                placeholder="Search buddies..."
+                placeholderTextColor={colors.icon}
+                value={contactsSearchQuery}
+                onChangeText={setContactsSearchQuery}
+              />
+            </View>
+
+            {contactsLoading ? (
+              <View style={styles.centerModalContainer}>
+                <ActivityIndicator size="large" color={colors.tint} />
+                <Text style={[styles.modalLoadingText, { color: colors.icon }]}>Loading address book...</Text>
+              </View>
+            ) : filteredContacts.length === 0 ? (
+              <View style={styles.centerModalContainer}>
+                <Ionicons name="people-outline" size={48} color={colors.icon} />
+                <Text style={[styles.modalEmptyText, { color: colors.text }]}>No contacts found</Text>
+              </View>
+            ) : (
+              <FlatList
+                data={filteredContacts}
+                keyExtractor={(item) => item.id}
+                contentContainerStyle={styles.contactsList}
+                renderItem={({ item }) => (
+                  <Pressable 
+                    style={[
+                      styles.contactPickerItem,
+                      { 
+                        backgroundColor: colorScheme === 'dark' ? '#1E2123' : '#FFFFFF',
+                        borderColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6'
+                      }
+                    ]}
+                    onPress={() => handleSelectContact(item)}
+                  >
+                    <View style={[styles.avatarCircle, { backgroundColor: colors.tint + '15' }]}>
+                      <Text style={[styles.avatarText, { color: colors.tint }]}>{item.initials}</Text>
+                    </View>
+                    <View style={styles.contactPickerMeta}>
+                      <Text style={[styles.contactPickerName, { color: colors.text }]}>{item.name}</Text>
+                      <Text style={[styles.contactPickerPhone, { color: colors.icon }]}>
+                        {item.phoneNumber || 'No Number'}
+                      </Text>
+                    </View>
+                    <Ionicons name="chevron-forward" size={16} color={colors.icon} />
+                  </Pressable>
+                )}
+              />
+            )}
+          </View>
+        </SafeAreaView>
+      </Modal>
     </View>
   );
 }
@@ -520,6 +825,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 6,
+  },
+  inlinePasteBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   notesPasteLink: {
     fontSize: 12,
@@ -607,6 +916,20 @@ const styles = StyleSheet.create({
   attachmentDesc: {
     fontSize: 12,
     marginTop: 1,
+  },
+  attachedImageWrapper: {
+    marginTop: 6,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+  },
+  inlineAttachedThumbnail: {
+    width: 60,
+    height: 60,
+    borderRadius: 6,
+  },
+  removeImageBtn: {
+    padding: 4,
   },
   attachBtn: {
     borderWidth: 1,
@@ -786,5 +1109,135 @@ const styles = StyleSheet.create({
     color: '#FFF',
     fontSize: 15,
     fontWeight: 'bold',
+  },
+
+  // ==================== INLINE MODALS STYLES ====================
+  modalScreenContainer: {
+    flex: 1,
+  },
+  cameraOverlayContainer: {
+    flex: 1,
+    justifyContent: 'space-between',
+    padding: 20,
+    backgroundColor: 'rgba(0,0,0,0.15)',
+  },
+  cameraHeader: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    marginTop: 20,
+  },
+  camCloseBtn: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  cameraControls: {
+    alignItems: 'center',
+    marginBottom: 30,
+  },
+  captureBtn: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    borderWidth: 4,
+    borderColor: '#FFF',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(255,255,255,0.2)',
+  },
+  captureBtnInner: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: '#FFF',
+  },
+  modalHeader: {
+    height: 60,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 16,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: '#ccc',
+  },
+  modalHeaderTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  iconButtonSmall: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalContent: {
+    flex: 1,
+    padding: 16,
+  },
+  contactsSearchBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 12,
+    height: 44,
+    borderRadius: 8,
+    borderWidth: 1,
+    marginBottom: 16,
+  },
+  contactsSearchInput: {
+    flex: 1,
+    fontSize: 14,
+    height: '100%',
+  },
+  centerModalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalLoadingText: {
+    fontSize: 13,
+    marginTop: 10,
+  },
+  modalEmptyText: {
+    fontSize: 14,
+    marginTop: 8,
+    fontWeight: '500',
+  },
+  contactsList: {
+    paddingBottom: 24,
+  },
+  contactPickerItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 12,
+    borderRadius: 10,
+    borderWidth: 1,
+    marginBottom: 10,
+  },
+  avatarCircle: {
+    width: 38,
+    height: 38,
+    borderRadius: 19,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  avatarText: {
+    fontWeight: 'bold',
+    fontSize: 14,
+  },
+  contactPickerMeta: {
+    marginLeft: 12,
+    flex: 1,
+  },
+  contactPickerName: {
+    fontSize: 13,
+    fontWeight: 'bold',
+  },
+  contactPickerPhone: {
+    fontSize: 11,
+    marginTop: 2,
   },
 });
