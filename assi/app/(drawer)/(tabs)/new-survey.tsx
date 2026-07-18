@@ -87,7 +87,7 @@ export default function NewSurveyScreen() {
       });
 
       Alert.alert('GPS Captured! 📍', 'GPS location has been linked to your survey.');
-    } catch (e) {
+    } catch {
       Alert.alert('GPS Error', 'Unable to retrieve location coordinates. Make sure location is turned on.');
     } finally {
       setIsGPSLocating(false);
@@ -119,7 +119,7 @@ export default function NewSurveyScreen() {
           updateDraftField('photoTime', timestamp);
           setIsCameraOpen(false);
         }
-      } catch (error) {
+      } catch {
         Alert.alert('Camera Error', 'Could not capture picture.');
       } finally {
         setIsCapturing(false);
@@ -175,7 +175,7 @@ export default function NewSurveyScreen() {
       } else {
         setContactsList(mockContacts);
       }
-    } catch (e) {
+    } catch {
       setContactsList(mockContacts);
     } finally {
       setContactsLoading(false);
