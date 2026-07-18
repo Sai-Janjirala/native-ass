@@ -19,7 +19,7 @@ export default function SurveyDetailModal() {
   const colorScheme = useColorScheme();
   const colors = Colors[colorScheme ?? 'light'];
   
-  const { id } = useLocalSearchParams<{ id: string }>();
+  const { id } = useLocalSearchParams();
   const { surveys, deleteSurvey } = useSurvey();
 
   // Find the survey in history
@@ -43,7 +43,7 @@ export default function SurveyDetailModal() {
     );
   }
 
-  const getPriorityColor = (p: string) => {
+  const getPriorityColor = (p) => {
     switch (p) {
       case 'High': return '#FF3B30';
       case 'Medium': return '#FF9500';
@@ -52,7 +52,7 @@ export default function SurveyDetailModal() {
     }
   };
 
-  const handleCopyText = async (text: string, label: string) => {
+  const handleCopyText = async (text, label) => {
     await Clipboard.setStringAsync(text);
     Alert.alert('Copied', `${label} copied to clipboard!`);
   };
@@ -189,7 +189,7 @@ export default function SurveyDetailModal() {
               {survey.contact.phoneNumber ? (
                 <Pressable 
                   style={[styles.iconButtonSmall, { backgroundColor: colorScheme === 'dark' ? '#2F3336' : '#F5F5F5' }]}
-                  onPress={() => handleCopyText(survey.contact!.phoneNumber!, 'Contact Number')}
+                  onPress={() => handleCopyText(survey.contact.phoneNumber, 'Contact Number')}
                 >
                   <Ionicons name="copy-outline" size={16} color={colors.text} />
                 </Pressable>

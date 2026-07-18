@@ -5,12 +5,7 @@ import { DrawerActions } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/constants/theme';
 
-interface CustomHeaderProps {
-  title?: string;
-  showBack?: boolean;
-}
-
-export const CustomHeader: React.FC<CustomHeaderProps> = ({ title, showBack = false }) => {
+export const CustomHeader = ({ title, showBack = false }) => {
   const colorScheme = useColorScheme();
   const colors = Colors[colorScheme ?? 'light'];
   const navigation = useNavigation();
@@ -24,7 +19,7 @@ export const CustomHeader: React.FC<CustomHeaderProps> = ({ title, showBack = fa
   };
 
   const getFormattedDate = () => {
-    const options: Intl.DateTimeFormatOptions = { 
+    const options = { 
       weekday: 'short', 
       month: 'short', 
       day: 'numeric' 

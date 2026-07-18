@@ -1,18 +1,9 @@
 import React from 'react';
-import { StyleSheet, View, Text, Pressable, useColorScheme, ViewStyle } from 'react-native';
+import { StyleSheet, View, Text, Pressable, useColorScheme } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/constants/theme';
 
-interface PremiumCardProps {
-  title: string;
-  description?: string;
-  iconName?: keyof typeof Ionicons.glyphMap;
-  onPress?: () => void;
-  style?: ViewStyle;
-  rightElement?: React.ReactNode;
-}
-
-export const PremiumCard: React.FC<PremiumCardProps> = ({
+export const PremiumCard = ({
   title,
   description,
   iconName,
