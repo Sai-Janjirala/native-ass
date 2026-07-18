@@ -464,7 +464,7 @@ export default function NewSurveyScreen() {
           <View style={styles.inputGroup}>
             <Text style={[styles.label, { color: colors.text }]}>How Important? 🔥</Text>
             <View style={styles.priorityRow}>
-              {(['Low', 'Medium', 'High'] as const).map((p) => {
+              {(['Low', 'Medium', 'High']).map((p) => {
                 const isSelected = draft.priority === p;
                 const pColor = getPriorityColor(p);
                 return (

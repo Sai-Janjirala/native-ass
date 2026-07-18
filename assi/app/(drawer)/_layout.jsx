@@ -14,7 +14,7 @@ function CustomDrawerContent(props) {
   const { todayCount } = useSurvey();
 
   // Helper to determine if drawer item is active
-  const isActive = (route: string) => {
+  const isActive = (route) => {
     if (route === 'dashboard') {
       return pathname === '/' || pathname === '/(tabs)' || pathname === '/(drawer)/(tabs)';
     }
