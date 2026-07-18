@@ -36,7 +36,7 @@ export default function HistoryScreen() {
 
   const handleDeletePress = (id: string, siteName: string) => {
     Alert.alert(
-      'Confirm Deletion',
+      'Delete this survey? 🗑️',
       `Are you sure you want to delete the survey record for "${siteName}"? This action is permanent.`,
       [
         { text: 'Cancel', style: 'cancel' },
@@ -65,7 +65,7 @@ export default function HistoryScreen() {
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
-      <CustomHeader title="Inspection History" />
+      <CustomHeader title="Survey History 📂" />
 
       {/* Search Input Bar */}
       <View style={styles.topContainer}>
@@ -95,6 +95,7 @@ export default function HistoryScreen() {
         <View style={styles.filterRow}>
           {(['All', 'High', 'Medium', 'Low'] as const).map((p) => {
             const isSelected = priorityFilter === p;
+            const displayLabel = p === 'All' ? 'All' : p === 'High' ? 'High 🔥' : p === 'Medium' ? 'Med ⚡' : 'Low 🍀';
             return (
               <Pressable
                 key={p}
@@ -115,7 +116,7 @@ export default function HistoryScreen() {
                     fontWeight: isSelected ? '700' : '500'
                   }
                 ]}>
-                  {p}
+                  {displayLabel}
                 </Text>
               </Pressable>
             );
@@ -129,11 +130,11 @@ export default function HistoryScreen() {
           <View style={[styles.emptyIconCircle, { backgroundColor: colorScheme === 'dark' ? '#1E2123' : '#F2FAFD' }]}>
             <Ionicons name="document-text-outline" size={48} color={colors.icon} />
           </View>
-          <Text style={[styles.emptyTitle, { color: colors.text }]}>No Records Found</Text>
+          <Text style={[styles.emptyTitle, { color: colors.text }]}>Nothing here! 🏜️</Text>
           <Text style={[styles.emptySub, { color: colors.icon }]}>
             {surveys.length === 0 
-              ? 'No surveys have been submitted yet. Go to New Survey tab to create one.'
-              : 'No surveys match the search query or priority filters selected.'}
+              ? 'No surveys added yet! Go start one under the New tab.'
+              : 'No surveys match your search or filters.'}
           </Text>
         </View>
       ) : (

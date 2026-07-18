@@ -19,7 +19,7 @@ export default function SettingsScreen() {
 
   const handleClearAllData = () => {
     Alert.alert(
-      'Warning: Clear All Data',
+      'Danger! Delete All? 🧨',
       'This will erase all submitted surveys in your inspection history. This action cannot be undone.',
       [
         { text: 'Cancel', style: 'cancel' },
@@ -49,7 +49,7 @@ export default function SettingsScreen() {
 
   return (
     <ScrollView style={[styles.container, { backgroundColor: colors.background }]} contentContainerStyle={styles.scrollContainer}>
-      <Text style={[styles.sectionTitle, { color: colors.text }]}>Application Settings</Text>
+      <Text style={[styles.sectionTitle, { color: colors.text }]}>App Settings ⚙️</Text>
       
       <View style={[styles.box, { backgroundColor: colorScheme === 'dark' ? '#1E2123' : '#FFFFFF', borderColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6' }]}>
         
@@ -58,7 +58,7 @@ export default function SettingsScreen() {
           <View style={styles.meta}>
             <Ionicons name="color-palette-outline" size={22} color={colors.tint} />
             <View style={styles.textBlock}>
-              <Text style={[styles.title, { color: colors.text }]}>System Color Scheme</Text>
+              <Text style={[styles.title, { color: colors.text }]}>System Vibe 🎨</Text>
               <Text style={[styles.desc, { color: colors.icon }]}>
                 Currently running in {colorScheme === 'dark' ? 'Dark Mode' : 'Light Mode'}
               </Text>
@@ -76,9 +76,9 @@ export default function SettingsScreen() {
           <View style={styles.meta}>
             <Ionicons name="trash-outline" size={22} color="#FF3B30" />
             <View style={styles.textBlock}>
-              <Text style={[styles.title, { color: '#FF3B30' }]}>Clear All Survey History</Text>
+              <Text style={[styles.title, { color: '#FF3B30' }]}>Wipe All Surveys 🗑️</Text>
               <Text style={[styles.desc, { color: colors.icon }]}>
-                Wipe all completed surveys ({surveys.length} records)
+                Delete all surveys forever ({surveys.length} records)
               </Text>
             </View>
           </View>

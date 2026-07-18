@@ -59,7 +59,7 @@ export default function SurveyDetailModal() {
 
   const handleDelete = () => {
     Alert.alert(
-      'Confirm Delete',
+      'Delete Survey? 🗑️',
       'Are you sure you want to delete this survey record from history?',
       [
         { text: 'Cancel', style: 'cancel' },
@@ -107,12 +107,12 @@ export default function SurveyDetailModal() {
 
         {/* Client details */}
         <View style={[styles.sectionCard, { backgroundColor: colorScheme === 'dark' ? '#1E2123' : '#F9FBFD', borderColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6' }]}>
-          <Text style={[styles.sectionLabel, { color: colors.icon }]}>Client Organization</Text>
+          <Text style={[styles.sectionLabel, { color: colors.icon }]}>Client Info 👤</Text>
           <Text style={[styles.sectionValueBold, { color: colors.text }]}>{survey.clientName}</Text>
           
           {survey.description ? (
             <View style={{ marginTop: 12 }}>
-              <Text style={[styles.sectionLabel, { color: colors.icon }]}>Inspection Description</Text>
+              <Text style={[styles.sectionLabel, { color: colors.icon }]}>Site Description 💬</Text>
               <Text style={[styles.sectionValue, { color: colors.text }]}>{survey.description}</Text>
             </View>
           ) : null}
@@ -120,7 +120,7 @@ export default function SurveyDetailModal() {
 
         {/* Photo Section */}
         <View style={styles.detailBlock}>
-          <Text style={[styles.blockTitle, { color: colors.text }]}>Attached Site Image</Text>
+          <Text style={[styles.blockTitle, { color: colors.text }]}>Site Picture 📸</Text>
           {survey.photoUri ? (
             <View style={styles.photoContainer}>
               <Image source={{ uri: survey.photoUri }} style={styles.siteImage} />
@@ -133,14 +133,14 @@ export default function SurveyDetailModal() {
           ) : (
             <View style={[styles.emptyAttachment, { borderColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6' }]}>
               <Ionicons name="image-outline" size={24} color={colors.icon} />
-              <Text style={[styles.emptyAttachmentText, { color: colors.icon }]}>No photograph attached</Text>
+              <Text style={[styles.emptyAttachmentText, { color: colors.icon }]}>No picture snapped yet 🤷</Text>
             </View>
           )}
         </View>
 
         {/* Location Section */}
         <View style={styles.detailBlock}>
-          <Text style={[styles.blockTitle, { color: colors.text }]}>GPS Location Details</Text>
+          <Text style={[styles.blockTitle, { color: colors.text }]}>Coordinates 📍</Text>
           {survey.location ? (
             <View style={[styles.infoRowCard, { backgroundColor: colorScheme === 'dark' ? '#1E2123' : '#FFF', borderColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6' }]}>
               <View style={styles.infoRowMeta}>
@@ -167,14 +167,14 @@ export default function SurveyDetailModal() {
           ) : (
             <View style={[styles.emptyAttachment, { borderColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6' }]}>
               <Ionicons name="location-outline" size={24} color={colors.icon} />
-              <Text style={[styles.emptyAttachmentText, { color: colors.icon }]}>No location details attached</Text>
+              <Text style={[styles.emptyAttachmentText, { color: colors.icon }]}>No GPS signals linked yet 🧭</Text>
             </View>
           )}
         </View>
 
         {/* Contact Section */}
         <View style={styles.detailBlock}>
-          <Text style={[styles.blockTitle, { color: colors.text }]}>Linked Inspector/Team Contact</Text>
+          <Text style={[styles.blockTitle, { color: colors.text }]}>Team Contact 👥</Text>
           {survey.contact ? (
             <View style={[styles.infoRowCard, { backgroundColor: colorScheme === 'dark' ? '#1E2123' : '#FFF', borderColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6' }]}>
               <View style={styles.infoRowMeta}>
@@ -198,17 +198,17 @@ export default function SurveyDetailModal() {
           ) : (
             <View style={[styles.emptyAttachment, { borderColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6' }]}>
               <Ionicons name="person-outline" size={24} color={colors.icon} />
-              <Text style={[styles.emptyAttachmentText, { color: colors.icon }]}>No contact details linked</Text>
+              <Text style={[styles.emptyAttachmentText, { color: colors.icon }]}>No buddy linked yet 👤</Text>
             </View>
           )}
         </View>
 
         {/* Notes Section */}
         <View style={styles.detailBlock}>
-          <Text style={[styles.blockTitle, { color: colors.text }]}>Survey Notes</Text>
+          <Text style={[styles.blockTitle, { color: colors.text }]}>Notes 📝</Text>
           <View style={[styles.notesBox, { backgroundColor: colorScheme === 'dark' ? '#1E2123' : '#F9FBFD', borderColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6' }]}>
             <Text style={[styles.notesText, { color: survey.notes ? colors.text : colors.icon }]}>
-              {survey.notes || 'No notes were provided for this inspection.'}
+              {survey.notes || 'No notes written yet ✍️'}
             </Text>
           </View>
         </View>
@@ -220,7 +220,7 @@ export default function SurveyDetailModal() {
             onPress={handleDelete}
           >
             <Ionicons name="trash-outline" size={18} color="#FF3B30" style={{ marginRight: 6 }} />
-            <Text style={styles.deleteButtonText}>Delete Report</Text>
+            <Text style={styles.deleteButtonText}>Delete Survey 🗑️</Text>
           </Pressable>
         </View>
       </ScrollView>

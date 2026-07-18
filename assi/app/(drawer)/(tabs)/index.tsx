@@ -30,7 +30,7 @@ export default function DashboardScreen() {
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
-      <CustomHeader title="Inspection Dashboard" />
+      <CustomHeader title="My Field Surveys 🚀" />
       
       <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
         {/* Welcome Section */}
@@ -42,13 +42,13 @@ export default function DashboardScreen() {
           }
         ]}>
           <View style={styles.welcomeTextContainer}>
-            <Text style={[styles.welcomeSub, { color: colors.icon }]}>Welcome back,</Text>
+            <Text style={[styles.welcomeSub, { color: colors.icon }]}>Hey there! 👋</Text>
             <Text style={[styles.welcomeTitle, { color: colors.text }]}>Sai Janjirala</Text>
             <Text style={[styles.studentRoll, { color: colors.tint }]}>ID: 2026-NATIVE-ASS</Text>
           </View>
           <View style={[styles.countBadge, { backgroundColor: colors.tint }]}>
             <Text style={styles.countNumber}>{todayCount}</Text>
-            <Text style={styles.countLabel}>Today</Text>
+            <Text style={styles.countLabel}>Done</Text>
           </View>
         </View>
 
@@ -67,21 +67,21 @@ export default function DashboardScreen() {
         </View>
 
         {/* Quick Action Grid */}
-        <Text style={[styles.sectionTitle, { color: colors.text }]}>Quick Actions</Text>
+        <Text style={[styles.sectionTitle, { color: colors.text }]}>Quick Actions ⚡</Text>
         <View style={styles.gridContainer}>
           <View style={styles.gridRow}>
             <View style={styles.gridCol}>
               <PremiumCard 
-                title="Create Survey" 
-                description="Start a new report" 
+                title="New Survey ➕" 
+                description="Add a new log" 
                 iconName="add-circle-outline" 
                 onPress={() => router.navigate('/(drawer)/(tabs)/new-survey')} 
               />
             </View>
             <View style={styles.gridCol}>
               <PremiumCard 
-                title="History" 
-                description="Inspect logged items" 
+                title="History 📂" 
+                description="View past surveys" 
                 iconName="time-outline" 
                 onPress={() => router.navigate('/(drawer)/(tabs)/history')} 
               />
@@ -91,16 +91,16 @@ export default function DashboardScreen() {
           <View style={styles.gridRow}>
             <View style={styles.gridCol}>
               <PremiumCard 
-                title="Camera API" 
-                description="Snap survey photos" 
+                title="Snap Pic 📸" 
+                description="Take photos of sites" 
                 iconName="camera-outline" 
                 onPress={() => router.navigate('/(drawer)/camera')} 
               />
             </View>
             <View style={styles.gridCol}>
               <PremiumCard 
-                title="Location API" 
-                description="Capture coordinates" 
+                title="GPS Tracker 📍" 
+                description="Grab GPS coordinates" 
                 iconName="location-outline" 
                 onPress={() => router.navigate('/(drawer)/location')} 
               />
@@ -110,16 +110,16 @@ export default function DashboardScreen() {
           <View style={styles.gridRow}>
             <View style={styles.gridCol}>
               <PremiumCard 
-                title="Contacts API" 
-                description="Link team contacts" 
+                title="Link Buddies 👥" 
+                description="Choose team contacts" 
                 iconName="people-outline" 
                 onPress={() => router.navigate('/(drawer)/contacts')} 
               />
             </View>
             <View style={styles.gridCol}>
               <PremiumCard 
-                title="Clipboard" 
-                description="Inspect copied text" 
+                title="Clipboard 📋" 
+                description="Copy/paste helper" 
                 iconName="clipboard-outline" 
                 onPress={() => router.navigate('/(drawer)/clipboard')} 
               />
@@ -129,7 +129,7 @@ export default function DashboardScreen() {
 
         {/* Recent Surveys Summary */}
         <View style={styles.recentHeader}>
-          <Text style={[styles.sectionTitle, { color: colors.text, marginBottom: 0 }]}>Recent Surveys</Text>
+          <Text style={[styles.sectionTitle, { color: colors.text, marginBottom: 0 }]}>Latest Surveys 👀</Text>
           {surveys.length > 0 && (
             <Pressable onPress={() => router.navigate('/(drawer)/(tabs)/history')}>
               <Text style={[styles.viewAllText, { color: colors.tint }]}>View All</Text>
@@ -140,7 +140,7 @@ export default function DashboardScreen() {
         {recentSurveys.length === 0 ? (
           <View style={[styles.emptyRecent, { borderColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6' }]}>
             <Ionicons name="document-text-outline" size={32} color={colors.icon} />
-            <Text style={[styles.emptyRecentText, { color: colors.icon }]}>No surveys logged yet.</Text>
+            <Text style={[styles.emptyRecentText, { color: colors.icon }]}>Empty! Go start a survey ⚡</Text>
           </View>
         ) : (
           recentSurveys.map((survey) => (

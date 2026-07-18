@@ -57,7 +57,7 @@ function CustomDrawerContent(props: any) {
             color={isActive('dashboard') ? activeText : inactiveText} 
           />
           <Text style={[styles.itemText, { color: isActive('dashboard') ? activeText : inactiveText }]}>
-            Dashboard
+            Home 🏠
           </Text>
         </Pressable>
 
@@ -72,12 +72,12 @@ function CustomDrawerContent(props: any) {
             color={isActive('survey') ? activeText : inactiveText} 
           />
           <Text style={[styles.itemText, { color: isActive('survey') ? activeText : inactiveText }]}>
-            Create Survey
+            New Survey ➕
           </Text>
         </Pressable>
 
         <View style={[styles.divider, { backgroundColor: colorScheme === 'dark' ? '#333' : '#eee' }]} />
-        <Text style={[styles.sectionTitle, { color: colors.icon }]}>APIs & Tools</Text>
+        <Text style={[styles.sectionTitle, { color: colors.icon }]}>Cool APIs ⚡</Text>
 
         {/* Camera */}
         <Pressable
@@ -90,7 +90,7 @@ function CustomDrawerContent(props: any) {
             color={isActive('camera') ? activeText : inactiveText} 
           />
           <Text style={[styles.itemText, { color: isActive('camera') ? activeText : inactiveText }]}>
-            Camera API
+            Snap Pic 📸
           </Text>
         </Pressable>
 
@@ -105,7 +105,7 @@ function CustomDrawerContent(props: any) {
             color={isActive('location') ? activeText : inactiveText} 
           />
           <Text style={[styles.itemText, { color: isActive('location') ? activeText : inactiveText }]}>
-            Location API
+            GPS Tracker 📍
           </Text>
         </Pressable>
 
@@ -120,7 +120,7 @@ function CustomDrawerContent(props: any) {
             color={isActive('contacts') ? activeText : inactiveText} 
           />
           <Text style={[styles.itemText, { color: isActive('contacts') ? activeText : inactiveText }]}>
-            Contacts API
+            Buddies List 👥
           </Text>
         </Pressable>
 
@@ -135,7 +135,7 @@ function CustomDrawerContent(props: any) {
             color={isActive('clipboard') ? activeText : inactiveText} 
           />
           <Text style={[styles.itemText, { color: isActive('clipboard') ? activeText : inactiveText }]}>
-            Clipboard API
+            Clipboard Tool 📋
           </Text>
         </Pressable>
 
@@ -152,7 +152,7 @@ function CustomDrawerContent(props: any) {
             color={isActive('settings') ? activeText : inactiveText} 
           />
           <Text style={[styles.itemText, { color: isActive('settings') ? activeText : inactiveText }]}>
-            Settings
+            App Settings ⚙️
           </Text>
         </Pressable>
       </View>
@@ -160,7 +160,7 @@ function CustomDrawerContent(props: any) {
       {/* Drawer Footer info */}
       <View style={styles.footer}>
         <Text style={[styles.footerText, { color: colors.icon }]}>
-          {"Today's Surveys: "}{todayCount}
+          {"Done Today: "}{todayCount}
         </Text>
         <Text style={[styles.footerVersion, { color: colors.icon }]}>v1.0.0 (Native Assignment)</Text>
       </View>

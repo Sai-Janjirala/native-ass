@@ -17,7 +17,7 @@ export default function ProfileScreen() {
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
-      <CustomHeader title="Student Profile" />
+      <CustomHeader title="My Profile 🤠" />
       <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
         {/* Profile Card */}
         <View style={[
@@ -39,7 +39,7 @@ export default function ProfileScreen() {
         </View>
 
         {/* Project Details */}
-        <Text style={[styles.sectionTitle, { color: colors.text }]}>Assignment Information</Text>
+        <Text style={[styles.sectionTitle, { color: colors.text }]}>Homework Info 📖</Text>
         <View style={[
           styles.detailsBox, 
           { 
@@ -69,18 +69,18 @@ export default function ProfileScreen() {
         </View>
 
         {/* Survey Analytics */}
-        <Text style={[styles.sectionTitle, { color: colors.text }]}>Inspection Metrics</Text>
+        <Text style={[styles.sectionTitle, { color: colors.text }]}>My Stats 📊</Text>
         <View style={styles.metricsGrid}>
           <View style={[styles.metricCard, { backgroundColor: colorScheme === 'dark' ? '#1E2123' : '#FFFFFF', borderColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6' }]}>
             <Ionicons name="document-text-outline" size={24} color={colors.tint} />
             <Text style={[styles.metricNum, { color: colors.text }]}>{totalSurveys}</Text>
-            <Text style={[styles.metricLabel, { color: colors.icon }]}>Total Logged</Text>
+            <Text style={[styles.metricLabel, { color: colors.icon }]}>Total Logs</Text>
           </View>
           
           <View style={[styles.metricCard, { backgroundColor: colorScheme === 'dark' ? '#1E2123' : '#FFFFFF', borderColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6' }]}>
             <Ionicons name="today-outline" size={24} color="#34C759" />
             <Text style={[styles.metricNum, { color: '#34C759' }]}>{todayCount}</Text>
-            <Text style={[styles.metricLabel, { color: colors.icon }]}>Added Today</Text>
+            <Text style={[styles.metricLabel, { color: colors.icon }]}>Done Today</Text>
           </View>
         </View>
 
@@ -91,7 +91,7 @@ export default function ProfileScreen() {
             borderColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6'
           }
         ]}>
-          <Text style={[styles.breakdownTitle, { color: colors.text }]}>Priority Breakdown</Text>
+          <Text style={[styles.breakdownTitle, { color: colors.text }]}>Priority Breakdown 🔥</Text>
           
           {/* High Priority Bar */}
           <View style={styles.progressRow}>
