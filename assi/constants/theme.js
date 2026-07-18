@@ -1,41 +1,32 @@
-/**
- * Below are the colors that are used in the app. The colors are defined in the light and dark mode.
- * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
- */
-
 import { Platform } from 'react-native';
 
-const tintColorLight = '#8B5CF6'; // Vibrant purple
-const tintColorDark = '#C084FC'; // Soft neon violet
+const tintColorLight = '#000000'; // Pure black
+const tintColorDark = '#FFFFFF'; // Pure white
 
 export const Colors = {
   light: {
-    text: '#1E1B4B', // Indigo text
-    background: '#FAF5FF', // Soft pastel lavender tint
+    text: '#09090B', // Zinc-950 (Charcoal Black)
+    background: '#FFFFFF', // Pure White
     tint: tintColorLight,
-    icon: '#6B7280',
-    tabIconDefault: '#9CA3AF',
+    icon: '#71717A', // Zinc-500
+    tabIconDefault: '#A1A1AA', // Zinc-400
     tabIconSelected: tintColorLight,
   },
   dark: {
-    text: '#F5F3FF', // Pastel lavender-white text
-    background: '#0F0E17', // Deep slate violet-black
+    text: '#FAFAFA', // Zinc-50 (Pure White)
+    background: '#000000', // Pure Black
     tint: tintColorDark,
-    icon: '#9CA3AF',
-    tabIconDefault: '#4B5563',
+    icon: '#A1A1AA', // Zinc-400
+    tabIconDefault: '#3F3F46', // Zinc-700
     tabIconSelected: tintColorDark,
   },
 };
 
 export const Fonts = Platform.select({
   ios: {
-    /** iOS `UIFontDescriptorSystemDesignDefault` */
     sans: 'system-ui',
-    /** iOS `UIFontDescriptorSystemDesignSerif` */
     serif: 'ui-serif',
-    /** iOS `UIFontDescriptorSystemDesignRounded` */
     rounded: 'ui-rounded',
-    /** iOS `UIFontDescriptorSystemDesignMonospaced` */
     mono: 'ui-monospace',
   },
   default: {

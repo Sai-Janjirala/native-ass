@@ -1,5 +1,12 @@
 import React from 'react';
-import { View, StyleSheet, Text, ScrollView, useColorScheme, Pressable } from 'react-native';
+import { 
+  View, 
+  StyleSheet, 
+  Text, 
+  ScrollView, 
+  Pressable, 
+  useColorScheme 
+} from 'react-native';
 import { router } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/constants/theme';
@@ -28,22 +35,22 @@ export default function DashboardScreen() {
       <CustomHeader title="My Field Surveys 🚀" />
       
       <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
-        {/* Simplified User Welcome Banner */}
+        {/* Grayscale User Welcome Banner */}
         <View style={[
           styles.welcomeBanner, 
           { 
-            backgroundColor: colorScheme === 'dark' ? '#1E2123' : '#F5EEFF',
-            borderColor: colorScheme === 'dark' ? '#2F3336' : '#E9D5FF'
+            backgroundColor: colorScheme === 'dark' ? '#18181B' : '#F4F4F5',
+            borderColor: colorScheme === 'dark' ? '#27272A' : '#E4E4E7'
           }
         ]}>
           <View style={styles.welcomeTextContainer}>
             <Text style={[styles.welcomeSub, { color: colors.icon }]}>Hey there! 👋</Text>
             <Text style={[styles.welcomeTitle, { color: colors.text }]}>Sai Janjirala</Text>
-            <Text style={[styles.studentRoll, { color: colors.tint }]}>ID: 2026-NATIVE-ASS</Text>
+            <Text style={[styles.studentRoll, { color: colors.icon }]}>ID: 2026-NATIVE-ASS</Text>
           </View>
-          <View style={[styles.countBadge, { backgroundColor: colors.tint }]}>
-            <Text style={styles.countNumber}>{todayCount}</Text>
-            <Text style={styles.countLabel}>Done</Text>
+          <View style={[styles.countBadge, { backgroundColor: colors.text }]}>
+            <Text style={[styles.countNumber, { color: colors.background }]}>{todayCount}</Text>
+            <Text style={[styles.countLabel, { color: colors.background }]}>Done</Text>
           </View>
         </View>
 
@@ -51,8 +58,9 @@ export default function DashboardScreen() {
         <Text style={[styles.sectionTitle, { color: colors.text }]}>What do you want to do?</Text>
         
         <View style={styles.mainActionsContainer}>
+          {/* Colorful Emerald Green Button */}
           <Pressable 
-            style={[styles.primaryActionBtn, { backgroundColor: colors.tint }]}
+            style={[styles.primaryActionBtn, { backgroundColor: '#10B981' }]}
             onPress={() => router.navigate('/(drawer)/(tabs)/new-survey')}
           >
             <Ionicons name="add-circle" size={24} color="#FFF" />
@@ -62,68 +70,19 @@ export default function DashboardScreen() {
             </View>
           </Pressable>
 
+          {/* Colorful Royal Blue Button */}
           <Pressable 
-            style={[
-              styles.secondaryActionBtn, 
-              { 
-                backgroundColor: colorScheme === 'dark' ? '#1E2123' : '#FFFFFF',
-                borderColor: colors.tint 
-              }
-            ]}
+            style={[styles.secondaryActionBtn, { backgroundColor: '#3B82F6', borderColor: '#3B82F6' }]}
             onPress={() => router.navigate('/(drawer)/(tabs)/history')}
           >
-            <Ionicons name="time" size={24} color={colors.tint} />
+            <Ionicons name="time" size={24} color="#FFF" />
             <View style={styles.primaryActionText}>
-              <Text style={[styles.secondaryActionTitle, { color: colors.text }]}>View Survey History 📂</Text>
-              <Text style={[styles.secondaryActionSub, { color: colors.icon }]}>
+              <Text style={[styles.secondaryActionTitle, { color: '#FFF' }]}>View Survey History 📂</Text>
+              <Text style={[styles.secondaryActionSub, { color: '#E0E7FF' }]}>
                 Browse, search and filter {surveys.length} survey logs
               </Text>
             </View>
           </Pressable>
-        </View>
-
-        {/* Hardware API Playgrounds Section */}
-        <Text style={[styles.sectionTitle, { color: colors.text }]}>Hardware APIs 🛠️</Text>
-        <Text style={[styles.sectionDesc, { color: colors.icon }]}>
-          Test native mobile APIs standalone or link metadata below:
-        </Text>
-
-        <View style={styles.gridContainer}>
-          <View style={styles.gridRow}>
-            <Pressable 
-              style={[styles.toolCard, { backgroundColor: colorScheme === 'dark' ? '#1E2123' : '#FFFFFF', borderColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6' }]}
-              onPress={() => router.navigate('/(drawer)/camera')}
-            >
-              <Ionicons name="camera" size={22} color={colors.tint} />
-              <Text style={[styles.toolCardTitle, { color: colors.text }]}>Snap Pic 📸</Text>
-            </Pressable>
-
-            <Pressable 
-              style={[styles.toolCard, { backgroundColor: colorScheme === 'dark' ? '#1E2123' : '#FFFFFF', borderColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6' }]}
-              onPress={() => router.navigate('/(drawer)/location')}
-            >
-              <Ionicons name="location" size={22} color={colors.tint} />
-              <Text style={[styles.toolCardTitle, { color: colors.text }]}>GPS Tracker 📍</Text>
-            </Pressable>
-          </View>
-
-          <View style={styles.gridRow}>
-            <Pressable 
-              style={[styles.toolCard, { backgroundColor: colorScheme === 'dark' ? '#1E2123' : '#FFFFFF', borderColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6' }]}
-              onPress={() => router.navigate('/(drawer)/contacts')}
-            >
-              <Ionicons name="people" size={22} color={colors.tint} />
-              <Text style={[styles.toolCardTitle, { color: colors.text }]}>Buddies List 👥</Text>
-            </Pressable>
-
-            <Pressable 
-              style={[styles.toolCard, { backgroundColor: colorScheme === 'dark' ? '#1E2123' : '#FFFFFF', borderColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6' }]}
-              onPress={() => router.navigate('/(drawer)/clipboard')}
-            >
-              <Ionicons name="clipboard" size={22} color={colors.tint} />
-              <Text style={[styles.toolCardTitle, { color: colors.text }]}>Clipboard 📋</Text>
-            </Pressable>
-          </View>
         </View>
 
         {/* Recent Surveys Summary */}
@@ -131,13 +90,13 @@ export default function DashboardScreen() {
           <Text style={[styles.sectionTitle, { color: colors.text, marginBottom: 0 }]}>Latest Surveys 👀</Text>
           {surveys.length > 0 && (
             <Pressable onPress={() => router.navigate('/(drawer)/(tabs)/history')}>
-              <Text style={[styles.viewAllText, { color: colors.tint }]}>View All</Text>
+              <Text style={[styles.viewAllText, { color: '#3B82F6' }]}>View All</Text>
             </Pressable>
           )}
         </View>
 
         {recentSurveys.length === 0 ? (
-          <View style={[styles.emptyRecent, { borderColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6' }]}>
+          <View style={[styles.emptyRecent, { borderColor: colorScheme === 'dark' ? '#27272A' : '#E4E4E7' }]}>
             <Ionicons name="document-text-outline" size={32} color={colors.icon} />
             <Text style={[styles.emptyRecentText, { color: colors.icon }]}>Empty! Go start a survey ⚡</Text>
           </View>
@@ -148,8 +107,8 @@ export default function DashboardScreen() {
               style={[
                 styles.recentCard,
                 { 
-                  backgroundColor: colorScheme === 'dark' ? '#1E2123' : '#FFFFFF',
-                  borderColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6' 
+                  backgroundColor: colorScheme === 'dark' ? '#18181B' : '#FFFFFF',
+                  borderColor: colorScheme === 'dark' ? '#27272A' : '#E4E4E7' 
                 }
               ]}
               onPress={() => router.navigate({ pathname: '/modal', params: { id: survey.id } })}
@@ -166,7 +125,7 @@ export default function DashboardScreen() {
                 </View>
               </View>
               
-              <View style={[styles.recentDivider, { backgroundColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6' }]} />
+              <View style={[styles.recentDivider, { backgroundColor: colorScheme === 'dark' ? '#27272A' : '#E4E4E7' }]} />
               
               <View style={styles.recentFooter}>
                 <View style={styles.recentFooterItem}>
@@ -236,12 +195,10 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   countNumber: {
-    color: '#FFF',
     fontSize: 24,
     fontWeight: 'bold',
   },
   countLabel: {
-    color: '#FFF',
     fontSize: 10,
     fontWeight: '600',
   },
@@ -251,10 +208,6 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     letterSpacing: 0.2,
     marginTop: 8,
-  },
-  sectionDesc: {
-    fontSize: 12,
-    marginBottom: 12,
   },
   mainActionsContainer: {
     marginBottom: 20,
@@ -281,7 +234,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   primaryActionSub: {
-    color: 'rgba(255, 255, 255, 0.8)',
+    color: 'rgba(255, 255, 255, 0.85)',
     fontSize: 11,
     marginTop: 2,
   },
@@ -292,6 +245,11 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderWidth: 1,
     gap: 14,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
   },
   secondaryActionTitle: {
     fontSize: 16,
@@ -300,27 +258,6 @@ const styles = StyleSheet.create({
   secondaryActionSub: {
     fontSize: 11,
     marginTop: 2,
-  },
-  gridContainer: {
-    marginBottom: 20,
-    gap: 10,
-  },
-  gridRow: {
-    flexDirection: 'row',
-    gap: 10,
-  },
-  toolCard: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
-    padding: 14,
-    borderRadius: 10,
-    borderWidth: 1,
-  },
-  toolCardTitle: {
-    fontSize: 13,
-    fontWeight: 'bold',
   },
   recentHeader: {
     flexDirection: 'row',

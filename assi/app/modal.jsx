@@ -78,13 +78,13 @@ export default function SurveyDetailModal() {
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       {/* Modal Header */}
-      <View style={[styles.header, { borderBottomColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6' }]}>
+      <View style={[styles.header, { borderBottomColor: colorScheme === 'dark' ? '#27272A' : '#E4E4E7' }]}>
         <View style={styles.headerTitleContainer}>
           <Text style={[styles.surveyId, { color: colors.icon }]}>{survey.id}</Text>
           <Text style={[styles.siteNameHeader, { color: colors.text }]} numberOfLines={1}>{survey.siteName}</Text>
         </View>
         <Pressable 
-          style={[styles.iconBtnClose, { backgroundColor: colorScheme === 'dark' ? '#222' : '#F5F5F5' }]} 
+          style={[styles.iconBtnClose, { backgroundColor: colorScheme === 'dark' ? '#18181B' : '#F4F4F5' }]} 
           onPress={() => router.back()}
         >
           <Ionicons name="close" size={22} color={colors.text} />
@@ -106,7 +106,7 @@ export default function SurveyDetailModal() {
         </View>
 
         {/* Client details */}
-        <View style={[styles.sectionCard, { backgroundColor: colorScheme === 'dark' ? '#1E2123' : '#F9FBFD', borderColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6' }]}>
+        <View style={[styles.sectionCard, { backgroundColor: colorScheme === 'dark' ? '#18181B' : '#F4F4F5', borderColor: colorScheme === 'dark' ? '#27272A' : '#E4E4E7' }]}>
           <Text style={[styles.sectionLabel, { color: colors.icon }]}>Client Info 👤</Text>
           <Text style={[styles.sectionValueBold, { color: colors.text }]}>{survey.clientName}</Text>
           
@@ -131,7 +131,7 @@ export default function SurveyDetailModal() {
               )}
             </View>
           ) : (
-            <View style={[styles.emptyAttachment, { borderColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6' }]}>
+            <View style={[styles.emptyAttachment, { borderColor: colorScheme === 'dark' ? '#27272A' : '#E4E4E7' }]}>
               <Ionicons name="image-outline" size={24} color={colors.icon} />
               <Text style={[styles.emptyAttachmentText, { color: colors.icon }]}>No picture snapped yet 🤷</Text>
             </View>
@@ -142,7 +142,7 @@ export default function SurveyDetailModal() {
         <View style={styles.detailBlock}>
           <Text style={[styles.blockTitle, { color: colors.text }]}>Coordinates 📍</Text>
           {survey.location ? (
-            <View style={[styles.infoRowCard, { backgroundColor: colorScheme === 'dark' ? '#1E2123' : '#FFF', borderColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6' }]}>
+            <View style={[styles.infoRowCard, { backgroundColor: colorScheme === 'dark' ? '#18181B' : '#FFF', borderColor: colorScheme === 'dark' ? '#27272A' : '#E4E4E7' }]}>
               <View style={styles.infoRowMeta}>
                 <Ionicons name="location" size={20} color={colors.tint} />
                 <View style={styles.infoRowTextContainer}>
@@ -155,7 +155,7 @@ export default function SurveyDetailModal() {
                 </View>
               </View>
               <Pressable 
-                style={[styles.iconButtonSmall, { backgroundColor: colorScheme === 'dark' ? '#2F3336' : '#F5F5F5' }]}
+                style={[styles.iconButtonSmall, { backgroundColor: colorScheme === 'dark' ? '#27272A' : '#F4F4F5' }]}
                 onPress={() => {
                   const locStr = `${survey.location?.latitude.toFixed(6)}, ${survey.location?.longitude.toFixed(6)}`;
                   handleCopyText(locStr, 'Coordinates');
@@ -165,7 +165,7 @@ export default function SurveyDetailModal() {
               </Pressable>
             </View>
           ) : (
-            <View style={[styles.emptyAttachment, { borderColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6' }]}>
+            <View style={[styles.emptyAttachment, { borderColor: colorScheme === 'dark' ? '#27272A' : '#E4E4E7' }]}>
               <Ionicons name="location-outline" size={24} color={colors.icon} />
               <Text style={[styles.emptyAttachmentText, { color: colors.icon }]}>No GPS signals linked yet 🧭</Text>
             </View>
@@ -176,7 +176,7 @@ export default function SurveyDetailModal() {
         <View style={styles.detailBlock}>
           <Text style={[styles.blockTitle, { color: colors.text }]}>Team Contact 👥</Text>
           {survey.contact ? (
-            <View style={[styles.infoRowCard, { backgroundColor: colorScheme === 'dark' ? '#1E2123' : '#FFF', borderColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6' }]}>
+            <View style={[styles.infoRowCard, { backgroundColor: colorScheme === 'dark' ? '#18181B' : '#FFF', borderColor: colorScheme === 'dark' ? '#27272A' : '#E4E4E7' }]}>
               <View style={styles.infoRowMeta}>
                 <Ionicons name="person" size={20} color={colors.tint} />
                 <View style={styles.infoRowTextContainer}>
@@ -188,7 +188,7 @@ export default function SurveyDetailModal() {
               </View>
               {survey.contact.phoneNumber ? (
                 <Pressable 
-                  style={[styles.iconButtonSmall, { backgroundColor: colorScheme === 'dark' ? '#2F3336' : '#F5F5F5' }]}
+                  style={[styles.iconButtonSmall, { backgroundColor: colorScheme === 'dark' ? '#27272A' : '#F4F4F5' }]}
                   onPress={() => handleCopyText(survey.contact.phoneNumber, 'Contact Number')}
                 >
                   <Ionicons name="copy-outline" size={16} color={colors.text} />
@@ -196,7 +196,7 @@ export default function SurveyDetailModal() {
               ) : null}
             </View>
           ) : (
-            <View style={[styles.emptyAttachment, { borderColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6' }]}>
+            <View style={[styles.emptyAttachment, { borderColor: colorScheme === 'dark' ? '#27272A' : '#E4E4E7' }]}>
               <Ionicons name="person-outline" size={24} color={colors.icon} />
               <Text style={[styles.emptyAttachmentText, { color: colors.icon }]}>No buddy linked yet 👤</Text>
             </View>
@@ -206,7 +206,7 @@ export default function SurveyDetailModal() {
         {/* Notes Section */}
         <View style={styles.detailBlock}>
           <Text style={[styles.blockTitle, { color: colors.text }]}>Notes 📝</Text>
-          <View style={[styles.notesBox, { backgroundColor: colorScheme === 'dark' ? '#1E2123' : '#F9FBFD', borderColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6' }]}>
+          <View style={[styles.notesBox, { backgroundColor: colorScheme === 'dark' ? '#18181B' : '#F4F4F5', borderColor: colorScheme === 'dark' ? '#27272A' : '#E4E4E7' }]}>
             <Text style={[styles.notesText, { color: survey.notes ? colors.text : colors.icon }]}>
               {survey.notes || 'No notes written yet ✍️'}
             </Text>
@@ -216,11 +216,11 @@ export default function SurveyDetailModal() {
         {/* Footer Actions */}
         <View style={styles.footer}>
           <Pressable 
-            style={[styles.deleteButton, { borderColor: '#FF3B30' }]}
+            style={[styles.deleteButton, { backgroundColor: '#EF4444', borderColor: '#EF4444' }]}
             onPress={handleDelete}
           >
-            <Ionicons name="trash-outline" size={18} color="#FF3B30" style={{ marginRight: 6 }} />
-            <Text style={styles.deleteButtonText}>Delete Survey 🗑️</Text>
+            <Ionicons name="trash-outline" size={18} color="#FFF" style={{ marginRight: 6 }} />
+            <Text style={[styles.deleteButtonText, { color: '#FFF' }]}>Delete Survey 🗑️</Text>
           </Pressable>
         </View>
       </ScrollView>

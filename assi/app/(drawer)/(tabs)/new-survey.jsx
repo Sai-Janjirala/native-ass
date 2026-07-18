@@ -387,14 +387,14 @@ export default function NewSurveyScreen() {
           {/* Action Buttons */}
           <View style={styles.actionRow}>
             <Pressable 
-              style={[styles.editButton, { borderColor: colors.tint }]}
+              style={[styles.editButton, { backgroundColor: '#F59E0B', borderColor: '#F59E0B' }]}
               onPress={() => setIsPreview(false)}
             >
-              <Text style={[styles.editButtonText, { color: colors.tint }]}>Fix Form ✍️</Text>
+              <Text style={[styles.editButtonText, { color: '#FFF' }]}>Fix Form ✍️</Text>
             </Pressable>
             
             <Pressable 
-              style={[styles.submitButton, { backgroundColor: colors.tint }]}
+              style={[styles.submitButton, { backgroundColor: '#10B981', borderColor: '#10B981' }]}
               onPress={handleSubmit}
             >
               <Text style={styles.submitButtonText}>Log It! 🎉</Text>
@@ -601,10 +601,10 @@ export default function NewSurveyScreen() {
               </View>
             </View>
             <Pressable 
-              style={[styles.attachBtn, { borderColor: colors.tint }]}
+              style={[styles.attachBtn, { backgroundColor: '#8B5CF6', borderColor: '#8B5CF6' }]}
               onPress={handleOpenCameraModal}
             >
-              <Text style={[styles.attachBtnText, { color: colors.tint }]}>
+              <Text style={[styles.attachBtnText, { color: '#FFF' }]}>
                 {draft.photoUri ? 'Retake' : 'Open Camera'}
               </Text>
             </Pressable>
@@ -632,11 +632,11 @@ export default function NewSurveyScreen() {
               </View>
             </View>
             <Pressable 
-              style={[styles.attachBtn, { borderColor: colors.tint, opacity: isGPSLocating ? 0.6 : 1 }]}
+              style={[styles.attachBtn, { backgroundColor: '#06B6D4', borderColor: '#06B6D4', opacity: isGPSLocating ? 0.6 : 1 }]}
               onPress={handleGetGPS}
               disabled={isGPSLocating}
             >
-              <Text style={[styles.attachBtnText, { color: colors.tint }]}>
+              <Text style={[styles.attachBtnText, { color: '#FFF' }]}>
                 {draft.location ? 'Update' : 'Get GPS'}
               </Text>
             </Pressable>
@@ -660,10 +660,10 @@ export default function NewSurveyScreen() {
               </View>
             </View>
             <Pressable 
-              style={[styles.attachBtn, { borderColor: colors.tint }]}
+              style={[styles.attachBtn, { backgroundColor: '#6366F1', borderColor: '#6366F1' }]}
               onPress={handleOpenContactsModal}
             >
-              <Text style={[styles.attachBtnText, { color: colors.tint }]}>
+              <Text style={[styles.attachBtnText, { color: '#FFF' }]}>
                 {draft.contact ? 'Change' : 'Select'}
               </Text>
             </Pressable>
@@ -673,14 +673,14 @@ export default function NewSurveyScreen() {
         {/* Action Buttons */}
         <View style={styles.btnRow}>
           <Pressable 
-            style={[styles.resetBtn, { borderColor: '#FF3B30' }]}
+            style={[styles.resetBtn, { backgroundColor: '#EF4444', borderColor: '#EF4444' }]}
             onPress={handleReset}
           >
-            <Text style={styles.resetBtnText}>Wipe Draft 🧹</Text>
+            <Text style={[styles.resetBtnText, { color: '#FFF' }]}>Wipe Draft 🧹</Text>
           </Pressable>
 
           <Pressable 
-            style={[styles.previewBtn, { backgroundColor: colors.tint }]}
+            style={[styles.previewBtn, { backgroundColor: '#3B82F6' }]}
             onPress={handleGoToPreview}
           >
             <Text style={styles.previewBtnText}>See Preview 👀</Text>

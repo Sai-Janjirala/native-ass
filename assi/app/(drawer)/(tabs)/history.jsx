@@ -72,8 +72,8 @@ export default function HistoryScreen() {
         <View style={[
           styles.searchContainer, 
           { 
-            backgroundColor: colorScheme === 'dark' ? '#1E2123' : '#F5F5F5',
-            borderColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6'
+            backgroundColor: colorScheme === 'dark' ? '#18181B' : '#F4F4F5',
+            borderColor: colorScheme === 'dark' ? '#27272A' : '#E4E4E7'
           }
         ]}>
           <Ionicons name="search" size={20} color={colors.icon} style={{ marginRight: 8 }} />
@@ -103,7 +103,7 @@ export default function HistoryScreen() {
                   styles.filterTab,
                   { 
                     backgroundColor: isSelected ? colors.tint : 'transparent',
-                    borderColor: isSelected ? colors.tint : (colorScheme === 'dark' ? '#2F3336' : '#EAF0F6'),
+                    borderColor: isSelected ? colors.tint : (colorScheme === 'dark' ? '#27272A' : '#E4E4E7'),
                     borderWidth: isSelected ? 0 : 1
                   }
                 ]}
@@ -127,7 +127,7 @@ export default function HistoryScreen() {
       {/* FlatList */}
       {filteredSurveys.length === 0 ? (
         <View style={styles.emptyContainer}>
-          <View style={[styles.emptyIconCircle, { backgroundColor: colorScheme === 'dark' ? '#1E2123' : '#F2FAFD' }]}>
+          <View style={[styles.emptyIconCircle, { backgroundColor: colorScheme === 'dark' ? '#18181B' : '#F4F4F5' }]}>
             <Ionicons name="document-text-outline" size={48} color={colors.icon} />
           </View>
           <Text style={[styles.emptyTitle, { color: colors.text }]}>Nothing here! 🏜️</Text>
@@ -148,8 +148,8 @@ export default function HistoryScreen() {
               style={[
                 styles.surveyCard,
                 { 
-                  backgroundColor: colorScheme === 'dark' ? '#1E2123' : '#FFFFFF',
-                  borderColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6'
+                  backgroundColor: colorScheme === 'dark' ? '#18181B' : '#FFFFFF',
+                  borderColor: colorScheme === 'dark' ? '#27272A' : '#E4E4E7'
                 }
               ]}
               onPress={() => router.navigate({ pathname: '/modal', params: { id: item.id } })}
@@ -176,7 +176,7 @@ export default function HistoryScreen() {
                 </View>
               </View>
 
-              <View style={[styles.divider, { backgroundColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6' }]} />
+              <View style={[styles.divider, { backgroundColor: colorScheme === 'dark' ? '#27272A' : '#E4E4E7' }]} />
 
               <View style={styles.cardFooter}>
                 <View style={styles.footerItem}>
