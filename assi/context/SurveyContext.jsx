@@ -1,57 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 
-export interface LocationData {
-  latitude: number;
-  longitude: number;
-  accuracy: number;
-  timestamp: number;
-}
-
-export interface ContactData {
-  name: string;
-  phoneNumber?: string;
-}
-
-export interface Survey {
-  id: string;
-  siteName: string;
-  clientName: string;
-  description: string;
-  priority: 'High' | 'Medium' | 'Low';
-  date: string;
-  photoUri?: string;
-  photoTime?: string;
-  location?: LocationData;
-  contact?: ContactData;
-  notes?: string;
-  createdAt: string;
-}
-
-export interface SurveyDraft {
-  siteName: string;
-  clientName: string;
-  description: string;
-  priority: 'High' | 'Medium' | 'Low';
-  date: string;
-  photoUri?: string;
-  photoTime?: string;
-  location?: LocationData;
-  contact?: ContactData;
-  notes?: string;
-}
-
-interface SurveyContextType {
-  surveys: Survey[];
-  draft: SurveyDraft;
-  todayCount: number;
-  updateDraftField: <K extends keyof SurveyDraft>(field: K, value: SurveyDraft[K]) => void;
-  clearDraft: () => void;
-  submitSurvey: () => { success: boolean; error?: string; survey?: Survey };
-  updateSurvey: (id: string, updatedSurvey: Partial<Survey>) => void;
-  deleteSurvey: (id: string) => void;
-}
-
-const initialDraft: SurveyDraft = {
+const initialDraft = {
   siteName: '',
   clientName: '',
   description: '',
@@ -65,7 +14,7 @@ const initialDraft: SurveyDraft = {
 };
 
 // Seed some initial surveys for visual excellence
-const mockSurveys: Survey[] = [
+const mockSurveys = [
   {
     id: 'SURV-17212100001',
     siteName: 'Metro Station Phase 3',
@@ -134,12 +83,12 @@ const mockSurveys: Survey[] = [
   },
 ];
 
-const SurveyContext = createContext<SurveyContextType | undefined>(undefined);
+const SurveyContext = createContext(undefined);
 
-export const SurveyProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [surveys, setSurveys] = useState<Survey[]>(mockSurveys);
-  const [draft, setDraft] = useState<SurveyDraft>(initialDraft);
-  const [todayCount, setTodayCount] = useState<number>(0);
+export const SurveyProvider = ({ children }) => {
+  const [surveys, setSurveys] = useState(mockSurveys);
+  const [draft, setDraft] = useState(initialDraft);
+  const [todayCount, setTodayCount] = useState(0);
 
   // Compute today's survey count whenever surveys list changes
   useEffect(() => {
@@ -148,7 +97,7 @@ export const SurveyProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     setTodayCount(count);
   }, [surveys]);
 
-  const updateDraftField = <K extends keyof SurveyDraft>(field: K, value: SurveyDraft[K]) => {
+  const updateDraftField = (field, value) => {
     setDraft((prev) => ({
       ...prev,
       [field]: value,
@@ -167,24 +116,24 @@ export const SurveyProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       return { success: false, error: 'Site Name and Client Name are required.' };
     }
 
-    const newSurvey: Survey = {
+    const newSurvey = {
       ...draft,
       id: `SURV-${Date.now()}`,
       createdAt: new Date().toISOString(),
-    } as Survey;
+    };
 
     setSurveys((prev) => [newSurvey, ...prev]);
     clearDraft();
     return { success: true, survey: newSurvey };
   };
 
-  const updateSurvey = (id: string, updatedSurvey: Partial<Survey>) => {
+  const updateSurvey = (id, updatedSurvey) => {
     setSurveys((prev) =>
-      prev.map((s) => (s.id === id ? { ...s, ...updatedSurvey } as Survey : s))
+      prev.map((s) => (s.id === id ? { ...s, ...updatedSurvey } : s))
     );
   };
 
-  const deleteSurvey = (id: string) => {
+  const deleteSurvey = (id) => {
     setSurveys((prev) => prev.filter((s) => s.id !== id));
   };
 
