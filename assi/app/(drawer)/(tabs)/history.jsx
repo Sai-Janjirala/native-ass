@@ -23,9 +23,9 @@ export default function HistoryScreen() {
 
   // Local search and filter states
   const [searchQuery, setSearchQuery] = useState('');
-  const [priorityFilter, setPriorityFilter] = useState<'All' | 'High' | 'Medium' | 'Low'>('All');
+  const [priorityFilter, setPriorityFilter] = useState('All');
 
-  const getPriorityColor = (priority: string) => {
+  const getPriorityColor = (priority) => {
     switch (priority) {
       case 'High': return '#FF3B30';
       case 'Medium': return '#FF9500';
@@ -34,7 +34,7 @@ export default function HistoryScreen() {
     }
   };
 
-  const handleDeletePress = (id: string, siteName: string) => {
+  const handleDeletePress = (id, siteName) => {
     Alert.alert(
       'Delete this survey? 🗑️',
       `Are you sure you want to delete the survey record for "${siteName}"? This action is permanent.`,
@@ -93,7 +93,7 @@ export default function HistoryScreen() {
 
         {/* Priority Filters Segment */}
         <View style={styles.filterRow}>
-          {(['All', 'High', 'Medium', 'Low'] as const).map((p) => {
+          {(['All', 'High', 'Medium', 'Low']).map((p) => {
             const isSelected = priorityFilter === p;
             const displayLabel = p === 'All' ? 'All' : p === 'High' ? 'High 🔥' : p === 'Medium' ? 'Med ⚡' : 'Low 🍀';
             return (

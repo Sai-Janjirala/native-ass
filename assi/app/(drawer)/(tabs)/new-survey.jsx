@@ -24,15 +24,10 @@ import { Colors } from '@/constants/theme';
 import { useSurvey } from '@/context/SurveyContext';
 import { CustomHeader } from '@/components/CustomHeader';
 
-interface SimplifiedContact {
-  id: string;
-  name: string;
-  phoneNumber?: string;
-  initials: string;
-}
+
 
 // Fallback seed contacts for picker modal
-const mockContacts: SimplifiedContact[] = [
+const mockContacts = [
   { id: '1', name: 'Rohan Sharma', phoneNumber: '+91 98765 43210', initials: 'RS' },
   { id: '2', name: 'Anjali Verma', phoneNumber: '+91 91234 56789', initials: 'AV' },
   { id: '3', name: 'Suresh Kumar', phoneNumber: '+91 88888 77777', initials: 'SK' },
@@ -50,7 +45,7 @@ export default function NewSurveyScreen() {
 
   // Navigation & Form States
   const [isPreview, setIsPreview] = useState(false);
-  const [errors, setErrors] = useState<{ siteName?: string; clientName?: string }>({});
+  const [errors, setErrors] = useState({});
 
   // Inline Modal Overlay States
   const [isCameraOpen, setIsCameraOpen] = useState(false);
@@ -58,11 +53,11 @@ export default function NewSurveyScreen() {
   const [isGPSLocating, setIsGPSLocating] = useState(false);
   
   const [isContactsPickerOpen, setIsContactsPickerOpen] = useState(false);
-  const [contactsList, setContactsList] = useState<SimplifiedContact[]>([]);
+  const [contactsList, setContactsList] = useState([]);
   const [contactsSearchQuery, setContactsSearchQuery] = useState('');
   const [contactsLoading, setContactsLoading] = useState(false);
 
-  const cameraRef = React.useRef<CameraView>(null);
+  const cameraRef = React.useRef(null);
 
   // ==================== INLINE GPS RETRIEVAL ====================
   const handleGetGPS = async () => {
@@ -182,7 +177,7 @@ export default function NewSurveyScreen() {
     }
   };
 
-  const handleSelectContact = (contact: SimplifiedContact) => {
+  const handleSelectContact = (contact) => {
     updateDraftField('contact', {
       name: contact.name,
       phoneNumber: contact.phoneNumber,
@@ -202,12 +197,12 @@ export default function NewSurveyScreen() {
     }
   };
 
-  const handlePrioritySelect = (priority: 'High' | 'Medium' | 'Low') => {
+  const handlePrioritySelect = (priority) => {
     updateDraftField('priority', priority);
   };
 
   const validateForm = () => {
-    const tempErrors: { siteName?: string; clientName?: string } = {};
+    const tempErrors = {};
     let isValid = true;
 
     if (!draft.siteName.trim()) {
@@ -271,7 +266,7 @@ export default function NewSurveyScreen() {
     );
   };
 
-  const getPriorityColor = (p: string) => {
+  const getPriorityColor = (p) => {
     switch (p) {
       case 'High': return '#FF3B30';
       case 'Medium': return '#FF9500';

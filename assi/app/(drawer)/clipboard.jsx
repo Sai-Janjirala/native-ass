@@ -34,7 +34,7 @@ export default function ClipboardScreen() {
     setCopiedText(text);
   };
 
-  const handleCopyText = async (text: string, label: string) => {
+  const handleCopyText = async (text, label) => {
     await Clipboard.setStringAsync(text);
     setCopiedText(text);
     Alert.alert('Copied to Clipboard', `Copied ${label}:\n"${text}"`);

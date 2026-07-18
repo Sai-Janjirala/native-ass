@@ -18,15 +18,10 @@ import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/constants/theme';
 import { useSurvey } from '@/context/SurveyContext';
 
-interface SimplifiedContact {
-  id: string;
-  name: string;
-  phoneNumber?: string;
-  initials: string;
-}
+
 
 // Fallback seed contacts for simulators or quick visual testing
-const mockContacts: SimplifiedContact[] = [
+const mockContacts = [
   { id: '1', name: 'Rohan Sharma', phoneNumber: '+91 98765 43210', initials: 'RS' },
   { id: '2', name: 'Anjali Verma', phoneNumber: '+91 91234 56789', initials: 'AV' },
   { id: '3', name: 'Suresh Kumar', phoneNumber: '+91 88888 77777', initials: 'SK' },
@@ -42,11 +37,11 @@ export default function ContactsScreen() {
   const { updateDraftField } = useSurvey();
 
   // Local state
-  const [contacts, setContacts] = useState<SimplifiedContact[]>([]);
+  const [contacts, setContacts] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
-  const [permissionStatus, setPermissionStatus] = useState<string | null>(null);
+  const [permissionStatus, setPermissionStatus] = useState(null);
 
   useEffect(() => {
     loadContacts();
@@ -99,7 +94,7 @@ export default function ContactsScreen() {
     loadContacts(false);
   };
 
-  const handleCopyNumber = async (number?: string) => {
+  const handleCopyNumber = async (number) => {
     if (number) {
       await Clipboard.setStringAsync(number);
       Alert.alert('Phone Number Copied', `Contact phone number copied to clipboard:\n${number}`);
@@ -108,7 +103,7 @@ export default function ContactsScreen() {
     }
   };
 
-  const handleSelectContact = (contact: SimplifiedContact) => {
+  const handleSelectContact = (contact) => {
     updateDraftField('contact', {
       name: contact.name,
       phoneNumber: contact.phoneNumber,

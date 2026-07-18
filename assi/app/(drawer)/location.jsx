@@ -22,10 +22,10 @@ export default function LocationScreen() {
   const { updateDraftField } = useSurvey();
 
   // Local state
-  const [location, setLocation] = useState<Location.LocationObject | null>(null);
-  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [location, setLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [permissionStatus, setPermissionStatus] = useState<Location.PermissionStatus | null>(null);
+  const [permissionStatus, setPermissionStatus] = useState(null);
 
   // Check and fetch location on component mount
   useEffect(() => {

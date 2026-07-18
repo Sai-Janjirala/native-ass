@@ -21,12 +21,12 @@ export default function CameraScreen() {
   
   const { updateDraftField } = useSurvey();
   const [permission, requestPermission] = useCameraPermissions();
-  const cameraRef = useRef<CameraView>(null);
+  const cameraRef = useRef(null);
 
   // Local state
   const [isCameraActive, setIsCameraActive] = useState(false);
-  const [capturedUri, setCapturedUri] = useState<string | null>(null);
-  const [capturedTime, setCapturedTime] = useState<string | null>(null);
+  const [capturedUri, setCapturedUri] = useState(null);
+  const [capturedTime, setCapturedTime] = useState(null);
   const [isCapturing, setIsCapturing] = useState(false);
   const [isCameraLoading, setIsCameraLoading] = useState(true);
 

@@ -14,7 +14,7 @@ export default function DashboardScreen() {
   // Get 3 most recent surveys
   const recentSurveys = surveys.slice(0, 3);
 
-  const getPriorityColor = (priority: string) => {
+  const getPriorityColor = (priority) => {
     switch (priority) {
       case 'High': return '#FF3B30';
       case 'Medium': return '#FF9500';
