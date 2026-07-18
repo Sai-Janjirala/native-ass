@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text, Pressable, useColorScheme, SafeAreaView, Platform } from 'react-native';
+import { View, StyleSheet, Text, Pressable, useColorScheme, SafeAreaView, Platform, Image } from 'react-native';
 import { useNavigation, router } from 'expo-router';
 import { DrawerActions } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
@@ -54,7 +54,10 @@ export const CustomHeader = ({ title, showBack = false }) => {
           style={[styles.profileBadge, { borderColor: colors.tint }]}
           onPress={() => router.navigate('/?tab=3')}
         >
-          <Text style={[styles.profileBadgeText, { color: colors.tint }]}>SJ</Text>
+          <Image 
+            source={{ uri: 'https://avatars.githubusercontent.com/u/224969012?v=4&size=64' }} 
+            style={styles.headerAvatar}
+          />
         </Pressable>
       </View>
     </SafeAreaView>
@@ -103,8 +106,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  profileBadgeText: {
-    fontWeight: 'bold',
-    fontSize: 13,
+  headerAvatar: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
   },
 });

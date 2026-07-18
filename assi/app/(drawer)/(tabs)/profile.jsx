@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text, ScrollView, useColorScheme } from 'react-native';
+import { View, StyleSheet, Text, ScrollView, useColorScheme, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/constants/theme';
 import { useSurvey } from '@/context/SurveyContext';
@@ -27,46 +27,17 @@ export default function ProfileScreen() {
             borderColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6'
           }
         ]}>
-          <View style={[styles.avatarBig, { backgroundColor: colors.tint }]}>
-            <Text style={styles.avatarBigText}>SJ</Text>
+          <View style={[styles.avatarBig, { backgroundColor: colors.tint }]}> 
+            <Image 
+              source={{ uri: 'https://avatars.githubusercontent.com/u/224969012?v=4&size=64' }} 
+              style={styles.avatarBigImage} 
+            />
           </View>
           <Text style={[styles.studentName, { color: colors.text }]}>Sai Janjirala</Text>
           <Text style={[styles.studentSub, { color: colors.icon }]}>React Native Developer</Text>
-          
-          <View style={[styles.badge, { backgroundColor: colors.tint + '15' }]}>
-            <Text style={[styles.badgeText, { color: colors.tint }]}>Roll: 2026-NATIVE-ASS</Text>
-          </View>
         </View>
 
-        {/* Project Details */}
-        <Text style={[styles.sectionTitle, { color: colors.text }]}>Homework Info 📖</Text>
-        <View style={[
-          styles.detailsBox, 
-          { 
-            backgroundColor: colorScheme === 'dark' ? '#1E2123' : '#FFFFFF',
-            borderColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6'
-          }
-        ]}>
-          <View style={styles.detailRow}>
-            <Text style={[styles.detailLabel, { color: colors.icon }]}>Course Name</Text>
-            <Text style={[styles.detailVal, { color: colors.text }]}>React Native Mini Project</Text>
-          </View>
-          <View style={[styles.divider, { backgroundColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6' }]} />
-          <View style={styles.detailRow}>
-            <Text style={[styles.detailLabel, { color: colors.icon }]}>Project Title</Text>
-            <Text style={[styles.detailVal, { color: colors.text }]}>Smart Field Survey App</Text>
-          </View>
-          <View style={[styles.divider, { backgroundColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6' }]} />
-          <View style={styles.detailRow}>
-            <Text style={[styles.detailLabel, { color: colors.icon }]}>Tech Stack</Text>
-            <Text style={[styles.detailVal, { color: colors.text }]}>Expo, React Native, TypeScript</Text>
-          </View>
-          <View style={[styles.divider, { backgroundColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6' }]} />
-          <View style={styles.detailRow}>
-            <Text style={[styles.detailLabel, { color: colors.icon }]}>Completed Modules</Text>
-            <Text style={[styles.detailVal, { color: colors.tint, fontWeight: '700' }]}>8 / 8 Modules</Text>
-          </View>
-        </View>
+
 
         {/* Survey Analytics */}
         <Text style={[styles.sectionTitle, { color: colors.text }]}>My Stats 📊</Text>
@@ -171,6 +142,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 12,
+  },
+  avatarBigImage: {
+    width: 64,
+    height: 64,
+    borderRadius: 32,
   },
   avatarBigText: {
     color: '#FFF',

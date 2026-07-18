@@ -1,0 +1,46 @@
+[
+  {
+    "id": "SURV-001",
+    "siteName": "Central Plaza",
+    "clientName": "Urban Development Corp",
+    "description": "Inspect structural integrity of the central plaza foundation.",
+    "priority": "High",
+    "date": "2026-07-20",
+    "photoUri": null,
+    "photoTime": null,
+    "location": {
+      "latitude": 12.9716,
+      "longitude": 77.5946,
+      "accuracy": 5.0,
+      "timestamp": 1721452800000
+    },
+    "contact": {
+      "name": "Anita Patel",
+      "phoneNumber": "+91 98765 43210"
+    },
+    "notes": "Initial inspection completed. No major issues detected.",
+    "createdAt": "2026-07-20T08:00:00Z"
+  },
+  {
+    "id": "SURV-002",
+    "siteName": "Riverside Tower",
+    "clientName": "Skyline Builders",
+    "description": "Elevator shaft safety audit.",
+    "priority": "Medium",
+    "date": "2026-07-21",
+    "photoUri": null,
+    "photoTime": null,
+    "location": {
+      "latitude": 13.0827,
+      "longitude": 80.2707,
+      "accuracy": 8.2,
+      "timestamp": 1721539200000
+    },
+    "contact": {
+      "name": "Rohit Kumar",
+      "phoneNumber": "+91 91234 56789"
+    },
+    "notes": "Elevator cables show wear; schedule replacement.",
+    "createdAt": "2026-07-21T10:30:00Z"
+  }
+]

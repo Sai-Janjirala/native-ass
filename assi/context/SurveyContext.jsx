@@ -1,4 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
+import sampleSurveys from '../data/sample_surveys.json';
 
 const initialDraft = {
   siteName: '',
@@ -16,7 +17,7 @@ const initialDraft = {
 const SurveyContext = createContext(undefined);
 
 export const SurveyProvider = ({ children }) => {
-  const [surveys, setSurveys] = useState([]);
+  const [surveys, setSurveys] = useState(sampleSurveys);
   const [draft, setDraft] = useState(initialDraft);
   const [todayCount, setTodayCount] = useState(0);
 
