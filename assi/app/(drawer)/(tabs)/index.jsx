@@ -53,7 +53,7 @@ function DashboardContent({ onNavigate }) {
       ]}>
         <View style={styles.welcomeTextContainer}>
           <View style={[styles.greetingBadge, { backgroundColor: colorScheme === 'dark' ? 'rgba(37, 99, 235, 0.15)' : 'rgba(37, 99, 235, 0.08)' }]}>
-            <Text style={[styles.welcomeSub, { color: colors.primary }]}>Hey there! 👋</Text>
+            <Text style={[styles.welcomeSub, { color: colors.primary }]}>Hey there!</Text>
           </View>
           <Text style={[styles.welcomeTitle, { color: colors.text }]}>Sai Janjirala</Text>
           <Text style={[styles.studentRoll, { color: colors.icon }]}>ID: 2026-NATIVE-ASS</Text>
@@ -83,7 +83,7 @@ function DashboardContent({ onNavigate }) {
             <Ionicons name="add-circle" size={24} color="#10B981" />
           </View>
           <View style={styles.primaryActionText}>
-            <Text style={styles.primaryActionTitle}>Start a New Survey 📝</Text>
+            <Text style={styles.primaryActionTitle}>Start a New Survey</Text>
             <Text style={styles.primaryActionSub}>Log a site check inline with camera & GPS</Text>
           </View>
           <Ionicons name="chevron-forward" size={20} color="rgba(255, 255, 255, 0.8)" />
@@ -105,7 +105,7 @@ function DashboardContent({ onNavigate }) {
             <Ionicons name="time" size={24} color="#2563EB" />
           </View>
           <View style={styles.primaryActionText}>
-            <Text style={[styles.secondaryActionTitle, { color: '#FFFFFF' }]}>View Survey History 📂</Text>
+            <Text style={[styles.secondaryActionTitle, { color: '#FFFFFF' }]}>View Survey History</Text>
             <Text style={[styles.secondaryActionSub, { color: 'rgba(255, 255, 255, 0.85)' }]}>
               Browse, search and filter {surveys.length} survey logs
             </Text>
@@ -116,7 +116,7 @@ function DashboardContent({ onNavigate }) {
 
       {/* Recent Surveys Summary */}
       <View style={styles.recentHeader}>
-        <Text style={[styles.sectionTitle, { color: colors.text, marginBottom: 0 }]}>Latest Surveys 👀</Text>
+        <Text style={[styles.sectionTitle, { color: colors.text, marginBottom: 0 }]}>Latest Surveys</Text>
         {surveys.length > 0 && (
           <Pressable 
             style={[styles.viewAllPill, { backgroundColor: colors.pillBg }]}
@@ -131,8 +131,8 @@ function DashboardContent({ onNavigate }) {
       {recentSurveys.length === 0 ? (
         <View style={[styles.emptyRecent, { backgroundColor: colors.surface, borderColor: colors.surfaceBorder }]}>
           <Ionicons name="document-text-outline" size={36} color={colors.primary} />
-          <Text style={[styles.emptyRecentText, { color: colors.icon }]}>Empty! Go start a survey ⚡</Text>
-        </View>
+          <Text style={[styles.emptyRecentText, { color: colors.icon }]}>Empty! Go start a survey</Text>
+        </View>       </View>
       ) : (
         recentSurveys.map((survey) => (
           <Pressable

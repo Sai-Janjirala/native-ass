@@ -36,12 +36,12 @@ export default function HistoryScreen() {
 
   const handleDeletePress = (id, siteName) => {
     if (Platform.OS === 'web' && typeof window !== 'undefined') {
-      if (window.confirm(`Delete this survey? 🗑️\n\nAre you sure you want to delete the survey record for "${siteName}"? This action is permanent.`)) {
+      if (window.confirm(`Delete this survey?\n\nAre you sure you want to delete the survey record for "${siteName}"? This action is permanent.`)) {
         deleteSurvey(id);
       }
     } else {
       Alert.alert(
-        'Delete this survey? 🗑️',
+        'Delete this survey?',
         `Are you sure you want to delete the survey record for "${siteName}"? This action is permanent.`,
         [
           { text: 'Cancel', style: 'cancel' },
@@ -71,7 +71,7 @@ export default function HistoryScreen() {
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
-      <CustomHeader title="Survey History 📂" />
+      <CustomHeader title="Survey History" />
 
       {/* Search Input Bar */}
       <View style={styles.topContainer}>
@@ -101,7 +101,7 @@ export default function HistoryScreen() {
         <View style={styles.filterRow}>
           {(['All', 'High', 'Medium', 'Low']).map((p) => {
             const isSelected = priorityFilter === p;
-            const displayLabel = p === 'All' ? 'All' : p === 'High' ? 'High 🔥' : p === 'Medium' ? 'Med ⚡' : 'Low 🍀';
+            const displayLabel = p;
             return (
               <Pressable
                 key={p}

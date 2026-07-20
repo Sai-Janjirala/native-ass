@@ -299,12 +299,12 @@ export default function NewSurveyScreen() {
   if (isPreview) {
     return (
       <View style={[styles.container, { backgroundColor: colors.background }]}>
-        <CustomHeader title="Survey Preview 👀" showBack={false} />
+        <CustomHeader title="Survey Preview" showBack={false} />
         
         <ScrollView contentContainerStyle={[styles.scrollContainer, styles.contentShell]} showsVerticalScrollIndicator={false}>
           <View style={[styles.card, { backgroundColor: colorScheme === 'dark' ? '#1E2123' : '#FFFFFF', borderColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6' }]}>
             <View style={styles.previewHeader}>
-              <Text style={[styles.previewTitle, { color: colors.text }]}>Survey Summary 👀</Text>
+              <Text style={[styles.previewTitle, { color: colors.text }]}>Survey Summary</Text>
               <View style={[styles.priorityBadge, { backgroundColor: getPriorityColor(draft.priority) + '15' }]}>
                 <Text style={[styles.priorityText, { color: getPriorityColor(draft.priority) }]}>{draft.priority}</Text>
               </View>
@@ -313,23 +313,23 @@ export default function NewSurveyScreen() {
             {/* Field Details */}
             <View style={styles.previewGrid}>
               <View style={styles.previewRow}>
-                <Text style={[styles.previewLabel, { color: colors.icon }]}>Site Name 🏢</Text>
+                <Text style={[styles.previewLabel, { color: colors.icon }]}>Site Name</Text>
                 <Text style={[styles.previewValue, { color: colors.text }]}>{draft.siteName}</Text>
               </View>
               
               <View style={styles.previewRow}>
-                <Text style={[styles.previewLabel, { color: colors.icon }]}>Client Name 👤</Text>
+                <Text style={[styles.previewLabel, { color: colors.icon }]}>Client Name</Text>
                 <Text style={[styles.previewValue, { color: colors.text }]}>{draft.clientName}</Text>
               </View>
 
               <View style={styles.previewRow}>
-                <Text style={[styles.previewLabel, { color: colors.icon }]}>Survey Date 📅</Text>
+                <Text style={[styles.previewLabel, { color: colors.icon }]}>Survey Date</Text>
                 <Text style={[styles.previewValue, { color: colors.text }]}>{draft.date}</Text>
               </View>
 
               {draft.description ? (
                 <View style={styles.previewRow}>
-                  <Text style={[styles.previewLabel, { color: colors.icon }]}>Description 💬</Text>
+                  <Text style={[styles.previewLabel, { color: colors.icon }]}>Description</Text>
                   <Text style={[styles.previewValue, { color: colors.text }]}>{draft.description}</Text>
                 </View>
               ) : null}
@@ -337,7 +337,7 @@ export default function NewSurveyScreen() {
 
             {/* Photo Attachment View */}
             <View style={[styles.attachmentPreview, { borderTopColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6' }]}>
-              <Text style={[styles.attachmentTitle, { color: colors.text }]}>Attached Photo 📸</Text>
+              <Text style={[styles.attachmentTitle, { color: colors.text }]}>Attached Photo</Text>
               {draft.photoUri ? (
                 <View style={styles.photoContainer}>
                   <Image source={{ uri: draft.photoUri }} style={styles.previewImage} />
@@ -348,13 +348,13 @@ export default function NewSurveyScreen() {
                   )}
                 </View>
               ) : (
-                <Text style={[styles.noAttachmentText, { color: colors.icon }]}>No picture snapped yet 🤷</Text>
+                <Text style={[styles.noAttachmentText, { color: colors.icon }]}>No picture snapped yet</Text>
               )}
             </View>
 
             {/* Location Attachment View */}
             <View style={[styles.attachmentPreview, { borderTopColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6' }]}>
-              <Text style={[styles.attachmentTitle, { color: colors.text }]}>Location Coordinates 📍</Text>
+              <Text style={[styles.attachmentTitle, { color: colors.text }]}>Location Coordinates</Text>
               {draft.location ? (
                 <View style={styles.locationContainer}>
                   <Ionicons name="location" size={16} color={colors.tint} />
@@ -368,13 +368,13 @@ export default function NewSurveyScreen() {
                   </View>
                 </View>
               ) : (
-                <Text style={[styles.noAttachmentText, { color: colors.icon }]}>No GPS coordinates linked yet 🧭</Text>
+                <Text style={[styles.noAttachmentText, { color: colors.icon }]}>No GPS coordinates linked yet</Text>
               )}
             </View>
 
             {/* Contact Attachment View */}
             <View style={[styles.attachmentPreview, { borderTopColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6' }]}>
-              <Text style={[styles.attachmentTitle, { color: colors.text }]}>Linked Buddy 👥</Text>
+              <Text style={[styles.attachmentTitle, { color: colors.text }]}>Linked Buddy</Text>
               {draft.contact ? (
                 <View style={styles.contactContainer}>
                   <Ionicons name="person" size={16} color={colors.tint} />
@@ -383,17 +383,17 @@ export default function NewSurveyScreen() {
                   </Text>
                 </View>
               ) : (
-                <Text style={[styles.noAttachmentText, { color: colors.icon }]}>No buddy linked yet 👤</Text>
+                <Text style={[styles.noAttachmentText, { color: colors.icon }]}>No buddy linked yet</Text>
               )}
             </View>
 
             {/* Notes Attachment View */}
             <View style={[styles.attachmentPreview, { borderTopColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6' }]}>
-              <Text style={[styles.attachmentTitle, { color: colors.text }]}>My Notes 📝</Text>
+              <Text style={[styles.attachmentTitle, { color: colors.text }]}>My Notes</Text>
               {draft.notes ? (
                 <Text style={[styles.previewValue, { color: colors.text }]}>{draft.notes}</Text>
               ) : (
-                <Text style={[styles.noAttachmentText, { color: colors.icon }]}>No notes written yet ✍️</Text>
+                <Text style={[styles.noAttachmentText, { color: colors.icon }]}>No notes written yet</Text>
               )}
             </View>
           </View>
@@ -404,14 +404,14 @@ export default function NewSurveyScreen() {
               style={[styles.editButton, { backgroundColor: '#F59E0B', borderColor: '#F59E0B' }]}
               onPress={() => setIsPreview(false)}
             >
-              <Text style={[styles.editButtonText, { color: '#FFFFFF' }]}>Fix Form ✍️</Text>
+              <Text style={[styles.editButtonText, { color: '#FFFFFF' }]}>Fix Form</Text>
             </Pressable>
             
             <Pressable 
               style={[styles.submitButton, { backgroundColor: '#10B981', borderColor: '#10B981' }]}
               onPress={handleSubmit}
             >
-              <Text style={[styles.submitButtonText, { color: '#FFFFFF' }]}>Log It! 🎉</Text>
+              <Text style={[styles.submitButtonText, { color: '#FFFFFF' }]}>Log It!</Text>
             </Pressable>
           </View>
         </ScrollView>
@@ -422,7 +422,7 @@ export default function NewSurveyScreen() {
   // ==================== RENDER FORM EDIT MODE ====================
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
-      <CustomHeader title="Start a Survey 📝" />
+      <CustomHeader title="Start a Survey" />
       
       <ScrollView contentContainerStyle={[styles.scrollContainer, styles.contentShell]} keyboardShouldPersistTaps="handled" showsVerticalScrollIndicator={false}>
         {/* Form Fields */}
@@ -430,7 +430,7 @@ export default function NewSurveyScreen() {
           
           {/* Site Name Input */}
           <View style={styles.inputGroup}>
-            <Text style={[styles.label, { color: colors.text }]}>Site Name 🏢 *</Text>
+            <Text style={[styles.label, { color: colors.text }]}>Site Name *</Text>
             <TextInput
               style={[
                 styles.textInput, 
@@ -453,7 +453,7 @@ export default function NewSurveyScreen() {
 
           {/* Client Name Input */}
           <View style={styles.inputGroup}>
-            <Text style={[styles.label, { color: colors.text }]}>Client Name 👤 *</Text>
+            <Text style={[styles.label, { color: colors.text }]}>Client Name *</Text>
             <TextInput
               style={[
                 styles.textInput, 
@@ -476,7 +476,7 @@ export default function NewSurveyScreen() {
 
           {/* Priority selector */}
           <View style={styles.inputGroup}>
-            <Text style={[styles.label, { color: colors.text }]}>How Important? 🔥</Text>
+            <Text style={[styles.label, { color: colors.text }]}>How Important?</Text>
             <View style={styles.priorityRow}>
               {(['Low', 'Medium', 'High']).map((p) => {
                 const isSelected = draft.priority === p;
@@ -507,7 +507,7 @@ export default function NewSurveyScreen() {
 
           {/* Survey Date */}
           <View style={styles.inputGroup}>
-            <Text style={[styles.label, { color: colors.text }]}>Date of Survey 📅</Text>
+            <Text style={[styles.label, { color: colors.text }]}>Date of Survey</Text>
             <View style={styles.dateInputWrapper}>
               <TextInput
                 style={[
@@ -535,7 +535,7 @@ export default function NewSurveyScreen() {
 
           {/* Description Input */}
           <View style={styles.inputGroup}>
-            <Text style={[styles.label, { color: colors.text }]}>Tell me about the site 💬</Text>
+            <Text style={[styles.label, { color: colors.text }]}>Tell me about the site</Text>
             <TextInput
               style={[
                 styles.textInput, 
@@ -558,13 +558,13 @@ export default function NewSurveyScreen() {
           {/* Notes Input */}
           <View style={styles.inputGroup}>
             <View style={styles.labelRow}>
-              <Text style={[styles.label, { color: colors.text }]}>My personal notes 📝</Text>
+              <Text style={[styles.label, { color: colors.text }]}>My personal notes</Text>
               <Pressable 
                 style={styles.inlinePasteBtn} 
                 onPress={handlePasteClipboardNotes}
               >
                 <Ionicons name="clipboard" size={14} color={colors.tint} style={{ marginRight: 4 }} />
-                <Text style={[styles.notesPasteLink, { color: colors.tint }]}>Quick Paste 📋</Text>
+                <Text style={[styles.notesPasteLink, { color: colors.tint }]}>Quick Paste</Text>
               </Pressable>
             </View>
             <TextInput
@@ -588,7 +588,7 @@ export default function NewSurveyScreen() {
         </View>
 
         {/* Attachment Status Section */}
-        <Text style={[styles.sectionTitle, { color: colors.text, marginTop: 10 }]}>Cool Attachments 📎</Text>
+        <Text style={[styles.sectionTitle, { color: colors.text, marginTop: 10 }]}>Cool Attachments</Text>
         
         <View style={[styles.formContainer, { backgroundColor: colorScheme === 'dark' ? '#1E2123' : '#FFFFFF', borderColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6' }]}>
           
@@ -601,7 +601,7 @@ export default function NewSurveyScreen() {
                 color={draft.photoUri ? "#34C759" : colors.icon} 
               />
               <View style={styles.attachmentText}>
-                <Text style={[styles.attachmentName, { color: colors.text }]}>Photo 📸</Text>
+                <Text style={[styles.attachmentName, { color: colors.text }]}>Photo</Text>
                 {draft.photoUri ? (
                   <View style={styles.attachedImageWrapper}>
                     <Image source={{ uri: draft.photoUri }} style={styles.inlineAttachedThumbnail} />
@@ -639,7 +639,7 @@ export default function NewSurveyScreen() {
                 />
               )}
               <View style={styles.attachmentText}>
-                <Text style={[styles.attachmentName, { color: colors.text }]}>GPS Location 📍</Text>
+                <Text style={[styles.attachmentName, { color: colors.text }]}>GPS Location</Text>
                 <Text style={[styles.attachmentDesc, { color: colors.icon }]}>
                   {draft.location ? `${draft.location.latitude.toFixed(5)}, ${draft.location.longitude.toFixed(5)}` : 'No coordinates linked'}
                 </Text>
@@ -667,7 +667,7 @@ export default function NewSurveyScreen() {
                 color={draft.contact ? "#34C759" : colors.icon} 
               />
               <View style={styles.attachmentText}>
-                <Text style={[styles.attachmentName, { color: colors.text }]}>Linked Buddy 👥</Text>
+                <Text style={[styles.attachmentName, { color: colors.text }]}>Linked Buddy</Text>
                 <Text style={[styles.attachmentDesc, { color: colors.icon }]}>
                   {draft.contact ? `${draft.contact.name}` : 'No buddy linked'}
                 </Text>
@@ -690,14 +690,14 @@ export default function NewSurveyScreen() {
             style={[styles.resetBtn, { backgroundColor: '#EF4444', borderColor: '#EF4444' }]}
             onPress={handleReset}
           >
-            <Text style={[styles.resetBtnText, { color: '#FFFFFF' }]}>Wipe Draft 🧹</Text>
+            <Text style={[styles.resetBtnText, { color: '#FFFFFF' }]}>Wipe Draft</Text>
           </Pressable>
 
           <Pressable 
             style={[styles.previewBtn, { backgroundColor: '#2563EB' }]}
             onPress={handleGoToPreview}
           >
-            <Text style={[styles.previewBtnText, { color: '#FFFFFF' }]}>See Preview 👀</Text>
+            <Text style={[styles.previewBtnText, { color: '#FFFFFF' }]}>See Preview</Text>
           </Pressable>
         </View>
       </ScrollView>

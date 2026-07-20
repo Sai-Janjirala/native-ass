@@ -17,7 +17,7 @@ export default function ProfileScreen() {
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
-      <CustomHeader title="My Profile 🤠" />
+      <CustomHeader title="My Profile" />
       <ScrollView contentContainerStyle={[styles.scrollContainer, styles.contentShell]} showsVerticalScrollIndicator={false}>
         {/* Profile Card */}
         <View style={[
@@ -42,7 +42,7 @@ export default function ProfileScreen() {
         </View>
 
         {/* Survey Analytics */}
-        <Text style={[styles.sectionTitle, { color: colors.text }]}>My Stats 📊</Text>
+        <Text style={[styles.sectionTitle, { color: colors.text }]}>My Stats</Text>
         <View style={styles.metricsGrid}>
           <View style={[styles.metricCard, { backgroundColor: colors.surface, borderColor: colors.surfaceBorder }]}>
             <View style={[styles.metricIconBox, { backgroundColor: colors.pillBg }]}>
@@ -68,7 +68,7 @@ export default function ProfileScreen() {
             borderColor: colors.surfaceBorder,
           }
         ]}>
-          <Text style={[styles.breakdownTitle, { color: colors.text }]}>Priority Breakdown 🔥</Text>
+          <Text style={[styles.breakdownTitle, { color: colors.text }]}>Priority Breakdown</Text>
           
           {/* High Priority Bar */}
           <View style={styles.progressRow}>

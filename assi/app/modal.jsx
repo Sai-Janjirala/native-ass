@@ -7,6 +7,7 @@ import {
   Image, 
   Pressable, 
   Alert, 
+  Platform
 } from 'react-native';
 import { useLocalSearchParams, router } from 'expo-router';
 import * as Clipboard from 'expo-clipboard';
@@ -57,9 +58,15 @@ export default function SurveyDetailModal() {
   };
 
   const handleDelete = () => {
-    Alert.alert(
-      'Delete Survey? 🗑️',
-      'Are you sure you want to delete this survey record from history?',
+    if (Platform.OS === 'web' && typeof window !== 'undefined') {
+      if (window.confirm('Delete Survey?\n\nAre you sure you want to delete this survey record from history?')) {
+        deleteSurvey(survey.id);
+        router.back();
+      }
+    } else {
+      Alert.alert(
+        'Delete Survey?',
+        'Are you sure you want to delete this survey record from history?',
       [
         { text: 'Cancel', style: 'cancel' },
         { 

@@ -64,7 +64,7 @@ function CustomDrawerContent(props) {
             color={isActive('dashboard') ? activeText : inactiveText} 
           />
           <Text style={[styles.itemText, { color: isActive('dashboard') ? activeText : inactiveText, fontWeight: isActive('dashboard') ? '700' : '500' }]}>
-            Home 🏠
+            Home
           </Text>
         </Pressable>
 
@@ -84,12 +84,12 @@ function CustomDrawerContent(props) {
             color={isActive('survey') ? activeText : inactiveText} 
           />
           <Text style={[styles.itemText, { color: isActive('survey') ? activeText : inactiveText, fontWeight: isActive('survey') ? '700' : '500' }]}>
-            New Survey ➕
+            New Survey
           </Text>
         </Pressable>
 
         <View style={[styles.divider, { backgroundColor: colors.surfaceBorder }]} />
-        <Text style={[styles.sectionTitle, { color: colors.icon }]}>Native APIs ⚡</Text>
+        <Text style={[styles.sectionTitle, { color: colors.icon }]}>Native APIs</Text>
 
         {/* Camera */}
         <Pressable
@@ -107,7 +107,7 @@ function CustomDrawerContent(props) {
             color={isActive('camera') ? activeText : inactiveText} 
           />
           <Text style={[styles.itemText, { color: isActive('camera') ? activeText : inactiveText, fontWeight: isActive('camera') ? '700' : '500' }]}>
-            Snap Pic 📸
+            Snap Pic
           </Text>
         </Pressable>
 
@@ -127,7 +127,7 @@ function CustomDrawerContent(props) {
             color={isActive('location') ? activeText : inactiveText} 
           />
           <Text style={[styles.itemText, { color: isActive('location') ? activeText : inactiveText, fontWeight: isActive('location') ? '700' : '500' }]}>
-            GPS Tracker 📍
+            GPS Tracker
           </Text>
         </Pressable>
 
@@ -147,7 +147,7 @@ function CustomDrawerContent(props) {
             color={isActive('contacts') ? activeText : inactiveText} 
           />
           <Text style={[styles.itemText, { color: isActive('contacts') ? activeText : inactiveText, fontWeight: isActive('contacts') ? '700' : '500' }]}>
-            Buddies List 👥
+            Buddies List
           </Text>
         </Pressable>
 
@@ -167,7 +167,7 @@ function CustomDrawerContent(props) {
             color={isActive('clipboard') ? activeText : inactiveText} 
           />
           <Text style={[styles.itemText, { color: isActive('clipboard') ? activeText : inactiveText, fontWeight: isActive('clipboard') ? '700' : '500' }]}>
-            Clipboard Tool 📋
+            Clipboard Tool
           </Text>
         </Pressable>
 
@@ -189,7 +189,7 @@ function CustomDrawerContent(props) {
             color={isActive('settings') ? activeText : inactiveText} 
           />
           <Text style={[styles.itemText, { color: isActive('settings') ? activeText : inactiveText, fontWeight: isActive('settings') ? '700' : '500' }]}>
-            App Settings ⚙️
+            App Settings
           </Text>
         </Pressable>
       </View>
