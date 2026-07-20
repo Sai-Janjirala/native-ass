@@ -45,18 +45,18 @@ export default function ProfileScreen() {
         <Text style={[styles.sectionTitle, { color: colors.text }]}>My Stats 📊</Text>
         <View style={styles.metricsGrid}>
           <View style={[styles.metricCard, { backgroundColor: colors.surface, borderColor: colors.surfaceBorder }]}>
-            <View style={[styles.metricIconBox, { backgroundColor: colorScheme === 'dark' ? 'rgba(59, 130, 246, 0.15)' : 'rgba(37, 99, 235, 0.1)' }]}>
-              <Ionicons name="document-text-outline" size={22} color={colors.primary} />
+            <View style={[styles.metricIconBox, { backgroundColor: colors.pillBg }]}>
+              <Ionicons name="document-text-outline" size={22} color={colors.text} />
             </View>
             <Text style={[styles.metricNum, { color: colors.text }]}>{totalSurveys}</Text>
             <Text style={[styles.metricLabel, { color: colors.icon }]}>Total Logs</Text>
           </View>
           
           <View style={[styles.metricCard, { backgroundColor: colors.surface, borderColor: colors.surfaceBorder }]}>
-            <View style={[styles.metricIconBox, { backgroundColor: 'rgba(16, 185, 129, 0.12)' }]}>
-              <Ionicons name="today-outline" size={22} color="#10B981" />
+            <View style={[styles.metricIconBox, { backgroundColor: colors.pillBg }]}>
+              <Ionicons name="today-outline" size={22} color={colors.text} />
             </View>
-            <Text style={[styles.metricNum, { color: '#10B981' }]}>{todayCount}</Text>
+            <Text style={[styles.metricNum, { color: colors.text }]}>{todayCount}</Text>
             <Text style={[styles.metricLabel, { color: colors.icon }]}>Done Today</Text>
           </View>
         </View>

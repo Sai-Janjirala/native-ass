@@ -55,9 +55,9 @@ export const CustomHeader = ({ title, showBack = false }) => {
         </Pressable>
 
         <View style={styles.titleContainer}>
-          <View style={[styles.dateChip, { backgroundColor: colorScheme === 'dark' ? 'rgba(59, 130, 246, 0.15)' : 'rgba(37, 99, 235, 0.1)' }]}>
-            <Ionicons name="calendar-outline" size={11} color={colors.primary} style={{ marginRight: 4 }} />
-            <Text style={[styles.headerSubtitle, { color: colors.primary }]}>
+          <View style={[styles.dateChip, { backgroundColor: colorScheme === 'dark' ? '#27272A' : '#E4E4E7' }]}>
+            <Ionicons name="calendar-outline" size={11} color={colors.text} style={{ marginRight: 4 }} />
+            <Text style={[styles.headerSubtitle, { color: colors.text }]}>
               {getFormattedDate()}
             </Text>
           </View>
@@ -80,7 +80,7 @@ export const CustomHeader = ({ title, showBack = false }) => {
             source={{ uri: 'https://avatars.githubusercontent.com/u/224969012?v=4&size=64' }} 
             style={styles.headerAvatar}
           />
-          <View style={[styles.onlineIndicator, { backgroundColor: colors.accent }]} />
+          <View style={[styles.onlineIndicator, { backgroundColor: colors.text }]} />
         </Pressable>
       </View>
     </SafeAreaView>

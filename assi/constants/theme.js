@@ -1,43 +1,43 @@
 import { Platform, useColorScheme } from 'react-native';
 
-const tintColorLight = '#2563EB'; // Professional Cobalt Blue
-const tintColorDark = '#60A5FA'; // Professional Soft Executive Blue
+const tintColorLight = '#09090B'; // Obsidian Black
+const tintColorDark = '#FAFAFA'; // Stark White
 
 export const Colors = {
   light: {
-    text: '#0F172A', // Slate-900
-    background: '#F8FAFC', // Slate-50 soft backdrop
-    surface: '#FFFFFF', // Crisp white cards
-    surfaceBorder: '#E2E8F0', // Soft Slate-200 border
+    text: '#09090B', // Charcoal Black
+    background: '#F4F4F5', // Soft Zinc backdrop
+    surface: '#FFFFFF', // Pure White card
+    surfaceBorder: '#E4E4E7', // Soft Zinc border
     tint: tintColorLight,
-    primary: '#2563EB', // Cobalt Blue
-    primaryDark: '#1D4ED8', // Deep Royal Blue
-    secondary: '#0284C7', // Slate Sky Blue
-    accent: '#10B981', // Emerald Green
-    icon: '#64748B', // Slate-500
-    tabIconDefault: '#94A3B8', // Slate-400
+    primary: '#09090B', // Obsidian Black
+    primaryDark: '#18181B',
+    secondary: '#27272A', // Deep Zinc
+    accent: '#52525B', // Slate Charcoal
+    icon: '#71717A', // Zinc-500
+    tabIconDefault: '#A1A1AA', // Zinc-400
     tabIconSelected: tintColorLight,
-    pillBg: '#F1F5F9', // Light gray pill container
-    pillActiveBg: '#2563EB', // Active pill background fill
+    pillBg: '#E4E4E7', // Zinc pill background
+    pillActiveBg: '#09090B', // Active obsidian pill
     pillActiveText: '#FFFFFF',
-    cardShadow: 'rgba(37, 99, 235, 0.08)',
+    cardShadow: 'rgba(0, 0, 0, 0.08)',
   },
   dark: {
-    text: '#F8FAFC', // Slate-50
-    background: '#09090B', // Deep Zinc-950
-    surface: '#121216', // Dark zinc surface card
-    surfaceBorder: '#27272A', // Dark Zinc-800 border
+    text: '#FAFAFA', // Stark White
+    background: '#09090B', // Deep Obsidian Black
+    surface: '#141417', // Dark Obsidian surface card
+    surfaceBorder: '#27272A', // Dark Zinc border
     tint: tintColorDark,
-    primary: '#3B82F6', // Crisp Executive Blue
-    primaryDark: '#2563EB',
-    secondary: '#38BDF8', // Sky Blue
-    accent: '#34D399', // Emerald
+    primary: '#FAFAFA', // Crisp Stark White
+    primaryDark: '#E4E4E7',
+    secondary: '#A1A1AA', // Soft Zinc
+    accent: '#71717A',
     icon: '#A1A1AA', // Zinc-400
     tabIconDefault: '#52525B', // Zinc-600
     tabIconSelected: tintColorDark,
-    pillBg: '#18181C', // Dark pill container
-    pillActiveBg: '#3B82F6', // Vibrant pill highlight
-    pillActiveText: '#FFFFFF',
+    pillBg: '#27272A', // Dark pill container
+    pillActiveBg: '#FAFAFA', // Active white pill
+    pillActiveText: '#09090B',
     cardShadow: 'rgba(0, 0, 0, 0.5)',
   },
 };

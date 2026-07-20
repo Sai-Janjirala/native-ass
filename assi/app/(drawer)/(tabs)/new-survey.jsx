@@ -386,17 +386,17 @@ export default function NewSurveyScreen() {
           {/* Action Buttons */}
           <View style={styles.actionRow}>
             <Pressable 
-              style={[styles.editButton, { backgroundColor: '#F59E0B', borderColor: '#F59E0B' }]}
+              style={[styles.editButton, { backgroundColor: colors.surface, borderColor: colors.surfaceBorder }]}
               onPress={() => setIsPreview(false)}
             >
-              <Text style={[styles.editButtonText, { color: '#FFF' }]}>Fix Form ✍️</Text>
+              <Text style={[styles.editButtonText, { color: colors.text }]}>Fix Form ✍️</Text>
             </Pressable>
             
             <Pressable 
-              style={[styles.submitButton, { backgroundColor: '#10B981', borderColor: '#10B981' }]}
+              style={[styles.submitButton, { backgroundColor: colorScheme === 'dark' ? '#FAFAFA' : '#09090B', borderColor: colorScheme === 'dark' ? '#FAFAFA' : '#09090B' }]}
               onPress={handleSubmit}
             >
-              <Text style={styles.submitButtonText}>Log It! 🎉</Text>
+              <Text style={[styles.submitButtonText, { color: colorScheme === 'dark' ? '#09090B' : '#FAFAFA' }]}>Log It! 🎉</Text>
             </Pressable>
           </View>
         </ScrollView>
@@ -659,10 +659,10 @@ export default function NewSurveyScreen() {
               </View>
             </View>
             <Pressable 
-              style={[styles.attachBtn, { backgroundColor: '#2563EB', borderColor: '#2563EB' }]}
+              style={[styles.attachBtn, { backgroundColor: colors.primary, borderColor: colors.primary }]}
               onPress={handleOpenContactsModal}
             >
-              <Text style={[styles.attachBtnText, { color: '#FFF' }]}>
+              <Text style={[styles.attachBtnText, { color: colorScheme === 'dark' ? '#09090B' : '#FAFAFA' }]}>
                 {draft.contact ? 'Change' : 'Select'}
               </Text>
             </Pressable>
@@ -672,17 +672,17 @@ export default function NewSurveyScreen() {
         {/* Action Buttons */}
         <View style={styles.btnRow}>
           <Pressable 
-            style={[styles.resetBtn, { backgroundColor: '#EF4444', borderColor: '#EF4444' }]}
+            style={[styles.resetBtn, { backgroundColor: colors.surface, borderColor: colors.surfaceBorder }]}
             onPress={handleReset}
           >
-            <Text style={[styles.resetBtnText, { color: '#FFF' }]}>Wipe Draft 🧹</Text>
+            <Text style={[styles.resetBtnText, { color: colors.text }]}>Wipe Draft 🧹</Text>
           </Pressable>
 
           <Pressable 
-            style={[styles.previewBtn, { backgroundColor: '#3B82F6' }]}
+            style={[styles.previewBtn, { backgroundColor: colorScheme === 'dark' ? '#FAFAFA' : '#09090B' }]}
             onPress={handleGoToPreview}
           >
-            <Text style={styles.previewBtnText}>See Preview 👀</Text>
+            <Text style={[styles.previewBtnText, { color: colorScheme === 'dark' ? '#09090B' : '#FAFAFA' }]}>See Preview 👀</Text>
           </Pressable>
         </View>
       </ScrollView>

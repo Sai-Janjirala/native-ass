@@ -52,15 +52,15 @@ function DashboardContent({ onNavigate }) {
         }
       ]}>
         <View style={styles.welcomeTextContainer}>
-          <View style={[styles.greetingBadge, { backgroundColor: colorScheme === 'dark' ? 'rgba(59, 130, 246, 0.15)' : 'rgba(37, 99, 235, 0.1)' }]}>
-            <Text style={[styles.welcomeSub, { color: colors.primary }]}>Hey there! 👋</Text>
+          <View style={[styles.greetingBadge, { backgroundColor: colorScheme === 'dark' ? '#27272A' : '#E4E4E7' }]}>
+            <Text style={[styles.welcomeSub, { color: colors.text }]}>Hey there! 👋</Text>
           </View>
           <Text style={[styles.welcomeTitle, { color: colors.text }]}>Sai Janjirala</Text>
           <Text style={[styles.studentRoll, { color: colors.icon }]}>ID: 2026-NATIVE-ASS</Text>
         </View>
-        <View style={[styles.countBadge, { backgroundColor: colors.primary }]}>
-          <Text style={styles.countNumber}>{todayCount}</Text>
-          <Text style={styles.countLabel}>Done Today</Text>
+        <View style={[styles.countBadge, { backgroundColor: colorScheme === 'dark' ? '#FAFAFA' : '#09090B' }]}>
+          <Text style={[styles.countNumber, { color: colorScheme === 'dark' ? '#09090B' : '#FAFAFA' }]}>{todayCount}</Text>
+          <Text style={[styles.countLabel, { color: colorScheme === 'dark' ? '#09090B' : '#FAFAFA' }]}>Done Today</Text>
         </View>
       </View>
 
@@ -73,20 +73,20 @@ function DashboardContent({ onNavigate }) {
           style={({ pressed }) => [
             styles.primaryActionBtn, 
             { 
-              backgroundColor: '#2563EB',
+              backgroundColor: colorScheme === 'dark' ? '#FAFAFA' : '#09090B',
               transform: [{ scale: pressed ? 0.98 : 1 }]
             }
           ]}
           onPress={() => onNavigate(1)}
         >
-          <View style={styles.actionIconCircle}>
-            <Ionicons name="add-circle" size={24} color="#2563EB" />
+          <View style={[styles.actionIconCircle, { backgroundColor: colorScheme === 'dark' ? '#09090B' : '#FAFAFA' }]}>
+            <Ionicons name="add-circle" size={24} color={colorScheme === 'dark' ? '#FAFAFA' : '#09090B'} />
           </View>
           <View style={styles.primaryActionText}>
-            <Text style={styles.primaryActionTitle}>Start a New Survey 📝</Text>
-            <Text style={styles.primaryActionSub}>Log a site check inline with camera & GPS</Text>
+            <Text style={[styles.primaryActionTitle, { color: colorScheme === 'dark' ? '#09090B' : '#FAFAFA' }]}>Start a New Survey 📝</Text>
+            <Text style={[styles.primaryActionSub, { color: colorScheme === 'dark' ? 'rgba(9, 9, 11, 0.8)' : 'rgba(255, 255, 255, 0.8)' }]}>Log a site check inline with camera & GPS</Text>
           </View>
-          <Ionicons name="chevron-forward" size={20} color="rgba(255,255,255,0.7)" />
+          <Ionicons name="chevron-forward" size={20} color={colorScheme === 'dark' ? 'rgba(9, 9, 11, 0.6)' : 'rgba(255, 255, 255, 0.6)'} />
         </Pressable>
 
         {/* View History Button */}
@@ -94,22 +94,23 @@ function DashboardContent({ onNavigate }) {
           style={({ pressed }) => [
             styles.secondaryActionBtn, 
             { 
-              backgroundColor: '#10B981',
+              backgroundColor: colorScheme === 'dark' ? '#27272A' : '#27272A',
+              borderColor: colors.surfaceBorder,
               transform: [{ scale: pressed ? 0.98 : 1 }]
             }
           ]}
           onPress={() => onNavigate(2)}
         >
-          <View style={styles.actionIconCircle}>
-            <Ionicons name="time" size={24} color="#10B981" />
+          <View style={[styles.actionIconCircle, { backgroundColor: '#3F3F46' }]}>
+            <Ionicons name="time" size={24} color="#FAFAFA" />
           </View>
           <View style={styles.primaryActionText}>
-            <Text style={styles.secondaryActionTitle}>View Survey History 📂</Text>
-            <Text style={styles.secondaryActionSub}>
+            <Text style={[styles.secondaryActionTitle, { color: '#FAFAFA' }]}>View Survey History 📂</Text>
+            <Text style={[styles.secondaryActionSub, { color: 'rgba(250, 250, 250, 0.8)' }]}>
               Browse, search and filter {surveys.length} survey logs
             </Text>
           </View>
-          <Ionicons name="chevron-forward" size={20} color="rgba(255,255,255,0.7)" />
+          <Ionicons name="chevron-forward" size={20} color="rgba(255, 255, 255, 0.6)" />
         </Pressable>
       </View>
 
@@ -264,7 +265,7 @@ export default function TabLayoutWrapper() {
                   key={idx} 
                   style={({ pressed }) => [
                     styles.pillTabItem, 
-                    isActive && [styles.pillTabActive, { backgroundColor: colors.primary }],
+                    isActive && [styles.pillTabActive, { backgroundColor: colors.pillActiveBg }],
                     { transform: [{ scale: pressed ? 0.95 : 1 }] }
                   ]} 
                   onPress={() => navigateToTab(idx)}
@@ -272,10 +273,10 @@ export default function TabLayoutWrapper() {
                   <Ionicons 
                     name={isActive ? t.activeIcon : t.icon} 
                     size={20} 
-                    color={isActive ? '#FFFFFF' : colors.icon} 
+                    color={isActive ? colors.pillActiveText : colors.icon} 
                   />
                   {isActive && (
-                    <Text style={styles.activePillLabel}>{t.label}</Text>
+                    <Text style={[styles.activePillLabel, { color: colors.pillActiveText }]}>{t.label}</Text>
                   )}
                 </Pressable>
               );

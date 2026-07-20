@@ -111,7 +111,7 @@ export default function HistoryScreen() {
                 <Text style={[
                   styles.filterTabText, 
                   { 
-                    color: isSelected ? '#FFFFFF' : colors.text,
+                    color: isSelected ? (colorScheme === 'dark' ? '#09090B' : '#FFFFFF') : colors.text,
                     fontWeight: isSelected ? '800' : '600'
                   }
                 ]}>

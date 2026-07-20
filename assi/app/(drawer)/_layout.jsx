@@ -26,8 +26,8 @@ function CustomDrawerContent(props) {
     return pathname.includes(route);
   };
 
-  const activeBg = colors.primary;
-  const activeText = '#FFFFFF';
+  const activeBg = colorScheme === 'dark' ? '#FAFAFA' : '#09090B';
+  const activeText = colorScheme === 'dark' ? '#09090B' : '#FFFFFF';
   const inactiveText = colors.text;
 
   return (
