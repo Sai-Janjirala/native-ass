@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import sampleSurveys from '../data/sample_surveys.json';
+import { getStoredSurveys, saveStoredSurveys } from '../utils/storage';
 
 const initialDraft = {
   siteName: '',
@@ -20,13 +21,31 @@ export const SurveyProvider = ({ children }) => {
   const [surveys, setSurveys] = useState(sampleSurveys);
   const [draft, setDraft] = useState(initialDraft);
   const [todayCount, setTodayCount] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false);
 
-  // Compute today's survey count whenever surveys list changes
+  // Initial load from persistent storage (Web localStorage / Native AsyncStorage)
+  useEffect(() => {
+    let isMounted = true;
+    (async () => {
+      const stored = await getStoredSurveys(sampleSurveys);
+      if (isMounted && stored) {
+        setSurveys(stored);
+        setIsLoaded(true);
+      }
+    })();
+    return () => { isMounted = false; };
+  }, []);
+
+  // Compute today's survey count and persist surveys whenever surveys list changes
   useEffect(() => {
     const todayStr = new Date().toISOString().split('T')[0];
     const count = surveys.filter((s) => s.date === todayStr).length;
     setTodayCount(count);
-  }, [surveys]);
+
+    if (isLoaded) {
+      saveStoredSurveys(surveys);
+    }
+  }, [surveys, isLoaded]);
 
   const updateDraftField = (field, value) => {
     setDraft((prev) => ({
