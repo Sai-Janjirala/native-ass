@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, StyleSheet, Text, Pressable, useColorScheme, SafeAreaView, Platform, Image } from 'react-native';
+import { View, StyleSheet, Text, Pressable, SafeAreaView, Platform, Image } from 'react-native';
 import { useNavigation, router } from 'expo-router';
 import { DrawerActions } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
-import { Colors } from '@/constants/theme';
+import { Colors, useAppColorScheme } from '@/constants/theme';
 
 export const CustomHeader = ({ title, showBack = false }) => {
-  const colorScheme = useColorScheme();
+  const colorScheme = useAppColorScheme();
   const colors = Colors[colorScheme ?? 'light'];
   const navigation = useNavigation();
 

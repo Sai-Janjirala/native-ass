@@ -1,14 +1,14 @@
 import React from 'react';
-import { View, StyleSheet, Text, useColorScheme, Pressable, useWindowDimensions } from 'react-native';
+import { View, StyleSheet, Text, Pressable, useWindowDimensions } from 'react-native';
 import { Drawer } from 'expo-router/drawer';
 import { DrawerContentScrollView } from '@react-navigation/drawer';
 import { router, usePathname, useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { Colors } from '@/constants/theme';
+import { Colors, useAppColorScheme } from '@/constants/theme';
 import { useSurvey } from '@/context/SurveyContext';
 
 function CustomDrawerContent(props) {
-  const colorScheme = useColorScheme();
+  const colorScheme = useAppColorScheme();
   const colors = Colors[colorScheme ?? 'light'];
   const pathname = usePathname();
   const { tab } = useLocalSearchParams();
@@ -171,7 +171,7 @@ function CustomDrawerContent(props) {
 }
 
 export default function DrawerLayout() {
-  const colorScheme = useColorScheme();
+  const colorScheme = useAppColorScheme();
   const colors = Colors[colorScheme ?? 'light'];
   const { width } = useWindowDimensions();
 

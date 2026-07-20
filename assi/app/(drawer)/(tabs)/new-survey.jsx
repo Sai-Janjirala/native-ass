@@ -6,7 +6,6 @@ import {
   ScrollView, 
   TextInput, 
   Pressable, 
-  useColorScheme, 
   Alert, 
   Image,
   ActivityIndicator,
@@ -20,7 +19,7 @@ import { CameraView, useCameraPermissions } from 'expo-camera';
 import * as Location from 'expo-location';
 import * as Contacts from 'expo-contacts';
 import * as Clipboard from 'expo-clipboard';
-import { Colors } from '@/constants/theme';
+import { Colors, useAppColorScheme } from '@/constants/theme';
 import { useSurvey } from '@/context/SurveyContext';
 import { CustomHeader } from '@/components/CustomHeader';
 
@@ -37,7 +36,7 @@ const mockContacts = [
 ];
 
 export default function NewSurveyScreen() {
-  const colorScheme = useColorScheme();
+  const colorScheme = useAppColorScheme();
   const colors = Colors[colorScheme ?? 'light'];
   
   const { draft, updateDraftField, submitSurvey, clearDraft } = useSurvey();

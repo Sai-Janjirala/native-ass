@@ -1,4 +1,4 @@
-import { Platform } from 'react-native';
+import { Platform, useColorScheme } from 'react-native';
 
 const tintColorLight = '#000000'; // Pure black
 const tintColorDark = '#FFFFFF'; // Pure white
@@ -21,6 +21,12 @@ export const Colors = {
     tabIconSelected: tintColorDark,
   },
 };
+
+export function useAppColorScheme() {
+  const colorScheme = useColorScheme();
+
+  return Platform.OS === 'web' ? 'light' : (colorScheme ?? 'light');
+}
 
 export const Fonts = Platform.select({
   ios: {

@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, StyleSheet, Text, ScrollView, useColorScheme, Image } from 'react-native';
+import { View, StyleSheet, Text, ScrollView, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { Colors } from '@/constants/theme';
+import { Colors, useAppColorScheme } from '@/constants/theme';
 import { useSurvey } from '@/context/SurveyContext';
 import { CustomHeader } from '@/components/CustomHeader';
 
 export default function ProfileScreen() {
-  const colorScheme = useColorScheme();
+  const colorScheme = useAppColorScheme();
   const colors = Colors[colorScheme ?? 'light'];
   const { surveys, todayCount } = useSurvey();
 

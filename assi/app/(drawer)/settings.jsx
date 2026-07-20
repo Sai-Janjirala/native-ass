@@ -5,15 +5,14 @@ import {
   View, 
   Pressable, 
   Alert, 
-  useColorScheme, 
   ScrollView 
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { Colors } from '@/constants/theme';
+import { Colors, useAppColorScheme } from '@/constants/theme';
 import { useSurvey } from '@/context/SurveyContext';
 
 export default function SettingsScreen() {
-  const colorScheme = useColorScheme();
+  const colorScheme = useAppColorScheme();
   const colors = Colors[colorScheme ?? 'light'];
   const { surveys, deleteSurvey } = useSurvey();
 

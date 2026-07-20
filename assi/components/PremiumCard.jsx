@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, View, Text, Pressable, useColorScheme } from 'react-native';
+import { StyleSheet, View, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { Colors } from '@/constants/theme';
+import { Colors, useAppColorScheme } from '@/constants/theme';
 
 export const PremiumCard = ({
   title,
@@ -11,7 +11,7 @@ export const PremiumCard = ({
   style,
   rightElement,
 }) => {
-  const colorScheme = useColorScheme();
+  const colorScheme = useAppColorScheme();
   const colors = Colors[colorScheme ?? 'light'];
 
   const CardContent = (

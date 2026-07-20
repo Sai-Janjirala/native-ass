@@ -2,17 +2,17 @@ import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import 'react-native-reanimated';
-import { useColorScheme } from 'react-native';
 
 import { SurveyProvider } from '@/context/SurveyContext';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { useAppColorScheme } from '@/constants/theme';
 
 export const unstable_settings = {
   anchor: '(drawer)',
 };
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
+  const colorScheme = useAppColorScheme();
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>

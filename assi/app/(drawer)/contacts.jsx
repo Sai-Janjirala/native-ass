@@ -8,14 +8,13 @@ import {
   Pressable, 
   Alert, 
   ActivityIndicator, 
-  useColorScheme, 
   RefreshControl 
 } from 'react-native';
 import * as Contacts from 'expo-contacts';
 import * as Clipboard from 'expo-clipboard';
 import { router } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { Colors } from '@/constants/theme';
+import { Colors, useAppColorScheme } from '@/constants/theme';
 import { useSurvey } from '@/context/SurveyContext';
 
 
@@ -31,7 +30,7 @@ const mockContacts = [
 ];
 
 export default function ContactsScreen() {
-  const colorScheme = useColorScheme();
+  const colorScheme = useAppColorScheme();
   const colors = Colors[colorScheme ?? 'light'];
   
   const { updateDraftField } = useSurvey();

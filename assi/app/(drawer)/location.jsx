@@ -6,17 +6,16 @@ import {
   Pressable, 
   Alert, 
   ActivityIndicator, 
-  useColorScheme 
 } from 'react-native';
 import * as Location from 'expo-location';
 import * as Clipboard from 'expo-clipboard';
 import { router } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { Colors } from '@/constants/theme';
+import { Colors, useAppColorScheme } from '@/constants/theme';
 import { useSurvey } from '@/context/SurveyContext';
 
 export default function LocationScreen() {
-  const colorScheme = useColorScheme();
+  const colorScheme = useAppColorScheme();
   const colors = Colors[colorScheme ?? 'light'];
   
   const { updateDraftField } = useSurvey();

@@ -7,16 +7,15 @@ import {
   Image, 
   Pressable, 
   Alert, 
-  useColorScheme 
 } from 'react-native';
 import { useLocalSearchParams, router } from 'expo-router';
 import * as Clipboard from 'expo-clipboard';
 import { Ionicons } from '@expo/vector-icons';
-import { Colors } from '@/constants/theme';
+import { Colors, useAppColorScheme } from '@/constants/theme';
 import { useSurvey } from '@/context/SurveyContext';
 
 export default function SurveyDetailModal() {
-  const colorScheme = useColorScheme();
+  const colorScheme = useAppColorScheme();
   const colors = Colors[colorScheme ?? 'light'];
   
   const { id } = useLocalSearchParams();

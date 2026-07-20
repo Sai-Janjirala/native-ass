@@ -5,13 +5,12 @@ import {
   Text, 
   ScrollView, 
   Pressable, 
-  useColorScheme,
   useWindowDimensions,
   SafeAreaView
 } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { Colors } from '@/constants/theme';
+import { Colors, useAppColorScheme } from '@/constants/theme';
 import { useSurvey } from '@/context/SurveyContext';
 import { CustomHeader } from '@/components/CustomHeader';
 
@@ -20,7 +19,7 @@ import HistoryScreen from './history';
 import ProfileScreen from './profile';
 
 function DashboardContent({ onNavigate }) {
-  const colorScheme = useColorScheme();
+  const colorScheme = useAppColorScheme();
   const colors = Colors[colorScheme ?? 'light'];
   const { todayCount, surveys } = useSurvey();
 
@@ -152,7 +151,7 @@ function DashboardContent({ onNavigate }) {
 }
 
 export default function TabLayoutWrapper() {
-  const colorScheme = useColorScheme();
+  const colorScheme = useAppColorScheme();
   const colors = Colors[colorScheme ?? 'light'];
   const { tab } = useLocalSearchParams();
   const { width } = useWindowDimensions();

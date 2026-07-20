@@ -7,16 +7,15 @@ import {
   Image, 
   Alert, 
   ActivityIndicator, 
-  useColorScheme 
 } from 'react-native';
 import { useCameraPermissions, CameraView } from 'expo-camera';
 import { router } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { Colors } from '@/constants/theme';
+import { Colors, useAppColorScheme } from '@/constants/theme';
 import { useSurvey } from '@/context/SurveyContext';
 
 export default function CameraScreen() {
-  const colorScheme = useColorScheme();
+  const colorScheme = useAppColorScheme();
   const colors = Colors[colorScheme ?? 'light'];
   
   const { updateDraftField } = useSurvey();
