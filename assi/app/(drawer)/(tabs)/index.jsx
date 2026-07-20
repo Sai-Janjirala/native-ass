@@ -52,15 +52,15 @@ function DashboardContent({ onNavigate }) {
         }
       ]}>
         <View style={styles.welcomeTextContainer}>
-          <View style={[styles.greetingBadge, { backgroundColor: colorScheme === 'dark' ? '#27272A' : '#E4E4E7' }]}>
-            <Text style={[styles.welcomeSub, { color: colors.text }]}>Hey there! 👋</Text>
+          <View style={[styles.greetingBadge, { backgroundColor: colorScheme === 'dark' ? 'rgba(37, 99, 235, 0.15)' : 'rgba(37, 99, 235, 0.08)' }]}>
+            <Text style={[styles.welcomeSub, { color: colors.primary }]}>Hey there! 👋</Text>
           </View>
           <Text style={[styles.welcomeTitle, { color: colors.text }]}>Sai Janjirala</Text>
           <Text style={[styles.studentRoll, { color: colors.icon }]}>ID: 2026-NATIVE-ASS</Text>
         </View>
-        <View style={[styles.countBadge, { backgroundColor: colorScheme === 'dark' ? '#FAFAFA' : '#09090B' }]}>
-          <Text style={[styles.countNumber, { color: colorScheme === 'dark' ? '#09090B' : '#FAFAFA' }]}>{todayCount}</Text>
-          <Text style={[styles.countLabel, { color: colorScheme === 'dark' ? '#09090B' : '#FAFAFA' }]}>Done Today</Text>
+        <View style={[styles.countBadge, { backgroundColor: '#10B981' }]}>
+          <Text style={styles.countNumber}>{todayCount}</Text>
+          <Text style={styles.countLabel}>Done Today</Text>
         </View>
       </View>
 
@@ -68,49 +68,49 @@ function DashboardContent({ onNavigate }) {
       <Text style={[styles.sectionTitle, { color: colors.text }]}>What do you want to do?</Text>
       
       <View style={styles.mainActionsContainer}>
-        {/* Start New Survey Pill Button */}
+        {/* Start New Survey Pill Button - Emerald Green */}
         <Pressable 
           style={({ pressed }) => [
             styles.primaryActionBtn, 
             { 
-              backgroundColor: colorScheme === 'dark' ? '#FAFAFA' : '#09090B',
+              backgroundColor: '#10B981',
               transform: [{ scale: pressed ? 0.98 : 1 }]
             }
           ]}
           onPress={() => onNavigate(1)}
         >
-          <View style={[styles.actionIconCircle, { backgroundColor: colorScheme === 'dark' ? '#09090B' : '#FAFAFA' }]}>
-            <Ionicons name="add-circle" size={24} color={colorScheme === 'dark' ? '#FAFAFA' : '#09090B'} />
+          <View style={styles.actionIconCircle}>
+            <Ionicons name="add-circle" size={24} color="#10B981" />
           </View>
           <View style={styles.primaryActionText}>
-            <Text style={[styles.primaryActionTitle, { color: colorScheme === 'dark' ? '#09090B' : '#FAFAFA' }]}>Start a New Survey 📝</Text>
-            <Text style={[styles.primaryActionSub, { color: colorScheme === 'dark' ? 'rgba(9, 9, 11, 0.8)' : 'rgba(255, 255, 255, 0.8)' }]}>Log a site check inline with camera & GPS</Text>
+            <Text style={styles.primaryActionTitle}>Start a New Survey 📝</Text>
+            <Text style={styles.primaryActionSub}>Log a site check inline with camera & GPS</Text>
           </View>
-          <Ionicons name="chevron-forward" size={20} color={colorScheme === 'dark' ? 'rgba(9, 9, 11, 0.6)' : 'rgba(255, 255, 255, 0.6)'} />
+          <Ionicons name="chevron-forward" size={20} color="rgba(255, 255, 255, 0.8)" />
         </Pressable>
 
-        {/* View History Button */}
+        {/* View History Button - Royal Blue */}
         <Pressable 
           style={({ pressed }) => [
             styles.secondaryActionBtn, 
             { 
-              backgroundColor: colorScheme === 'dark' ? '#27272A' : '#27272A',
-              borderColor: colors.surfaceBorder,
+              backgroundColor: '#2563EB',
+              borderColor: '#2563EB',
               transform: [{ scale: pressed ? 0.98 : 1 }]
             }
           ]}
           onPress={() => onNavigate(2)}
         >
-          <View style={[styles.actionIconCircle, { backgroundColor: '#3F3F46' }]}>
-            <Ionicons name="time" size={24} color="#FAFAFA" />
+          <View style={styles.actionIconCircle}>
+            <Ionicons name="time" size={24} color="#2563EB" />
           </View>
           <View style={styles.primaryActionText}>
-            <Text style={[styles.secondaryActionTitle, { color: '#FAFAFA' }]}>View Survey History 📂</Text>
-            <Text style={[styles.secondaryActionSub, { color: 'rgba(250, 250, 250, 0.8)' }]}>
+            <Text style={[styles.secondaryActionTitle, { color: '#FFFFFF' }]}>View Survey History 📂</Text>
+            <Text style={[styles.secondaryActionSub, { color: 'rgba(255, 255, 255, 0.85)' }]}>
               Browse, search and filter {surveys.length} survey logs
             </Text>
           </View>
-          <Ionicons name="chevron-forward" size={20} color="rgba(255, 255, 255, 0.6)" />
+          <Ionicons name="chevron-forward" size={20} color="rgba(255, 255, 255, 0.8)" />
         </Pressable>
       </View>
 
@@ -248,14 +248,14 @@ export default function TabLayoutWrapper() {
           </View>
         </ScrollView>
 
-        {/* Floating Creative Pill Navigation Bar */}
+        {/* Floating Creative Pill Navigation Bar - Shades of Black */}
         <View style={styles.floatingTabBarWrapper} pointerEvents="box-none">
           <View style={[
             styles.pillTabBar, 
             { 
-              backgroundColor: colors.surface, 
-              borderColor: colors.surfaceBorder,
-              shadowColor: colors.primary,
+              backgroundColor: colorScheme === 'dark' ? '#18181B' : '#09090B', 
+              borderColor: colorScheme === 'dark' ? '#27272A' : '#18181B',
+              shadowColor: '#000000',
             }
           ]}>
             {tabsConfig.map((t, idx) => {
@@ -265,7 +265,7 @@ export default function TabLayoutWrapper() {
                   key={idx} 
                   style={({ pressed }) => [
                     styles.pillTabItem, 
-                    isActive && [styles.pillTabActive, { backgroundColor: colors.pillActiveBg }],
+                    isActive && [styles.pillTabActive, { backgroundColor: colorScheme === 'dark' ? '#FAFAFA' : '#27272A' }],
                     { transform: [{ scale: pressed ? 0.95 : 1 }] }
                   ]} 
                   onPress={() => navigateToTab(idx)}
@@ -273,10 +273,10 @@ export default function TabLayoutWrapper() {
                   <Ionicons 
                     name={isActive ? t.activeIcon : t.icon} 
                     size={20} 
-                    color={isActive ? colors.pillActiveText : colors.icon} 
+                    color={isActive ? (colorScheme === 'dark' ? '#09090B' : '#FFFFFF') : '#A1A1AA'} 
                   />
                   {isActive && (
-                    <Text style={[styles.activePillLabel, { color: colors.pillActiveText }]}>{t.label}</Text>
+                    <Text style={[styles.activePillLabel, { color: colorScheme === 'dark' ? '#09090B' : '#FFFFFF' }]}>{t.label}</Text>
                   )}
                 </Pressable>
               );
