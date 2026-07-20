@@ -29,35 +29,58 @@ export const CustomHeader = ({ title, showBack = false }) => {
 
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: colors.background }]}>
-      <View style={[styles.container, { borderBottomColor: colorScheme === 'dark' ? '#222' : '#f0f0f0' }]}>
+      <View style={[
+        styles.container, 
+        { 
+          backgroundColor: colors.surface,
+          borderColor: colors.surfaceBorder,
+        }
+      ]}>
         <Pressable 
-          style={[styles.iconButton, { backgroundColor: colorScheme === 'dark' ? '#222' : '#f5f5f5' }]} 
+          style={({ pressed }) => [
+            styles.iconButton, 
+            { 
+              backgroundColor: pressed 
+                ? (colorScheme === 'dark' ? '#27272A' : '#E2E8F0') 
+                : (colorScheme === 'dark' ? '#1E1E24' : '#F1F5F9'),
+            }
+          ]} 
           onPress={handleMenuPress}
         >
           <Ionicons 
-            name={showBack ? 'arrow-back' : 'menu'} 
-            size={24} 
+            name={showBack ? 'arrow-back-outline' : 'menu-outline'} 
+            size={22} 
             color={colors.text} 
           />
         </Pressable>
 
         <View style={styles.titleContainer}>
-          <Text style={[styles.headerSubtitle, { color: colors.icon }]}>
-            {getFormattedDate()}
-          </Text>
+          <View style={[styles.dateChip, { backgroundColor: colorScheme === 'dark' ? 'rgba(129, 140, 248, 0.15)' : 'rgba(99, 102, 241, 0.1)' }]}>
+            <Ionicons name="calendar-outline" size={11} color={colors.primary} style={{ marginRight: 4 }} />
+            <Text style={[styles.headerSubtitle, { color: colors.primary }]}>
+              {getFormattedDate()}
+            </Text>
+          </View>
           <Text style={[styles.headerTitle, { color: colors.text }]} numberOfLines={1}>
             {title || 'Smart Field Survey'}
           </Text>
         </View>
 
         <Pressable 
-          style={[styles.profileBadge, { borderColor: colors.tint }]}
+          style={({ pressed }) => [
+            styles.profileBadge, 
+            { 
+              borderColor: colors.primary,
+              transform: [{ scale: pressed ? 0.95 : 1 }]
+            }
+          ]}
           onPress={() => router.navigate('/?tab=3')}
         >
           <Image 
             source={{ uri: 'https://avatars.githubusercontent.com/u/224969012?v=4&size=64' }} 
             style={styles.headerAvatar}
           />
+          <View style={[styles.onlineIndicator, { backgroundColor: colors.accent }]} />
         </Pressable>
       </View>
     </SafeAreaView>
@@ -69,51 +92,79 @@ const styles = StyleSheet.create({
     paddingTop: Platform.OS === 'android' ? 35 : 0,
   },
   container: {
-    height: 60,
-    width: '100%',
+    height: 64,
+    width: '94%',
     maxWidth: 720,
     alignSelf: 'center',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 16,
-    borderBottomWidth: 1,
+    paddingHorizontal: 14,
+    marginVertical: 6,
+    borderRadius: 20,
+    borderWidth: 1,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.05,
+    shadowRadius: 10,
+    elevation: 3,
   },
   iconButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: 42,
+    height: 42,
+    borderRadius: 21,
     justifyContent: 'center',
     alignItems: 'center',
   },
   titleContainer: {
     flex: 1,
     minWidth: 0,
-    marginLeft: 15,
-    marginRight: 12,
+    marginLeft: 12,
+    marginRight: 10,
     justifyContent: 'center',
+  },
+  dateChip: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    alignSelf: 'flex-start',
+    paddingHorizontal: 8,
+    paddingVertical: 2,
+    borderRadius: 10,
+    marginBottom: 2,
   },
   headerSubtitle: {
-    fontSize: 11,
+    fontSize: 10,
     textTransform: 'uppercase',
-    letterSpacing: 0.5,
-    fontWeight: '600',
+    letterSpacing: 0.6,
+    fontWeight: '700',
   },
   headerTitle: {
-    fontSize: 17,
-    fontWeight: 'bold',
+    fontSize: 16,
+    fontWeight: '800',
+    letterSpacing: -0.2,
   },
   profileBadge: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
-    borderWidth: 1.5,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    borderWidth: 2,
     justifyContent: 'center',
     alignItems: 'center',
+    position: 'relative',
   },
   headerAvatar: {
     width: 36,
     height: 36,
     borderRadius: 18,
+  },
+  onlineIndicator: {
+    position: 'absolute',
+    bottom: -1,
+    right: -1,
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    borderWidth: 2,
+    borderColor: '#FFFFFF',
   },
 });

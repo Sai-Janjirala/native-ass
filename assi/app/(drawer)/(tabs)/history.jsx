@@ -71,11 +71,11 @@ export default function HistoryScreen() {
         <View style={[
           styles.searchContainer, 
           { 
-            backgroundColor: colorScheme === 'dark' ? '#18181B' : '#F4F4F5',
-            borderColor: colorScheme === 'dark' ? '#27272A' : '#E4E4E7'
+            backgroundColor: colors.surface,
+            borderColor: colors.surfaceBorder,
           }
         ]}>
-          <Ionicons name="search" size={20} color={colors.icon} style={{ marginRight: 8 }} />
+          <Ionicons name="search" size={18} color={colors.primary} style={{ marginRight: 8 }} />
           <TextInput
             style={[styles.searchInput, { color: colors.text }]}
             placeholder="Search by site or client..."
@@ -101,9 +101,9 @@ export default function HistoryScreen() {
                 style={[
                   styles.filterTab,
                   { 
-                    backgroundColor: isSelected ? colors.tint : 'transparent',
-                    borderColor: isSelected ? colors.tint : (colorScheme === 'dark' ? '#27272A' : '#E4E4E7'),
-                    borderWidth: isSelected ? 0 : 1
+                    backgroundColor: isSelected ? colors.primary : colors.surface,
+                    borderColor: isSelected ? colors.primary : colors.surfaceBorder,
+                    borderWidth: 1
                   }
                 ]}
                 onPress={() => setPriorityFilter(p)}
@@ -111,8 +111,8 @@ export default function HistoryScreen() {
                 <Text style={[
                   styles.filterTabText, 
                   { 
-                    color: isSelected ? '#FFF' : colors.text,
-                    fontWeight: isSelected ? '700' : '500'
+                    color: isSelected ? '#FFFFFF' : colors.text,
+                    fontWeight: isSelected ? '800' : '600'
                   }
                 ]}>
                   {displayLabel}
@@ -126,8 +126,8 @@ export default function HistoryScreen() {
       {/* FlatList */}
       {filteredSurveys.length === 0 ? (
         <View style={styles.emptyContainer}>
-          <View style={[styles.emptyIconCircle, { backgroundColor: colorScheme === 'dark' ? '#18181B' : '#F4F4F5' }]}>
-            <Ionicons name="document-text-outline" size={48} color={colors.icon} />
+          <View style={[styles.emptyIconCircle, { backgroundColor: colors.surface, borderColor: colors.surfaceBorder, borderWidth: 1 }]}>
+            <Ionicons name="document-text-outline" size={48} color={colors.primary} />
           </View>
           <Text style={[styles.emptyTitle, { color: colors.text }]}>Nothing here! 🏜️</Text>
           <Text style={[styles.emptySub, { color: colors.icon }]}>
@@ -144,11 +144,12 @@ export default function HistoryScreen() {
           showsVerticalScrollIndicator={false}
           renderItem={({ item }) => (
             <Pressable
-              style={[
+              style={({ pressed }) => [
                 styles.surveyCard,
                 { 
-                  backgroundColor: colorScheme === 'dark' ? '#18181B' : '#FFFFFF',
-                  borderColor: colorScheme === 'dark' ? '#27272A' : '#E4E4E7'
+                  backgroundColor: colors.surface,
+                  borderColor: colors.surfaceBorder,
+                  transform: [{ scale: pressed ? 0.99 : 1 }]
                 }
               ]}
               onPress={() => router.navigate({ pathname: '/modal', params: { id: item.id } })}
@@ -160,7 +161,7 @@ export default function HistoryScreen() {
                 </View>
                 
                 <View style={styles.badgeRow}>
-                  <View style={[styles.priorityBadge, { backgroundColor: getPriorityColor(item.priority) + '15' }]}>
+                  <View style={[styles.priorityBadge, { backgroundColor: getPriorityColor(item.priority) + '18' }]}>
                     <Text style={[styles.priorityText, { color: getPriorityColor(item.priority) }]}>
                       {item.priority}
                     </Text>
@@ -170,30 +171,30 @@ export default function HistoryScreen() {
                     style={styles.deleteBtn}
                     onPress={() => handleDeletePress(item.id, item.siteName)}
                   >
-                    <Ionicons name="trash-outline" size={16} color="#FF3B30" />
+                    <Ionicons name="trash-outline" size={15} color="#EF4444" />
                   </Pressable>
                 </View>
               </View>
 
-              <View style={[styles.divider, { backgroundColor: colorScheme === 'dark' ? '#27272A' : '#E4E4E7' }]} />
+              <View style={[styles.divider, { backgroundColor: colors.surfaceBorder }]} />
 
               <View style={styles.cardFooter}>
-                <View style={styles.footerItem}>
-                  <Ionicons name="calendar-outline" size={14} color={colors.icon} />
-                  <Text style={[styles.footerText, { color: colors.icon }]}>{item.date}</Text>
+                <View style={[styles.footerItem, { backgroundColor: colors.pillBg }]}>
+                  <Ionicons name="calendar-outline" size={13} color={colors.icon} />
+                  <Text style={[styles.footerText, { color: colors.text }]}>{item.date}</Text>
                 </View>
                 {item.location && (
-                  <View style={styles.footerItem}>
-                    <Ionicons name="location-outline" size={14} color={colors.icon} />
-                    <Text style={[styles.footerText, { color: colors.icon }]} numberOfLines={1}>
+                  <View style={[styles.footerItem, { backgroundColor: colors.pillBg }]}>
+                    <Ionicons name="location-outline" size={13} color={colors.primary} />
+                    <Text style={[styles.footerText, { color: colors.text }]} numberOfLines={1}>
                       {item.location.latitude.toFixed(4)}, {item.location.longitude.toFixed(4)}
                     </Text>
                   </View>
                 )}
                 {item.photoUri && (
-                  <View style={styles.footerItem}>
-                    <Ionicons name="image-outline" size={14} color="#34C759" />
-                    <Text style={[styles.footerText, { color: '#34C759', fontWeight: '600' }]}>Photo</Text>
+                  <View style={[styles.footerItem, { backgroundColor: 'rgba(16, 185, 129, 0.12)' }]}>
+                    <Ionicons name="image-outline" size={13} color="#10B981" />
+                    <Text style={[styles.footerText, { color: '#10B981', fontWeight: '700' }]}>Photo Attached</Text>
                   </View>
                 )}
               </View>
@@ -220,16 +221,22 @@ const styles = StyleSheet.create({
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 12,
-    height: 44,
-    borderRadius: 10,
+    paddingHorizontal: 14,
+    height: 48,
+    borderRadius: 24,
     borderWidth: 1,
     marginBottom: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.03,
+    shadowRadius: 4,
+    elevation: 1,
   },
   searchInput: {
     flex: 1,
     fontSize: 14,
     height: '100%',
+    fontWeight: '500',
   },
   filterRow: {
     flexDirection: 'row',
@@ -239,8 +246,8 @@ const styles = StyleSheet.create({
   filterTab: {
     flex: 1,
     minWidth: 72,
-    paddingVertical: 8,
-    borderRadius: 8,
+    paddingVertical: 9,
+    borderRadius: 20,
     alignItems: 'center',
   },
   filterTabText: {
@@ -248,7 +255,7 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     paddingHorizontal: 16,
-    paddingBottom: 88,
+    paddingBottom: 110,
   },
   contentShell: {
     width: '100%',
@@ -257,13 +264,13 @@ const styles = StyleSheet.create({
   },
   surveyCard: {
     padding: 16,
-    borderRadius: 12,
+    borderRadius: 20,
     borderWidth: 1,
     marginBottom: 12,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.05,
-    shadowRadius: 6,
+    shadowOpacity: 0.04,
+    shadowRadius: 8,
     elevation: 2,
   },
   cardHeader: {
@@ -277,12 +284,13 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   siteName: {
-    fontSize: 15,
-    fontWeight: 'bold',
+    fontSize: 16,
+    fontWeight: '800',
   },
   clientName: {
     fontSize: 13,
     marginTop: 2,
+    fontWeight: '500',
   },
   badgeRow: {
     flexDirection: 'row',
@@ -293,17 +301,17 @@ const styles = StyleSheet.create({
   priorityBadge: {
     paddingHorizontal: 10,
     paddingVertical: 4,
-    borderRadius: 6,
+    borderRadius: 12,
   },
   priorityText: {
     fontSize: 11,
-    fontWeight: '700',
+    fontWeight: '800',
   },
   deleteBtn: {
-    width: 28,
-    height: 28,
-    borderRadius: 6,
-    backgroundColor: 'rgba(255, 59, 48, 0.1)',
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    backgroundColor: 'rgba(239, 68, 68, 0.12)',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -314,17 +322,20 @@ const styles = StyleSheet.create({
   cardFooter: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 16,
+    gap: 8,
   },
   footerItem: {
     flexDirection: 'row',
     alignItems: 'center',
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 10,
     minWidth: 0,
     gap: 5,
   },
   footerText: {
-    fontSize: 12,
-    fontWeight: '500',
+    fontSize: 11,
+    fontWeight: '600',
     flexShrink: 1,
   },
   emptyContainer: {
@@ -343,7 +354,7 @@ const styles = StyleSheet.create({
   },
   emptyTitle: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: '800',
     textAlign: 'center',
   },
   emptySub: {
@@ -351,5 +362,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 8,
     lineHeight: 18,
+    fontWeight: '500',
   },
 });

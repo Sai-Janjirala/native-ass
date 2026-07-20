@@ -23,11 +23,11 @@ export default function ProfileScreen() {
         <View style={[
           styles.profileCard, 
           { 
-            backgroundColor: colorScheme === 'dark' ? '#1E2123' : '#FFFFFF',
-            borderColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6'
+            backgroundColor: colors.surface,
+            borderColor: colors.surfaceBorder,
           }
         ]}>
-          <View style={[styles.avatarBig, { backgroundColor: colors.tint }]}> 
+          <View style={[styles.avatarBig, { borderColor: colors.primary }]}> 
             <Image 
               source={{ uri: 'https://avatars.githubusercontent.com/u/224969012?v=4&size=64' }} 
               style={styles.avatarBigImage} 
@@ -35,22 +35,28 @@ export default function ProfileScreen() {
           </View>
           <Text style={[styles.studentName, { color: colors.text }]}>Sai Janjirala</Text>
           <Text style={[styles.studentSub, { color: colors.icon }]}>React Native Developer</Text>
+          
+          <View style={[styles.badge, { backgroundColor: colors.pillBg }]}>
+            <Text style={[styles.badgeText, { color: colors.primary }]}>ID: 2026-NATIVE-ASS</Text>
+          </View>
         </View>
-
-
 
         {/* Survey Analytics */}
         <Text style={[styles.sectionTitle, { color: colors.text }]}>My Stats 📊</Text>
         <View style={styles.metricsGrid}>
-          <View style={[styles.metricCard, { backgroundColor: colorScheme === 'dark' ? '#1E2123' : '#FFFFFF', borderColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6' }]}>
-            <Ionicons name="document-text-outline" size={24} color={colors.tint} />
+          <View style={[styles.metricCard, { backgroundColor: colors.surface, borderColor: colors.surfaceBorder }]}>
+            <View style={[styles.metricIconBox, { backgroundColor: colorScheme === 'dark' ? 'rgba(129, 140, 248, 0.15)' : 'rgba(99, 102, 241, 0.1)' }]}>
+              <Ionicons name="document-text-outline" size={22} color={colors.primary} />
+            </View>
             <Text style={[styles.metricNum, { color: colors.text }]}>{totalSurveys}</Text>
             <Text style={[styles.metricLabel, { color: colors.icon }]}>Total Logs</Text>
           </View>
           
-          <View style={[styles.metricCard, { backgroundColor: colorScheme === 'dark' ? '#1E2123' : '#FFFFFF', borderColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6' }]}>
-            <Ionicons name="today-outline" size={24} color="#34C759" />
-            <Text style={[styles.metricNum, { color: '#34C759' }]}>{todayCount}</Text>
+          <View style={[styles.metricCard, { backgroundColor: colors.surface, borderColor: colors.surfaceBorder }]}>
+            <View style={[styles.metricIconBox, { backgroundColor: 'rgba(16, 185, 129, 0.12)' }]}>
+              <Ionicons name="today-outline" size={22} color="#10B981" />
+            </View>
+            <Text style={[styles.metricNum, { color: '#10B981' }]}>{todayCount}</Text>
             <Text style={[styles.metricLabel, { color: colors.icon }]}>Done Today</Text>
           </View>
         </View>
@@ -58,8 +64,8 @@ export default function ProfileScreen() {
         <View style={[
           styles.breakdownBox, 
           { 
-            backgroundColor: colorScheme === 'dark' ? '#1E2123' : '#FFFFFF',
-            borderColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6'
+            backgroundColor: colors.surface,
+            borderColor: colors.surfaceBorder,
           }
         ]}>
           <Text style={[styles.breakdownTitle, { color: colors.text }]}>Priority Breakdown 🔥</Text>
@@ -68,13 +74,13 @@ export default function ProfileScreen() {
           <View style={styles.progressRow}>
             <View style={styles.progressLabelRow}>
               <Text style={[styles.progressName, { color: colors.text }]}>High Priority</Text>
-              <Text style={[styles.progressVal, { color: '#FF3B30' }]}>{highPriorityCount}</Text>
+              <Text style={[styles.progressVal, { color: '#EF4444' }]}>{highPriorityCount}</Text>
             </View>
-            <View style={[styles.progressBarBg, { backgroundColor: colorScheme === 'dark' ? '#333' : '#eee' }]}>
+            <View style={[styles.progressBarBg, { backgroundColor: colors.pillBg }]}>
               <View style={[
                 styles.progressBarFill, 
                 { 
-                  backgroundColor: '#FF3B30', 
+                  backgroundColor: '#EF4444', 
                   width: totalSurveys > 0 ? `${(highPriorityCount / totalSurveys) * 100}%` : '0%' 
                 }
               ]} />
@@ -85,13 +91,13 @@ export default function ProfileScreen() {
           <View style={styles.progressRow}>
             <View style={styles.progressLabelRow}>
               <Text style={[styles.progressName, { color: colors.text }]}>Medium Priority</Text>
-              <Text style={[styles.progressVal, { color: '#FF9500' }]}>{medPriorityCount}</Text>
+              <Text style={[styles.progressVal, { color: '#F59E0B' }]}>{medPriorityCount}</Text>
             </View>
-            <View style={[styles.progressBarBg, { backgroundColor: colorScheme === 'dark' ? '#333' : '#eee' }]}>
+            <View style={[styles.progressBarBg, { backgroundColor: colors.pillBg }]}>
               <View style={[
                 styles.progressBarFill, 
                 { 
-                  backgroundColor: '#FF9500', 
+                  backgroundColor: '#F59E0B', 
                   width: totalSurveys > 0 ? `${(medPriorityCount / totalSurveys) * 100}%` : '0%' 
                 }
               ]} />
@@ -102,13 +108,13 @@ export default function ProfileScreen() {
           <View style={styles.progressRow}>
             <View style={styles.progressLabelRow}>
               <Text style={[styles.progressName, { color: colors.text }]}>Low Priority</Text>
-              <Text style={[styles.progressVal, { color: '#34C759' }]}>{lowPriorityCount}</Text>
+              <Text style={[styles.progressVal, { color: '#10B981' }]}>{lowPriorityCount}</Text>
             </View>
-            <View style={[styles.progressBarBg, { backgroundColor: colorScheme === 'dark' ? '#333' : '#eee' }]}>
+            <View style={[styles.progressBarBg, { backgroundColor: colors.pillBg }]}>
               <View style={[
                 styles.progressBarFill, 
                 { 
-                  backgroundColor: '#34C759', 
+                  backgroundColor: '#10B981', 
                   width: totalSurveys > 0 ? `${(lowPriorityCount / totalSurveys) * 100}%` : '0%' 
                 }
               ]} />
@@ -126,7 +132,7 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     padding: 16,
-    paddingBottom: 88,
+    paddingBottom: 110,
   },
   contentShell: {
     width: '100%',
@@ -135,76 +141,56 @@ const styles = StyleSheet.create({
   },
   profileCard: {
     padding: 24,
-    borderRadius: 16,
+    borderRadius: 24,
     borderWidth: 1,
     alignItems: 'center',
     marginBottom: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.04,
+    shadowRadius: 10,
+    elevation: 2,
   },
   avatarBig: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
+    width: 84,
+    height: 84,
+    borderRadius: 42,
+    borderWidth: 3,
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 12,
   },
   avatarBigImage: {
-    width: 64,
-    height: 64,
-    borderRadius: 32,
-  },
-  avatarBigText: {
-    color: '#FFF',
-    fontSize: 32,
-    fontWeight: 'bold',
+    width: 76,
+    height: 76,
+    borderRadius: 38,
   },
   studentName: {
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontSize: 22,
+    fontWeight: '800',
+    letterSpacing: -0.3,
   },
   studentSub: {
-    fontSize: 14,
+    fontSize: 13,
     marginTop: 2,
     marginBottom: 12,
+    fontWeight: '500',
   },
   badge: {
-    paddingHorizontal: 12,
+    paddingHorizontal: 14,
     paddingVertical: 6,
     borderRadius: 20,
   },
   badgeText: {
     fontSize: 12,
-    fontWeight: 'bold',
+    fontWeight: '700',
   },
   sectionTitle: {
     fontSize: 15,
-    fontWeight: 'bold',
+    fontWeight: '800',
     marginBottom: 10,
     textTransform: 'uppercase',
-    letterSpacing: 0.5,
-  },
-  detailsBox: {
-    padding: 16,
-    borderRadius: 12,
-    borderWidth: 1,
-    marginBottom: 20,
-  },
-  detailRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingVertical: 8,
-  },
-  detailLabel: {
-    fontSize: 13,
-    fontWeight: '500',
-  },
-  detailVal: {
-    fontSize: 13,
-    fontWeight: '600',
-  },
-  divider: {
-    height: 1,
-    marginVertical: 4,
+    letterSpacing: 0.6,
   },
   metricsGrid: {
     flexDirection: 'row',
@@ -215,29 +201,47 @@ const styles = StyleSheet.create({
   metricCard: {
     flex: 1,
     minWidth: 140,
-    padding: 16,
-    borderRadius: 12,
+    padding: 18,
+    borderRadius: 20,
     borderWidth: 1,
     alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.03,
+    shadowRadius: 6,
+    elevation: 1,
+  },
+  metricIconBox: {
+    width: 42,
+    height: 42,
+    borderRadius: 21,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 6,
   },
   metricNum: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    marginVertical: 4,
+    fontSize: 24,
+    fontWeight: '900',
+    marginVertical: 2,
   },
   metricLabel: {
-    fontSize: 11,
+    fontSize: 12,
     fontWeight: '600',
   },
   breakdownBox: {
-    padding: 16,
-    borderRadius: 12,
+    padding: 18,
+    borderRadius: 20,
     borderWidth: 1,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.03,
+    shadowRadius: 6,
+    elevation: 1,
   },
   breakdownTitle: {
-    fontSize: 14,
-    fontWeight: '700',
-    marginBottom: 12,
+    fontSize: 15,
+    fontWeight: '800',
+    marginBottom: 14,
   },
   progressRow: {
     marginBottom: 12,
@@ -245,15 +249,15 @@ const styles = StyleSheet.create({
   progressLabelRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 4,
+    marginBottom: 6,
   },
   progressName: {
     fontSize: 12,
-    fontWeight: '500',
+    fontWeight: '600',
   },
   progressVal: {
     fontSize: 12,
-    fontWeight: '700',
+    fontWeight: '800',
   },
   progressBarBg: {
     height: 8,
