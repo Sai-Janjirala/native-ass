@@ -196,8 +196,8 @@ function CustomDrawerContent(props) {
 
       {/* Drawer Footer info */}
       <View style={[styles.footer, { borderTopColor: colors.surfaceBorder }]}>
-        <View style={[styles.footerBadge, { backgroundColor: colors.pillBg }]}>
-          <Text style={[styles.footerText, { color: colors.primary }]}>
+        <View style={[styles.footerBadge, { backgroundColor: '#09090B' }]}>
+          <Text style={[styles.footerText, { color: '#FFFFFF' }]}>
             {"Done Today: "}{todayCount}
           </Text>
         </View>

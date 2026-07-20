@@ -58,7 +58,7 @@ function DashboardContent({ onNavigate }) {
           <Text style={[styles.welcomeTitle, { color: colors.text }]}>Sai Janjirala</Text>
           <Text style={[styles.studentRoll, { color: colors.icon }]}>ID: 2026-NATIVE-ASS</Text>
         </View>
-        <View style={[styles.countBadge, { backgroundColor: '#10B981' }]}>
+        <View style={[styles.countBadge, { backgroundColor: '#09090B' }]}>
           <Text style={styles.countNumber}>{todayCount}</Text>
           <Text style={styles.countLabel}>Done Today</Text>
         </View>
@@ -355,7 +355,7 @@ const styles = StyleSheet.create({
     borderRadius: 34,
     justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: '#2563EB',
+    shadowColor: '#000000',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 8,
