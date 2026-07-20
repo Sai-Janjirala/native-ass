@@ -74,17 +74,22 @@ Features a **Creative Floating Pill Navigation Bar** in stealth shades of black,
 
 ### Installation
 
-1. Install dependencies:
+1. Navigate to the project directory:
+   ```bash
+   cd assi
+   ```
+
+2. Install dependencies:
    ```bash
    npm install
    ```
 
-2. Run the development server:
+3. Run the development server:
    ```bash
    npx expo start
    ```
 
-3. Run on specific platform:
+4. Run on specific platform:
    - **Android**: Press `a` or run `npx expo start --android`
    - **iOS**: Press `i` or run `npx expo start --ios`
    - **Web**: Press `w` or run `npx expo start --web`
