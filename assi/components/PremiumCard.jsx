@@ -104,6 +104,7 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     flex: 1,
+    minWidth: 0,
   },
   title: {
     fontSize: 15,
@@ -116,5 +117,6 @@ const styles = StyleSheet.create({
   },
   rightContainer: {
     marginLeft: 10,
+    flexShrink: 0,
   },
 });

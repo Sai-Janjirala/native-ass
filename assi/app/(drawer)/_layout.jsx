@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text, useColorScheme, Pressable } from 'react-native';
+import { View, StyleSheet, Text, useColorScheme, Pressable, useWindowDimensions } from 'react-native';
 import { Drawer } from 'expo-router/drawer';
 import { DrawerContentScrollView } from '@react-navigation/drawer';
 import { router, usePathname, useLocalSearchParams } from 'expo-router';
@@ -173,6 +173,7 @@ function CustomDrawerContent(props) {
 export default function DrawerLayout() {
   const colorScheme = useColorScheme();
   const colors = Colors[colorScheme ?? 'light'];
+  const { width } = useWindowDimensions();
 
   return (
     <Drawer
@@ -187,7 +188,7 @@ export default function DrawerLayout() {
         },
         headerTintColor: colors.text,
         drawerStyle: {
-          width: 280,
+          width: Math.min(280, Math.max(260, width * 0.86)),
         },
       }}
     >

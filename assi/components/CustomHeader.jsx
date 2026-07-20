@@ -70,6 +70,9 @@ const styles = StyleSheet.create({
   },
   container: {
     height: 60,
+    width: '100%',
+    maxWidth: 720,
+    alignSelf: 'center',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -85,7 +88,9 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     flex: 1,
+    minWidth: 0,
     marginLeft: 15,
+    marginRight: 12,
     justifyContent: 'center',
   },
   headerSubtitle: {

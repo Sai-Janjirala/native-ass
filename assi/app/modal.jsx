@@ -91,7 +91,7 @@ export default function SurveyDetailModal() {
         </Pressable>
       </View>
 
-      <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
+      <ScrollView contentContainerStyle={[styles.scrollContainer, styles.contentShell]} showsVerticalScrollIndicator={false}>
         {/* Priority and Date Row */}
         <View style={styles.metaRow}>
           <View style={[styles.priorityBadge, { backgroundColor: getPriorityColor(survey.priority) + '15' }]}>
@@ -258,6 +258,9 @@ const styles = StyleSheet.create({
   },
   header: {
     height: 64,
+    width: '100%',
+    maxWidth: 720,
+    alignSelf: 'center',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -289,10 +292,17 @@ const styles = StyleSheet.create({
     padding: 16,
     paddingBottom: 40,
   },
+  contentShell: {
+    width: '100%',
+    maxWidth: 720,
+    alignSelf: 'center',
+  },
   metaRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    flexWrap: 'wrap',
+    gap: 12,
     marginBottom: 16,
   },
   priorityBadge: {
@@ -376,6 +386,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    gap: 12,
     padding: 12,
     borderRadius: 12,
     borderWidth: 1,
@@ -384,15 +395,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     flex: 1,
-    marginRight: 10,
+    minWidth: 0,
   },
   infoRowTextContainer: {
     marginLeft: 12,
     flex: 1,
+    minWidth: 0,
   },
   infoRowTitle: {
     fontSize: 13,
     fontWeight: 'bold',
+    flexShrink: 1,
   },
   infoRowSub: {
     fontSize: 11,
@@ -428,6 +441,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    flexWrap: 'wrap',
     borderWidth: 1,
     paddingVertical: 12,
     paddingHorizontal: 24,

@@ -273,6 +273,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
+    width: '100%',
+    maxWidth: 720,
+    alignSelf: 'center',
   },
   searchContainer: {
     flexDirection: 'row',
@@ -341,6 +344,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     flex: 1,
+    minWidth: 0,
     marginRight: 10,
   },
   avatarCircle: {
@@ -357,6 +361,7 @@ const styles = StyleSheet.create({
   contactInfo: {
     marginLeft: 12,
     flex: 1,
+    minWidth: 0,
   },
   contactName: {
     fontSize: 14,
@@ -369,6 +374,7 @@ const styles = StyleSheet.create({
   itemActions: {
     flexDirection: 'row',
     alignItems: 'center',
+    flexShrink: 0,
     gap: 8,
   },
   actionIconBtn: {

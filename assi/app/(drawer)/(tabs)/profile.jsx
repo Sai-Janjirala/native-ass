@@ -18,7 +18,7 @@ export default function ProfileScreen() {
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       <CustomHeader title="My Profile 🤠" />
-      <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
+      <ScrollView contentContainerStyle={[styles.scrollContainer, styles.contentShell]} showsVerticalScrollIndicator={false}>
         {/* Profile Card */}
         <View style={[
           styles.profileCard, 
@@ -126,7 +126,12 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     padding: 16,
-    paddingBottom: 32,
+    paddingBottom: 88,
+  },
+  contentShell: {
+    width: '100%',
+    maxWidth: 720,
+    alignSelf: 'center',
   },
   profileCard: {
     padding: 24,
@@ -203,11 +208,13 @@ const styles = StyleSheet.create({
   },
   metricsGrid: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
     gap: 12,
     marginBottom: 16,
   },
   metricCard: {
     flex: 1,
+    minWidth: 140,
     padding: 16,
     borderRadius: 12,
     borderWidth: 1,

@@ -48,7 +48,7 @@ export default function SettingsScreen() {
   };
 
   return (
-    <ScrollView style={[styles.container, { backgroundColor: colors.background }]} contentContainerStyle={styles.scrollContainer}>
+    <ScrollView style={[styles.container, { backgroundColor: colors.background }]} contentContainerStyle={[styles.scrollContainer, styles.contentShell]}>
       <Text style={[styles.sectionTitle, { color: colors.text }]}>App Settings ⚙️</Text>
       
       <View style={[styles.box, { backgroundColor: colorScheme === 'dark' ? '#1E2123' : '#FFFFFF', borderColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6' }]}>
@@ -119,6 +119,11 @@ const styles = StyleSheet.create({
     padding: 16,
     paddingBottom: 40,
   },
+  contentShell: {
+    width: '100%',
+    maxWidth: 720,
+    alignSelf: 'center',
+  },
   sectionTitle: {
     fontSize: 14,
     fontWeight: 'bold',
@@ -166,6 +171,8 @@ const styles = StyleSheet.create({
   infoRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    gap: 16,
     paddingVertical: 12,
   },
   infoLabel: {
@@ -175,6 +182,8 @@ const styles = StyleSheet.create({
   infoVal: {
     fontSize: 13,
     fontWeight: '600',
+    flexShrink: 1,
+    textAlign: 'right',
   },
   footerText: {
     fontSize: 11,

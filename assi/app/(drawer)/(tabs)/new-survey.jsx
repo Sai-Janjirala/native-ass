@@ -287,7 +287,7 @@ export default function NewSurveyScreen() {
       <View style={[styles.container, { backgroundColor: colors.background }]}>
         <CustomHeader title="Survey Preview 👀" showBack={false} />
         
-        <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
+        <ScrollView contentContainerStyle={[styles.scrollContainer, styles.contentShell]} showsVerticalScrollIndicator={false}>
           <View style={[styles.card, { backgroundColor: colorScheme === 'dark' ? '#1E2123' : '#FFFFFF', borderColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6' }]}>
             <View style={styles.previewHeader}>
               <Text style={[styles.previewTitle, { color: colors.text }]}>Survey Summary 👀</Text>
@@ -410,7 +410,7 @@ export default function NewSurveyScreen() {
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       <CustomHeader title="Start a Survey 📝" />
       
-      <ScrollView contentContainerStyle={styles.scrollContainer} keyboardShouldPersistTaps="handled" showsVerticalScrollIndicator={false}>
+      <ScrollView contentContainerStyle={[styles.scrollContainer, styles.contentShell]} keyboardShouldPersistTaps="handled" showsVerticalScrollIndicator={false}>
         {/* Form Fields */}
         <View style={[styles.formContainer, { backgroundColor: colorScheme === 'dark' ? '#1E2123' : '#FFFFFF', borderColor: colorScheme === 'dark' ? '#2F3336' : '#EAF0F6' }]}>
           
@@ -804,7 +804,12 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     padding: 16,
-    paddingBottom: 40,
+    paddingBottom: 96,
+  },
+  contentShell: {
+    width: '100%',
+    maxWidth: 720,
+    alignSelf: 'center',
   },
   formContainer: {
     padding: 16,
@@ -819,6 +824,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    gap: 12,
     marginBottom: 6,
   },
   inlinePasteBtn: {
@@ -847,6 +853,7 @@ const styles = StyleSheet.create({
   },
   dateInputWrapper: {
     flexDirection: 'row',
+    alignItems: 'stretch',
     gap: 8,
   },
   dateTodayBtn: {
@@ -892,17 +899,20 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    flexWrap: 'wrap',
+    gap: 12,
     paddingVertical: 10,
   },
   attachmentMeta: {
     flexDirection: 'row',
     alignItems: 'center',
     flex: 1,
-    marginRight: 10,
+    minWidth: 0,
   },
   attachmentText: {
     marginLeft: 12,
     flex: 1,
+    minWidth: 0,
   },
   attachmentName: {
     fontSize: 14,
@@ -942,10 +952,12 @@ const styles = StyleSheet.create({
   },
   btnRow: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
     gap: 12,
   },
   resetBtn: {
     flex: 1,
+    minWidth: 120,
     borderWidth: 1,
     paddingVertical: 14,
     borderRadius: 10,
@@ -958,6 +970,7 @@ const styles = StyleSheet.create({
   },
   previewBtn: {
     flex: 2.5,
+    minWidth: 160,
     paddingVertical: 14,
     borderRadius: 10,
     alignItems: 'center',
@@ -1050,15 +1063,18 @@ const styles = StyleSheet.create({
   locationContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    flexWrap: 'wrap',
     gap: 8,
     paddingVertical: 4,
   },
   locationTextContainer: {
     flex: 1,
+    minWidth: 0,
   },
   locationCoordinate: {
     fontSize: 14,
     fontWeight: '600',
+    flexShrink: 1,
   },
   locationAccuracy: {
     fontSize: 11,
@@ -1067,19 +1083,23 @@ const styles = StyleSheet.create({
   contactContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    flexWrap: 'wrap',
     gap: 8,
     paddingVertical: 4,
   },
   contactName: {
     fontSize: 14,
     fontWeight: '600',
+    flexShrink: 1,
   },
   actionRow: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
     gap: 12,
   },
   editButton: {
     flex: 1.2,
+    minWidth: 120,
     borderWidth: 1,
     paddingVertical: 14,
     borderRadius: 10,
@@ -1091,6 +1111,7 @@ const styles = StyleSheet.create({
   },
   submitButton: {
     flex: 2,
+    minWidth: 160,
     paddingVertical: 14,
     borderRadius: 10,
     alignItems: 'center',

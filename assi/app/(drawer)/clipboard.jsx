@@ -62,7 +62,7 @@ export default function ClipboardScreen() {
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
-      <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
+      <ScrollView contentContainerStyle={[styles.scrollContainer, styles.contentShell]} showsVerticalScrollIndicator={false}>
         
         {/* Info Header */}
         <View style={[styles.card, { backgroundColor: colorScheme === 'dark' ? '#1E2123' : '#F5F9FC', borderColor: colorScheme === 'dark' ? '#2F3336' : '#D5E6F3' }]}>
@@ -184,6 +184,11 @@ const styles = StyleSheet.create({
   scrollContainer: {
     paddingBottom: 32,
   },
+  contentShell: {
+    width: '100%',
+    maxWidth: 720,
+    alignSelf: 'center',
+  },
   card: {
     padding: 20,
     borderRadius: 16,
@@ -267,10 +272,12 @@ const styles = StyleSheet.create({
   },
   btnRow: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
     gap: 12,
   },
   btnOutline: {
     flex: 1,
+    minWidth: 150,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -285,6 +292,7 @@ const styles = StyleSheet.create({
   },
   btnPrimary: {
     flex: 1.5,
+    minWidth: 180,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',

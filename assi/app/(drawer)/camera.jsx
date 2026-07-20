@@ -240,6 +240,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
+    width: '100%',
+    maxWidth: 720,
+    alignSelf: 'center',
   },
   centerContainer: {
     flex: 1,
@@ -321,11 +324,13 @@ const styles = StyleSheet.create({
   },
   actionRow: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
     gap: 12,
     marginVertical: 16,
   },
   deleteBtn: {
     flex: 1,
+    minWidth: 130,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -341,6 +346,7 @@ const styles = StyleSheet.create({
   },
   retakeBtn: {
     flex: 1,
+    minWidth: 130,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -357,6 +363,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    flexWrap: 'wrap',
     gap: 8,
     paddingVertical: 14,
     borderRadius: 10,

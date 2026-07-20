@@ -6,7 +6,7 @@ import {
   ScrollView, 
   Pressable, 
   useColorScheme,
-  Dimensions,
+  useWindowDimensions,
   SafeAreaView
 } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
@@ -18,8 +18,6 @@ import { CustomHeader } from '@/components/CustomHeader';
 import NewSurveyScreen from './new-survey';
 import HistoryScreen from './history';
 import ProfileScreen from './profile';
-
-const { width } = Dimensions.get('window');
 
 function DashboardContent({ onNavigate }) {
   const colorScheme = useColorScheme();
@@ -39,7 +37,7 @@ function DashboardContent({ onNavigate }) {
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
+    <ScrollView contentContainerStyle={[styles.scrollContainer, styles.contentShell]} showsVerticalScrollIndicator={false}>
       {/* Grayscale User Welcome Banner */}
       <View style={[
         styles.welcomeBanner, 
@@ -157,6 +155,7 @@ export default function TabLayoutWrapper() {
   const colorScheme = useColorScheme();
   const colors = Colors[colorScheme ?? 'light'];
   const { tab } = useLocalSearchParams();
+  const { width } = useWindowDimensions();
   const [activeTab, setActiveTab] = useState(0);
   const scrollViewRef = useRef(null);
 
@@ -175,6 +174,10 @@ export default function TabLayoutWrapper() {
     setActiveTab(index);
     scrollViewRef.current?.scrollTo({ x: index * width, animated: true });
   };
+
+  useEffect(() => {
+    scrollViewRef.current?.scrollTo({ x: activeTab * width, animated: false });
+  }, [activeTab, width]);
 
   const handleScrollEnd = (e) => {
     const xOffset = e.nativeEvent.contentOffset.x;
@@ -197,19 +200,19 @@ export default function TabLayoutWrapper() {
           bounces={false}
           scrollEventThrottle={16}
         >
-          <View style={{ width }}>
-            <View style={{ flex: 1 }}>
+          <View style={[styles.pagerPage, { width }]}>
+            <View style={styles.pageContent}>
               <CustomHeader title="My Field Surveys 🚀" />
               <DashboardContent onNavigate={navigateToTab} />
             </View>
           </View>
-          <View style={{ width }}>
+          <View style={[styles.pagerPage, { width }]}>
             <NewSurveyScreen />
           </View>
-          <View style={{ width }}>
+          <View style={[styles.pagerPage, { width }]}>
             <HistoryScreen />
           </View>
-          <View style={{ width }}>
+          <View style={[styles.pagerPage, { width }]}>
             <ProfileScreen />
           </View>
         </ScrollView>
@@ -248,9 +251,22 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  pagerPage: {
+    flex: 1,
+    minWidth: 0,
+  },
+  pageContent: {
+    flex: 1,
+    minWidth: 0,
+  },
   scrollContainer: {
     padding: 16,
-    paddingBottom: 32,
+    paddingBottom: 88,
+  },
+  contentShell: {
+    width: '100%',
+    maxWidth: 720,
+    alignSelf: 'center',
   },
   welcomeBanner: {
     flexDirection: 'row',
@@ -263,6 +279,8 @@ const styles = StyleSheet.create({
   },
   welcomeTextContainer: {
     flex: 1,
+    minWidth: 0,
+    marginRight: 12,
   },
   welcomeSub: {
     fontSize: 13,
@@ -322,6 +340,7 @@ const styles = StyleSheet.create({
   },
   primaryActionText: {
     flex: 1,
+    minWidth: 0,
   },
   primaryActionTitle: {
     color: '#FFF',
@@ -415,16 +434,19 @@ const styles = StyleSheet.create({
   },
   recentFooter: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
     gap: 16,
   },
   recentFooterItem: {
     flexDirection: 'row',
     alignItems: 'center',
+    minWidth: 0,
     gap: 5,
   },
   recentFooterText: {
     fontSize: 12,
     fontWeight: '500',
+    flexShrink: 1,
   },
   tabBar: {
     flexDirection: 'row',

@@ -141,7 +141,7 @@ export default function HistoryScreen() {
         <FlatList
           data={filteredSurveys}
           keyExtractor={(item) => item.id}
-          contentContainerStyle={styles.listContainer}
+          contentContainerStyle={[styles.listContainer, styles.contentShell]}
           showsVerticalScrollIndicator={false}
           renderItem={({ item }) => (
             <Pressable
@@ -214,6 +214,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingTop: 8,
     paddingBottom: 12,
+    width: '100%',
+    maxWidth: 720,
+    alignSelf: 'center',
   },
   searchContainer: {
     flexDirection: 'row',
@@ -231,10 +234,12 @@ const styles = StyleSheet.create({
   },
   filterRow: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
     gap: 8,
   },
   filterTab: {
     flex: 1,
+    minWidth: 72,
     paddingVertical: 8,
     borderRadius: 8,
     alignItems: 'center',
@@ -244,7 +249,12 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     paddingHorizontal: 16,
-    paddingBottom: 24,
+    paddingBottom: 88,
+  },
+  contentShell: {
+    width: '100%',
+    maxWidth: 720,
+    alignSelf: 'center',
   },
   surveyCard: {
     padding: 16,
@@ -264,6 +274,7 @@ const styles = StyleSheet.create({
   },
   siteInfo: {
     flex: 1,
+    minWidth: 0,
     marginRight: 10,
   },
   siteName: {
@@ -277,6 +288,7 @@ const styles = StyleSheet.create({
   badgeRow: {
     flexDirection: 'row',
     alignItems: 'center',
+    flexShrink: 0,
     gap: 8,
   },
   priorityBadge: {
@@ -302,16 +314,19 @@ const styles = StyleSheet.create({
   },
   cardFooter: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
     gap: 16,
   },
   footerItem: {
     flexDirection: 'row',
     alignItems: 'center',
+    minWidth: 0,
     gap: 5,
   },
   footerText: {
     fontSize: 12,
     fontWeight: '500',
+    flexShrink: 1,
   },
   emptyContainer: {
     flex: 1,

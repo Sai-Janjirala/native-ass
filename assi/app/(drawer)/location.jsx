@@ -237,6 +237,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
+    width: '100%',
+    maxWidth: 720,
+    alignSelf: 'center',
   },
   content: {
     flex: 1,
@@ -283,6 +286,8 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    gap: 16,
     paddingVertical: 4,
   },
   label: {
@@ -293,6 +298,8 @@ const styles = StyleSheet.create({
   value: {
     fontSize: 14,
     fontWeight: 'bold',
+    flexShrink: 1,
+    textAlign: 'right',
   },
   divider: {
     height: 1,
@@ -302,10 +309,12 @@ const styles = StyleSheet.create({
   },
   rowButtons: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
     gap: 12,
   },
   btnOutline: {
     flex: 1,
+    minWidth: 140,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -321,6 +330,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    flexWrap: 'wrap',
     paddingVertical: 14,
     borderRadius: 10,
     shadowColor: '#000',
