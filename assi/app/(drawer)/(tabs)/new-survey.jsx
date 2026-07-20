@@ -221,48 +221,53 @@ export default function NewSurveyScreen() {
     if (validateForm()) {
       setIsPreview(true);
     } else {
-      Alert.alert('Incomplete Form', 'Please fill in the required fields (Site Name and Client Name).');
+      handleFormValidationAlert('Incomplete Form', 'Please fill in the required fields (Site Name and Client Name).');
     }
   };
 
   const handleSubmit = () => {
     const result = submitSurvey();
     if (result.success) {
-      Alert.alert(
-        'Survey Logged! 🎉',
-        `Survey ID: ${result.survey?.id} was successfully saved.`,
-        [
-          {
-            text: 'Awesome',
-            onPress: () => {
-              setIsPreview(false);
-              router.navigate('/?tab=2');
-            }
-          }
-        ]
-      );
+      setIsPreview(false);
+      if (Platform.OS === 'web' && typeof window !== 'undefined') {
+        window.alert(`Survey Logged! 🎉\n\nSurvey ID: ${result.survey?.id} was successfully saved.`);
+      } else {
+        Alert.alert(
+          'Survey Logged! 🎉',
+          `Survey ID: ${result.survey?.id} was successfully saved.`
+        );
+      }
+      router.navigate('/?tab=2');
     } else {
-      Alert.alert('Error', result.error || 'Failed to submit.');
+      handleFormValidationAlert('Error', result.error || 'Failed to submit.');
     }
   };
 
   const handleReset = () => {
-    Alert.alert(
-      'Wipe Draft? 🧹',
-      'Are you sure you want to clear all inputs and attachments?',
-      [
-        { text: 'Cancel', style: 'cancel' },
-        { 
-          text: 'Clear', 
-          style: 'destructive',
-          onPress: () => {
-            clearDraft();
-            setErrors({});
-            setIsPreview(false);
+    const confirmReset = () => {
+      clearDraft();
+      setErrors({});
+      setIsPreview(false);
+    };
+
+    if (Platform.OS === 'web' && typeof window !== 'undefined') {
+      if (window.confirm('Wipe Draft? 🧹\n\nAre you sure you want to clear all inputs and attachments?')) {
+        confirmReset();
+      }
+    } else {
+      Alert.alert(
+        'Wipe Draft? 🧹',
+        'Are you sure you want to clear all inputs and attachments?',
+        [
+          { text: 'Cancel', style: 'cancel' },
+          { 
+            text: 'Clear', 
+            style: 'destructive',
+            onPress: confirmReset
           }
-        }
-      ]
-    );
+        ]
+      );
+    }
   };
 
   const getPriorityColor = (p) => {

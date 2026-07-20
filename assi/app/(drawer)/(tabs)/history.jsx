@@ -7,6 +7,7 @@ import {
   FlatList, 
   Pressable, 
   Alert, 
+  Platform
 } from 'react-native';
 import { router } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
@@ -34,20 +35,26 @@ export default function HistoryScreen() {
   };
 
   const handleDeletePress = (id, siteName) => {
-    Alert.alert(
-      'Delete this survey? 🗑️',
-      `Are you sure you want to delete the survey record for "${siteName}"? This action is permanent.`,
-      [
-        { text: 'Cancel', style: 'cancel' },
-        { 
-          text: 'Delete', 
-          style: 'destructive',
-          onPress: () => {
-            deleteSurvey(id);
+    if (Platform.OS === 'web' && typeof window !== 'undefined') {
+      if (window.confirm(`Delete this survey? 🗑️\n\nAre you sure you want to delete the survey record for "${siteName}"? This action is permanent.`)) {
+        deleteSurvey(id);
+      }
+    } else {
+      Alert.alert(
+        'Delete this survey? 🗑️',
+        `Are you sure you want to delete the survey record for "${siteName}"? This action is permanent.`,
+        [
+          { text: 'Cancel', style: 'cancel' },
+          { 
+            text: 'Delete', 
+            style: 'destructive',
+            onPress: () => {
+              deleteSurvey(id);
+            }
           }
-        }
-      ]
-    );
+        ]
+      );
+    }
   };
 
   // Filter logic
