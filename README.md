@@ -98,4 +98,3 @@ Features a **Creative Floating Pill Navigation Bar** in stealth shades of black,
 
 ## 👨‍💻 Author
 - **Developer**: Sai Janjirala
-- **Roll Number**: `2026-NATIVE-ASS`
