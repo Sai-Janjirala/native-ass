@@ -55,7 +55,7 @@ export const CustomHeader = ({ title, showBack = false }) => {
         </Pressable>
 
         <View style={styles.titleContainer}>
-          <View style={[styles.dateChip, { backgroundColor: colorScheme === 'dark' ? 'rgba(129, 140, 248, 0.15)' : 'rgba(99, 102, 241, 0.1)' }]}>
+          <View style={[styles.dateChip, { backgroundColor: colorScheme === 'dark' ? 'rgba(59, 130, 246, 0.15)' : 'rgba(37, 99, 235, 0.1)' }]}>
             <Ionicons name="calendar-outline" size={11} color={colors.primary} style={{ marginRight: 4 }} />
             <Text style={[styles.headerSubtitle, { color: colors.primary }]}>
               {getFormattedDate()}

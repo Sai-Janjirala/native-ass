@@ -52,7 +52,7 @@ function DashboardContent({ onNavigate }) {
         }
       ]}>
         <View style={styles.welcomeTextContainer}>
-          <View style={[styles.greetingBadge, { backgroundColor: colorScheme === 'dark' ? 'rgba(129, 140, 248, 0.15)' : 'rgba(99, 102, 241, 0.1)' }]}>
+          <View style={[styles.greetingBadge, { backgroundColor: colorScheme === 'dark' ? 'rgba(59, 130, 246, 0.15)' : 'rgba(37, 99, 235, 0.1)' }]}>
             <Text style={[styles.welcomeSub, { color: colors.primary }]}>Hey there! 👋</Text>
           </View>
           <Text style={[styles.welcomeTitle, { color: colors.text }]}>Sai Janjirala</Text>
@@ -73,14 +73,14 @@ function DashboardContent({ onNavigate }) {
           style={({ pressed }) => [
             styles.primaryActionBtn, 
             { 
-              backgroundColor: '#6366F1',
+              backgroundColor: '#2563EB',
               transform: [{ scale: pressed ? 0.98 : 1 }]
             }
           ]}
           onPress={() => onNavigate(1)}
         >
           <View style={styles.actionIconCircle}>
-            <Ionicons name="add-circle" size={24} color="#6366F1" />
+            <Ionicons name="add-circle" size={24} color="#2563EB" />
           </View>
           <View style={styles.primaryActionText}>
             <Text style={styles.primaryActionTitle}>Start a New Survey 📝</Text>
@@ -354,7 +354,7 @@ const styles = StyleSheet.create({
     borderRadius: 34,
     justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: '#6366F1',
+    shadowColor: '#2563EB',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 8,
@@ -396,7 +396,7 @@ const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 22,
     gap: 14,
-    shadowColor: '#6366F1',
+    shadowColor: '#2563EB',
     shadowOffset: { width: 0, height: 6 },
     shadowOpacity: 0.25,
     shadowRadius: 10,
@@ -573,7 +573,7 @@ const styles = StyleSheet.create({
   },
   pillTabActive: {
     paddingHorizontal: 18,
-    shadowColor: '#6366F1',
+    shadowColor: '#2563EB',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 8,

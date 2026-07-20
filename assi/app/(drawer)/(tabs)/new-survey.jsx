@@ -659,7 +659,7 @@ export default function NewSurveyScreen() {
               </View>
             </View>
             <Pressable 
-              style={[styles.attachBtn, { backgroundColor: '#6366F1', borderColor: '#6366F1' }]}
+              style={[styles.attachBtn, { backgroundColor: '#2563EB', borderColor: '#2563EB' }]}
               onPress={handleOpenContactsModal}
             >
               <Text style={[styles.attachBtnText, { color: '#FFF' }]}>
@@ -974,7 +974,7 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
     borderRadius: 22,
     alignItems: 'center',
-    shadowColor: '#6366F1',
+    shadowColor: '#2563EB',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 8,

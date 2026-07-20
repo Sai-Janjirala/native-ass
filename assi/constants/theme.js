@@ -1,7 +1,7 @@
 import { Platform, useColorScheme } from 'react-native';
 
-const tintColorLight = '#6366F1'; // Electric Indigo
-const tintColorDark = '#818CF8'; // Soft Electric Violet
+const tintColorLight = '#2563EB'; // Professional Cobalt Blue
+const tintColorDark = '#60A5FA'; // Professional Soft Executive Blue
 
 export const Colors = {
   light: {
@@ -10,17 +10,17 @@ export const Colors = {
     surface: '#FFFFFF', // Crisp white cards
     surfaceBorder: '#E2E8F0', // Soft Slate-200 border
     tint: tintColorLight,
-    primary: '#6366F1',
-    primaryDark: '#4F46E5',
-    secondary: '#0EA5E9', // Sky Blue
-    accent: '#10B981', // Emerald
+    primary: '#2563EB', // Cobalt Blue
+    primaryDark: '#1D4ED8', // Deep Royal Blue
+    secondary: '#0284C7', // Slate Sky Blue
+    accent: '#10B981', // Emerald Green
     icon: '#64748B', // Slate-500
     tabIconDefault: '#94A3B8', // Slate-400
     tabIconSelected: tintColorLight,
     pillBg: '#F1F5F9', // Light gray pill container
-    pillActiveBg: '#6366F1', // Active pill background fill
+    pillActiveBg: '#2563EB', // Active pill background fill
     pillActiveText: '#FFFFFF',
-    cardShadow: 'rgba(99, 102, 241, 0.08)',
+    cardShadow: 'rgba(37, 99, 235, 0.08)',
   },
   dark: {
     text: '#F8FAFC', // Slate-50
@@ -28,15 +28,15 @@ export const Colors = {
     surface: '#121216', // Dark zinc surface card
     surfaceBorder: '#27272A', // Dark Zinc-800 border
     tint: tintColorDark,
-    primary: '#818CF8',
-    primaryDark: '#6366F1',
+    primary: '#3B82F6', // Crisp Executive Blue
+    primaryDark: '#2563EB',
     secondary: '#38BDF8', // Sky Blue
     accent: '#34D399', // Emerald
     icon: '#A1A1AA', // Zinc-400
     tabIconDefault: '#52525B', // Zinc-600
     tabIconSelected: tintColorDark,
     pillBg: '#18181C', // Dark pill container
-    pillActiveBg: '#6366F1', // Vibrant pill highlight
+    pillActiveBg: '#3B82F6', // Vibrant pill highlight
     pillActiveText: '#FFFFFF',
     cardShadow: 'rgba(0, 0, 0, 0.5)',
   },

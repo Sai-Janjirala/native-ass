@@ -45,7 +45,7 @@ export default function ProfileScreen() {
         <Text style={[styles.sectionTitle, { color: colors.text }]}>My Stats 📊</Text>
         <View style={styles.metricsGrid}>
           <View style={[styles.metricCard, { backgroundColor: colors.surface, borderColor: colors.surfaceBorder }]}>
-            <View style={[styles.metricIconBox, { backgroundColor: colorScheme === 'dark' ? 'rgba(129, 140, 248, 0.15)' : 'rgba(99, 102, 241, 0.1)' }]}>
+            <View style={[styles.metricIconBox, { backgroundColor: colorScheme === 'dark' ? 'rgba(59, 130, 246, 0.15)' : 'rgba(37, 99, 235, 0.1)' }]}>
               <Ionicons name="document-text-outline" size={22} color={colors.primary} />
             </View>
             <Text style={[styles.metricNum, { color: colors.text }]}>{totalSurveys}</Text>
